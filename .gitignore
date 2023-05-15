@@ -1,0 +1,13 @@
+_site
+.sass-cache
+.jekyll-metadata
+.vscode
+.idea
+.DS_Store
+.jekyll-cache/
+
+# packages #
+*.swp
+*.dmg
+*.iso
+*.tar
