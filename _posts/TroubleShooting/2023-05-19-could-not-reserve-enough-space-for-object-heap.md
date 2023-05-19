@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "vsfpt에서 파일 업로드가 되지 않는 현상"
+title: "Cloud not reserve enough space for object heap"
 subtitle: "553 Could not create file."
-date: 2010-11-07 17:35:00+0900
+date: 2023-05-19 10:23:00+0900
 categories: TroubleShooting
-tags: vsftp linux
+tags: JDK Heap 
 mathjax: true
 ---
 
