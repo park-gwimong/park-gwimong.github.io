@@ -11,7 +11,7 @@ mathjax: true
 ======================
 .NET Framework 데이터 공급자는 Database에 연결하고 명령을 실행하며 그 결과를 검색하는데 사용됩니다.
 
-![attack type](/resource/DotNetFrameworkProvider.png ".NET Framework Data Provider")
+![attack type](/resource/2018/20180524/DotNetFrameworkProvider.png ".NET Framework Data Provider")
 
 ## .NET Framework Data Provider for ODBC
 ODBC(Open DataBase Connectivity)는 Database에 접근하기 위해 Microsoft가 만든 소프트웨어 표준 규격입니다.   

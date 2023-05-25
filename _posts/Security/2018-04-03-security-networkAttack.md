@@ -8,7 +8,7 @@ mathjax: true
 ---
 
 ## 네트워크 기반 공격
-![attack type](/resource/AttackType.png "tack type")
+![attack type](/resource/2018/20180403/AttackType.png "tack type")
 
 # 서비스 거부(Dos) 공격
 시스템을 악의적으로 공격해 해당 시스템의 자원을 부족하게 하여 원래 의도됙 용도로 사용하지 못하게 하는 공격.

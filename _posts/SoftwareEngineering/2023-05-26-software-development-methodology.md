@@ -12,13 +12,13 @@ mathjax: true
 
 (SDM; Software Development Methodology) :    
 소프트웨어를 개발하는 방법에 대한 이론으로서, 소프트웨어 개발 과정, 절차, 방법, 산출물, 기법, 도구들을 체계적으로 정리하고 표준화시킨 것입니다.
-![softwareDeveopmentMethodology](/resource/20230526/2023-05-26-image-1.png)
+![softwareDeveopmentMethodology](/resource/2023/20230526/2023-05-26-image-1.png)
 
 ## 구조적 방법론
 
 (Structured Development) :  
 전체 시스템을 __정형화된 분석 절차에 따라 요구사항을 파악하여 문서화__ 하고, 이를 기반으로 소트프웨어를 개발하는 방법론 입니다.  
-![softwareDeveopmentMethodology](/resource/20230526/2023-05-26-image-2.png)  
+![softwareDeveopmentMethodology](/resource/2023/20230526/2023-05-26-image-2.png)  
 
 - 요구 사항 분석 : 고객이 원하는 요구사항을 끌어내어 명세화합니다.
 - 구조적 분석 : 고객이 원하는 기능과 시스템 환경, 데이터를 종합하여 DFD(Data Flow Diagram)을 작성하고, 이를 통해 기능을 분해하여 기능별 소단위 명세(
@@ -33,7 +33,7 @@ mathjax: true
 (Information Engineering Development) :  
 비즈니스 시스템 규모 성장과 소프트웨어 공학 발전에 따라 1980년대 중반에 등장한 방법론으로  
 기업 전체, 또는 기업의 주요 부분을 계획, 분석, 설계 및 구축에 정형화 된 기법들을 상호 연관성 있게 통합, 적용하는 __데이터 중심 방법론__ 입니다.  
-![softwareDeveopmentMethodology](/resource/20230526/2023-05-26-image-3.png)  
+![softwareDeveopmentMethodology](/resource/2023/20230526/2023-05-26-image-3.png)  
 
 - 정보 전략 계획(ISP) : 업무프로세스와 시스템을 분석하고 미래 아키텍처와 전략계획을 수립합니다.
 - 업무 영역 분석(BAA) :  업무 현황을 분석하여 개념 수준의 데이터와 프로세스를 설계합니다.
@@ -47,7 +47,7 @@ mathjax: true
 (Object-Oriented Development) :
 현실 세계의 __개체(Entity)를 속성(Attribute)과 메소드(Method)가 결합된 형태의 객체(Object)__ 로 표현하며,  
 이 객체들이 메시지 교환을 통해 상호 작용함으로써 전체 시스템이 운영되도록 개발하는 방법론입니다.  
-![softwareDeveopmentMethodology](/resource/20230526/2023-05-26-image-4.png)
+![softwareDeveopmentMethodology](/resource/2023/20230526/2023-05-26-image-4.png)
 
 - 개념화 : 요구 사항을 분석하여 정의합니다.
 - 상세화 : 문제 영역(Problem Domaion)을 분석하고 견고한 아키텍처 토대를 마련합니다.
@@ -60,7 +60,7 @@ mathjax: true
 
 (Component Based Development) :  
 __컴포넌트를 조립하여 시스템을 개발__ 하여 객체지향의 단점인 S/W 재사용성을 극대화한 개발 방법론입니다.  
-![softwareDeveopmentMethodology](/resource/20230526/2023-05-26-image-5.png)
+![softwareDeveopmentMethodology](/resource/2023/20230526/2023-05-26-image-5.png)
 
 - 분석 : 사용자의 요구 사항을 수집하고 이를 정의합니다.
 - 설계 : 소프트웨어의 아키텍처를 정의하고 이를 구성하는 콤포넌트와 데이터베이스 등을 설계합니다.
@@ -73,7 +73,7 @@ __컴포넌트를 조립하여 시스템을 개발__ 하여 객체지향의 단�
 
 미래를 예측하기 보다는 주기적으로 제작 프로토타입을 시험해보는 철저한 관리를 통한 개발 방법론이라 할 수 있으며  
 끊임없이 개발하고 수정하는 일을 반복하면서 고객이 가장 만족할 수 있는 방향으로 소프트웨어를 개발합니다.  
-![softwareDeveopmentMethodology](/resource/20230526/2023-05-26-image-6.png)
+![softwareDeveopmentMethodology](/resource/2023/20230526/2023-05-26-image-6.png)
 
 1. 먼저 개발 범위 안에 있는 요구 사항을 분석해 우선 순위가 높은 요구 사항을 먼저 개발합니다.
 2. 개발 된 부분에 대해 실행하는 모습을 고객에게 보여주고 이에 대한 피드백을 받습니다.
@@ -83,7 +83,7 @@ __컴포넌트를 조립하여 시스템을 개발__ 하여 객체지향의 단�
 ## 테스트 기반 개발 방법론
 (Test Driven Development) :   
 전통적인 개발 방법론에서의 구현 후 테스트를 수행하는 단계와는 반대로 테스트를 먼저 수행하고, 소프트웨어를 구현하는 개발 방법론입니다.  
-![softwareDeveopmentMethodology](/resource/20230526/2023-05-26-image-7.png)
+![softwareDeveopmentMethodology](/resource/2023/20230526/2023-05-26-image-7.png)
 
 1. 테스트 케이스 작성 : 요구 사항을 만족하기 위한 테스트 케이스를 작성합니다.  
 2. 실제 코드 구현 : 테스트 케이스를 통과하기 위한 최소한의 코드를 구현합니다.  

@@ -11,8 +11,8 @@ mathjax: true
 ## 문제 현상
 Windows10의 명령프롬프트에서 Mount를 정상적으로 수행하였는데, 윈도우 탐색기에 마운트된 드라이브가 보이지 않는 현상이 발생하였습니다.
 
-![screen_1](/resource/NotFoundMountDriveFromCMD/CMD_Mount_Result.png)  
-![screen_2](/resource/NotFoundMountDriveFromCMD/NotFoundNFSDrive.png)  
+![screen_1](/resource/2020/20200525/CMD_Mount_Result.png)  
+![screen_2](/resource/2020/20200525/NotFoundNFSDrive.png)  
 
 
 ## 원인 분석

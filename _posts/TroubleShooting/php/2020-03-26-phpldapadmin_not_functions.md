@@ -10,7 +10,7 @@ mathjax: true
 
 # 오류 내용
 Unrecognized error number: 8192: Function create_function() is deprecated
-![error_png](/resource/phpldapadmin/phpldapadmin_create_function_is_deprecated.png)
+![error_png](/resource/2020/20200326/phpldapadmin_create_function_is_deprecated.png)
 
 # 시스템 구성
 - Ubuntu 18.04 LTS

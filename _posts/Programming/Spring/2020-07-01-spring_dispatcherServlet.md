@@ -14,7 +14,7 @@ DispatchserServlet는 Spring MVC에 정의된 유일한 **Front Controller**입�
 즉, Spring MVC에서 모든 요청을 받아 적절한 Controller와 View에 전달하고 요청에 대한 처리 결과를 출력하는 역활을 수행합니다.
 
 # DispatcherServlet 흐름
-![dispatchserServlet_flow](/resource/Spring/Concept/dispatcherServletFlow.png)
+![dispatchserServlet_flow](/resource/2020/20200630/dispatcherServletFlow.png)
 
 1. 사용자가 요청한 내용을 Servlet Container(WAS)이 Dispacher Servlet에 전달합니다.
 2. DispacherServlet는 요청받은 URL과 매핑된 Controller정보를 HandllerMapping에 요청합니다.

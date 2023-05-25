@@ -34,15 +34,15 @@ exports 파일에 nfs 정보를 설정합니다. ([자세히](https://linux.die.
 
 ## NFS Clinet(Windows)
 1. Windows의 NFS 기능 켜기  
-![screenshot_1](/resource/NFSMountWriteFail/WindowsOnNFS.png)  
+![screenshot_1](/resource/2020/20200522/WindowsOnNFS.png)  
 * Windows 10 Enterprise 이상에서 제공되는 기능입니다.
 * Windows 10 Pro(version 10.0.14393 and above)에서도 제공됩니다.
 2. 네트워크 드라이브 추가
-![screenshot_2](/resource/NFSMountWriteFail/CreateNetworkDrive.png)
+![screenshot_2](/resource/2020/20200522/CreateNetworkDrive.png)
 
 # 오류 내용
 네트워크 드라이브가 정상적으로 추가되어 읽기는 가능하나 쓰기 실패.  
-![screenshot_3](/resource/NFSMountWriteFail/NFSMountWriteFail.png)
+![screenshot_3](/resource/2020/20200522/NFSMountWriteFail.png)
 
 # 원인 분석
 1. NFS Server의 권한을 확인 해보자  
@@ -124,7 +124,7 @@ Windows10에서는 특정 사용자로 로그인 할 수는 없지만, 익명 �
 5. 시스템 재부팅
 
 명령 프롬프트에서 마운트하여 정보를 확인해보면, UID,와 GID가 레지스트리에 설정된 값으로 지정된 것을 확인 할 수 있습니다.  
-![screenshot_4](/resource/NFSMountWriteFail/Result-Mount.png)
+![screenshot_4](/resource/2020/20200522/Result-Mount.png)
 
 
 ### 방법 2 - NFS Server에서 UID, GID 지정

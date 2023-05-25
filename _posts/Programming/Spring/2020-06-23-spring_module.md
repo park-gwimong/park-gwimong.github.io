@@ -11,7 +11,7 @@ mathjax: true
 
 # Spring Framework 모듈
 Springdms 20여개의 모듈로 구성되어 기능을 제공합니다.  이러한 모듈은 다음 다이어그램과 같이 그룹화되어져 있습니다.  
-![spring_overview](/resource/Spring/Concept/spring-overview.png)
+![spring_overview](/resource/2020/20200630/spring-overview.png)
 
 
 ## Core Container

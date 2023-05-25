@@ -15,7 +15,7 @@ Using ODP.NET
 1. C# 프로젝트 생성
 
 2. 참조에 OracleManagedDataAccess 추가   
-	![AddReference](/resource/ODPDotNet/ODPDotNet_AddReference.png "AddReference"){: width="700" height="400"}
+	![AddReference](/resource/2018/20180529/ODPDotNet_AddReference.png "AddReference"){: width="700" height="400"}
 
 3. using 코드 추가
 ```c#
@@ -99,16 +99,16 @@ using (OracleConnection cnn = new OracleConnection(connectStr))
 ## Using ODP.NET with Oracle Developer Tools for Visual Studio
 
 1. 서버 탐색기 -  연결 추가 클릭   
-![ODPDotNet_ODT1](/resource/ODPDotNet/ODPDotNet_ODT_Using1.png "ODPDotNet_ODT1")
+![ODPDotNet_ODT1](/resource/2018/20180529/ODPDotNet_ODT_Using1.png "ODPDotNet_ODT1")
 
 2. 데이터 소스 변경 - Oracle 데이터베이스 - ODP.NET, 관리되는 드라이버 선택
-![ODPDotNet_ODT2](/resource/ODPDotNet/ODPDotNet_ODT_Using2.png "ODPDotNet_ODT2")
+![ODPDotNet_ODT2](/resource/2018/20180529/ODPDotNet_ODT_Using2.png "ODPDotNet_ODT2")
 
 3. 연결 정보 입력   
-![ODPDotNet_ODT3](/resource/ODPDotNet/ODPDotNet_ODT_Using3.png "ODPDotNet_ODT3")
+![ODPDotNet_ODT3](/resource/2018/20180529/ODPDotNet_ODT_Using3.png "ODPDotNet_ODT3")
 
 4. 데이터 연결 확인   
-![ODPDotNet_ODT3](/resource/ODPDotNet/ODPDotNet_ODT_Using4.png "ODPDotNet_ODT4")
+![ODPDotNet_ODT3](/resource/2018/20180529/ODPDotNet_ODT_Using4.png "ODPDotNet_ODT4")
 
 
 

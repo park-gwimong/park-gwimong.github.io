@@ -10,7 +10,7 @@ mathjax: true
 Access2007부터 확장자가 accdb로 바뀌었습니다.
 C#에서는 OleDB를 이용하여 연결하면 됩니다.
 
-![img](/resource/20110306/20110306-img-1.png)
+![img](/resource/2011/20110306/20110306-img-1.png)
 
 <details>
 <summary>접기/펼치기</summary>
@@ -55,4 +55,4 @@ namespace OleDb
 ```
 </details>
 
-![img](/resource/20110306/20110306-img-2.png)
+![img](/resource/2011/20110306/20110306-img-2.png)

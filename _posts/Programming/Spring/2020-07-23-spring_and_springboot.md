@@ -31,7 +31,7 @@ Spring Boot로 환경을 구성하면 다음과 같은 이점을 제공합니다
 # Spring Boot Architecture
 Spring Boot는 다음의 단계를 수행합니다.
 
-![SpringBootArchitecture](/resource/Spring/SpringBoot/SpringBootArchitecture.png)
+![SpringBootArchitecture](/resource/2020/20200723/SpringBootArchitecture.png)
 
 - Spring Boot Staters :
 정의된 Spring Boot stater들을 이용하여 필요한 라이브러리들을 다운로드/갱신 합니다.
@@ -63,4 +63,4 @@ Spring boot에는 'stater'라는 편리한 종속성 기술자들이 존재합�
 새로운 프로젝트를 시작하게 되면, 가장 많은 노력과 시간이 걸리는 부분이 개발환경을 구축하는 일입니다.  
 Spring Initializr은 Spring에 대한 설정을 몇번의 클릭만으로 가능하게 합니다.  
 
-![SpringInitializr](/resource/Spring/SpringBoot/SpringInitializr.png)
+![SpringInitializr](/resource/2020/20200723/SpringInitializr.png)

@@ -18,7 +18,7 @@ IEEE(전기 전자 기술자 협회)에서 개발한 부동소수점 표현 방�
 
 ### 표현 방법
 
-![IEE754 부동소수점](/resource/GeneralFloatingPoint.png){: width="800" height="200"}  
+![IEE754 부동소수점](/resource/2022/20221121/GeneralFloatingPoint.png){: width="800" height="200"}  
 [[위키백과 - 부동소수점]](https://ko.wikipedia.org/wiki/%EB%B6%80%EB%8F%99%EC%86%8C%EC%88%98%EC%A0%90)
 
 ---

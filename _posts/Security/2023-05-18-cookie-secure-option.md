@@ -22,7 +22,7 @@ Cookie는 2개의 유형으로 나뉩니다.
 Http는 connectionless & Stateless(무상태성, 상태 정보를 가지 않는) 프로토콜입니다.  
 서버는 요청한 클라이언트의 상태 정보를 알 수 없기 때문에, 매번 인증 절차를 수행해야 합니다.  
 
-![sessionProcess](/resource/20230518/20230518-image-1.png)
+![sessionProcess](/resource/2023/20230518/20230518-image-1.png)
 1. Client A는 Server로 사용자 정보를 전송하여 인증 절차를 수행합니다.
 2. Server는 Client A의 대한 Session을 생성하여 Set-Cookie에 담아 Client에 전송합니다.
 3. 이 후, Client A는 Server로 요청 시, 세션 정보를 cookie에 담아 함께 전송합니다.

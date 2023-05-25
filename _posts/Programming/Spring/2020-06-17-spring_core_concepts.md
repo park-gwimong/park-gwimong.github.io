@@ -190,7 +190,7 @@ AOP(관점 지향 프로그래밍)는 POP(절차 지향 프로그래밍), OOP(�
 POP가 프로시저를 기준으로 분리시킨 것처럼, OOP가 객체를 기준으로 분리 시킨 것처럼 AOP는 **"관점"**을 기준으로 분리시킨 프로그래밍 패러다임입니다. 
 
 
-![spring_aop](/resource/Spring/Concept/spring_aop.png)  
+![spring_aop](/resource/2020/20200630/spring_aop.png)  
 <span style="color:blue;font-size:12px">* 가로 횡단 영역의 공통된 부분을 잘라냈다고 하여, AOP를 Cross-Cutting이라고 부르기도 합니다.</span>  
 
 AOP는 클래스에서 비슷한 기능을 하는 부분인 Concern(관심사)를 모아 Aspect로 모듈화하고 이를 필요시 Class에 적용하는 형태로 구현됩니다.  

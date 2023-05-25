@@ -43,7 +43,7 @@ FILE_ANY_ACCESS<-- 이 옵션으로 해놓은 경우에 어플에서 드라이�
 
 어플에서 DeviceIoControl를 호출하면 드라이버에서선 IRP_MJ_DEVICE_CONTROL 메세지를 날리는데, 이때 SystemBuffer의 주소값을 얻어 여기에 데이터를 읽고 쓰면 됩니다.  
 [응용프로그램 <->IO관리자<->드라이버]
-![ndis](/resource/20110212/20110212-NDIS-1.png)  
+![ndis](/resource/2011/20110212/20110212-NDIS-1.png)  
 
 1. 어플에서 InputBuffer를 이용하여 IO관리자에게 넘겨줌
 2. IO관리자는 이 값을 SystemBuffer에 복사, 드라이버는 SystemBuffer값을 참조하여 데이터를 가져옴
@@ -106,7 +106,7 @@ while(1)
 ```
 </details>
 
-![ndis](/resource/20110212/20110212-NDIS-2.png)  
+![ndis](/resource/2011/20110212/20110212-NDIS-2.png)  
 
 ---
 ## Driver
@@ -189,7 +189,7 @@ Return Value:
 </details>
 
 
-![ndis](/resource/20110212/20110212-NDIS-3.png)  
+![ndis](/resource/2011/20110212/20110212-NDIS-3.png)  
 
 > 참고로 2285576 값은 IOCTL_CODE로 생성한 IOCTL_EXAMPLE_SAMPLE_BUFFERED_IO의 값입니다.
 

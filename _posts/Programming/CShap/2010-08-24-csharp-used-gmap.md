@@ -21,8 +21,8 @@ http://greatmaps.codeplex.com/
 # GMap.Net 라이브러리 이용하기
 
 1. 우선 솔루션 탐색기에서 참조 추가를 이용하여 GMap.Net라이브러를 참조 추가 합니다.
-![img](/resource/20100824/20100824-img-1.png)
-![img](/resource/20100824/20100824-img-2.png)  
+![img](/resource/2010/20100824/20100824-img-1.png)
+![img](/resource/2010/20100824/20100824-img-2.png)  
 라이브러리를 모두 추가합니다.
     - GMap.NET.Windows.Forms.dll
     - GMap.NET.Core.dll
@@ -30,9 +30,9 @@ http://greatmaps.codeplex.com/
     - System.Data.SQLite.DLL  
 
 2. 코드를 직접 입력해도 되지만 좀 더 편리하게 이용하기 위해 도구상자에 추가합니다
-![img](/resource/20100824/20100824-img-3.png)  
+![img](/resource/2010/20100824/20100824-img-3.png)  
 찾아보기를 선택하여 GMap.Net.WindowsForms.dll를 추가하여 체크합니다.
-![img](/resource/20100824/20100824-img-4.png)  
+![img](/resource/2010/20100824/20100824-img-4.png)  
 
 이렇게 하면
 도구상자에서 기존의 컨트롤처럼 드래그하여 사용할 수 있습니다.
@@ -41,4 +41,4 @@ http://greatmaps.codeplex.com/
 
 
 # 결과
-![img](/resource/20100824/20100824-img-5.png)  
+![img](/resource/2010/20100824/20100824-img-5.png)  

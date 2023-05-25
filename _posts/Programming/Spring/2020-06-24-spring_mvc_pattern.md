@@ -20,12 +20,12 @@ Model1과 Model2는 Java web application의 설계에서 흔히 사용되는 소
 ## Model1  
 > 표시되는 부분과 로직을 하나의 서블릿에 함께 구현하는 디자인 패턴  
 
-![model1](/resource/Spring/Mvc/model1.png)
+![model1](/resource/2020/20200624/model1.png)
 
 ## Model2  
 > 표시되는 부분과 로직을 구별하여 구현하는 디자인 패턴  
 
-![model2](/resource/Spring/Mvc/model2.png)
+![model2](/resource/2020/20200624/model2.png)
 
 
 간단하게 정리하면, Logic과 Content가 함께 있느냐 없느냐로 보면 될 것 같습니다.  
@@ -40,13 +40,13 @@ MVC는 소프트웨어 공학에서 사용되는 소프트웨어 디자인 패�
 MVC에서 Model은 데이터를 나타내며, View는 사용자에게 보여지는 부분을, Controller는 Model과 View 사이의 상호동작을 관리합니다.  
 
 ### MVC1(= MVC + Model1)
-![mvc1](/resource/Spring/Mvc/mvc1.png)  
+![mvc1](/resource/2020/20200624/mvc1.png)  
 MVC에 Model1를 적용한 모델입니다.  
 JSP에 Model, Controller, View 코드가 모두 혼재되어 있습니다.  
 간단한 웹페이지를 구현할 때 사용됩니다.
 
 ### MVC2(= MVC + Model2)
-![mvc2](/resource/Spring/Mvc/mvc2.png)  
+![mvc2](/resource/2020/20200624/mvc2.png)  
 MVC에 Model를 적용한 모델입니다.  
 Model, Controller, View가 모두 완벽히 분리되어 있습니다.  
 

@@ -41,7 +41,7 @@ deb-src http://kr.archive.ubuntu.com/ubuntu/ maverick-security multiverse
 ```
 
 먼저 iwcofing 명령어를 통해 현재 설치되어있는 네트워크 인터페이스의 정보를 확인합니다.
-![img](/resource/20100910/20100910-img-1.png)  
+![img](/resource/2010/20100910/20100910-img-1.png)  
 
 현재 제 컴퓨터에 사용하고 있는 무선랜 인터페이스의 이름은 wlan0입니다.  
 이 무선랜 인터페이스를 모니터 모드로 바꿔주어야 합니다.  
@@ -49,10 +49,10 @@ deb-src http://kr.archive.ubuntu.com/ubuntu/ maverick-security multiverse
 $sudo airmon-ng start [인터페이스 이름]
 ```
 
-![img](/resource/20100910/20100910-img-2.png)  
+![img](/resource/2010/20100910/20100910-img-2.png)  
 
 성공적으로 이루어지면 mon0이라는 모니터 모드로 동작하고 있는 새로운 인터페이스가 추가되어있습니다.  
-![img](/resource/20100910/20100910-img-3.png)  
+![img](/resource/2010/20100910/20100910-img-3.png)  
 
 그럼 이제 airodump-ng으로 실시간으로 지나가는 모든 패킷을 캡처링을 할 수 있습니다.  
 
@@ -62,7 +62,7 @@ $sudo airmon-ng start [인터페이스 이름]
 
 으로 lv데이터를 모아서 dump 파일로 만듭니다.  
 lv데이터는 AP와 수신할때 앞에 24비트의 정보를 포함하고 있는 데이터를 말합니다.  
-![img](/resource/20100910/20100910-img-4.png)  
+![img](/resource/2010/20100910/20100910-img-4.png)  
 
 충분히 많은  IVs를 모았을때
 ```
@@ -70,6 +70,6 @@ $sudo aircrack-ng dump-01.cap
 ```  
 를 이용하여 암호를 알아냅니다.
 
-![img](/resource/20100910/20100910-img-5.png)  
+![img](/resource/2010/20100910/20100910-img-5.png)  
 
 [참고]http://www.askstudent.com/hacking/how-to-crack-a-wep-key-using-ubuntu/

@@ -26,7 +26,7 @@ autoexpect 실행 후 해당 프로그램 종료 시 expect script가 생성됩�
 
 # 예시
 ## 실행 예제
-![autoexpect_example](/resource/Expect/autoexpect.png)
+![autoexpect_example](/resource/2020/20200317/autoexpect.png)
 
 ## 생성 파일 
 ```bash

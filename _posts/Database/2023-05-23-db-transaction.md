@@ -32,7 +32,7 @@ Transaction은 시스템에 적용하기 위한 연산으로 Commit와 Rollback�
 
 ## Transaction 상태
 
-![transaction_status](/resource/20230523/20230523-image-1.png)
+![transaction_status](/resource/2023/20230523/20230523-image-1.png)
 
 - Active(활동) : Transaction이 실행 중인 상태
 - Failed(실패) : Transaction 실행 중 오류가 발생하여 중단된 상태

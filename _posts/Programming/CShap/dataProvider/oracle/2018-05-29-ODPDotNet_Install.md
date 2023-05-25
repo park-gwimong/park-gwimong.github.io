@@ -19,16 +19,16 @@ ODP.NET을 사용하기 위해서는 OracleManagedDataAccess.dll을 참조에 �
 ## Nuget을 이용하여 설치하는 방법
 
 1. 솔루션 탐색기에서 참조 또는 프로젝트를 선택 -> 오른쪽 단추 클릭 하고 NuGet 패키지 관리..클릭   
-	![NuGet Package Manager](/resource/ODPDotNet/ODPDotNet_NuGet0.png "ODPDotNet_NuGet0"){: width="300" height="300"}
+	![NuGet Package Manager](/resource/2018/20180529/ODPDotNet_NuGet0.png "ODPDotNet_NuGet0"){: width="300" height="300"}
 
 2. 찾아보기 - ODP.NET 검색하여 설치 클릭   
-	![NuGet Package Manager](/resource/ODPDotNet/ODPDotNet_NuGet1.png "ODPDotNet_NuGet1"){: width="700" height="400"}
+	![NuGet Package Manager](/resource/2018/20180529/ODPDotNet_NuGet1.png "ODPDotNet_NuGet1"){: width="700" height="400"}
 
 3. 라이센스 동의 버튼 클릭   
-	![ODPDotNet_NuGet2](/resource/ODPDotNet/ODPDotNet_NuGet2.png "ODPDotNet_NuGet2"){: width="700" height="400"}
+	![ODPDotNet_NuGet2](/resource/2018/20180529/ODPDotNet_NuGet2.png "ODPDotNet_NuGet2"){: width="700" height="400"}
 
 4. 설치 완료   
-	![ODPDotNet_NuGet3](/resource/ODPDotNet/ODPDotNet_NuGet3.png "ODPDotNet_NuGet3"){: width="700" height="400"}
+	![ODPDotNet_NuGet3](/resource/2018/20180529/ODPDotNet_NuGet3.png "ODPDotNet_NuGet3"){: width="700" height="400"}
 
 
 ## Oracle Developer Tools for Visual Studio 201x - MSI Installer을 이용하여 설치하는 방법

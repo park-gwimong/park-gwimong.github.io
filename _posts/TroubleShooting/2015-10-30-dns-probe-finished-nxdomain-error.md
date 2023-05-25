@@ -14,7 +14,7 @@ mathjax: true
 VirtualBox에서 우분투를 돌리고 있는데 DNS 설정을 변경하니 해당 오류가 발생하였습니다.
 
 wireshark로 패킷 캡쳐해보니
-![error](/resource/20151030/20151030-dns-error.png)
+![error](/resource/2015/20151030/20151030-dns-error.png)
 
 EDP(Extreme Discovery Protocol)
 

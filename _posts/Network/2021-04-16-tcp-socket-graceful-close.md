@@ -31,7 +31,7 @@ mathjax: true
 이번 글에서 정리하고 하는 부분은 바로 **소켓 연결 종료** 부분입니다.
 
 # TCP/IP 소켓 종료
-![img](/resource/20210416/20210416-%20img-1.png)
+![img](/resource/2021/20210416/20210416-img-1.png)
 1. 연결 종료 요청 : Client가 Server로 연결을 종료 하겠다는 FIN 플래그를 전송하고 Client는 FIN_WAIT 상태가 됩니다.  
 2. 연결 종료 준비 : Server는 FIN 플래그를 확인햇다는 ACK 플래그를 전송하면서 통신이 끝날때까지 TIME_WAIT 상태가 됩니다.  
 3. Server의 통신이 끝나면, Client에게 FIN 플래그를 전송합니다.  
@@ -75,7 +75,7 @@ TCP/IP의 Bible이라고 불리는 Richard W. Stevens의 TCP/IP Illustrated Volu
 ## Half-close
 Socket에는 입력과 출력을 위한 버퍼가 각각 존재하는데,  
 연결이 정상적으로 완료되면 아래 그림과 같이 입출력 스트림이 2개가 생성됩니다.  
-![img](/resource/20210416/20210416-img-2.png)  
+![img](/resource/2021/20210416/20210416-img-2.png)  
 
 Half-close는 2개의 스트림 중 하나만 종료하는 방법입니다.  
 

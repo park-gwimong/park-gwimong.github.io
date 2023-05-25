@@ -18,7 +18,7 @@ $sudo apt-get install eclipse
 ```
 
 저같은 경우엔 Luna버전을 설치하기 위해 직접 다운로드하였습니다.  
-![error](/resource/20151127/20151127-eclipse-install-1.png)
+![error](/resource/2015/20151127/20151127-eclipse-install-1.png)
 
 MORE DOWNLOADS에서 원하는 버전의 다운로드 페이지로 이동 할 수 있습니다.
 
@@ -78,7 +78,7 @@ $sudo chmod -R 777 conf
 # 4. Eclipse와 (SVN+Spring+Maven) 연동  
 SVN과 연동하기 위해 필요한 plug-in을 설치합니다.  
 plug-in파일을 다운로드 받아 Eclipse 설치 디렉토리에 바로 넣는 방법도 있지만, 간단하게 MarketPlace를 이용해서 다운로드 받습니다.    
-![error](/resource/20151127/20151127-eclipse-install-2.png)
+![error](/resource/2015/20151127/20151127-eclipse-install-2.png)
 
 다음의 기능과 연동하기 위해 추가적으로 plug-in을 설치합니다.  
 
@@ -91,17 +91,17 @@ plug-in파일을 다운로드 받아 Eclipse 설치 디렉토리에 바로 넣�
 
 # 5. SVN 서버로부터 프로젝트 파일 가져오기.  
 Svn Repository exploring 실행  
-![error](/resource/20151127/20151127-eclipse-install-3.png)
+![error](/resource/2015/20151127/20151127-eclipse-install-3.png)
 
 최초로 실행하면 SVN connet를 설치하라는 Maketplace가 실행됩니다.  
 Svn kit 1.7을 선택하여 설치합니다.  
 정상 설치 되었을 경우 SVN Connetor에 SVNKit 1.7이 선택되어 있습니다.  
 (다른 것들도 모두 선택하여 설치한후 이 후 설정에서 변경 할 수 있음)  
-![error](/resource/20151127/20151127-eclipse-install-4.png)
+![error](/resource/2015/20151127/20151127-eclipse-install-4.png)
 
 
 Svn Repository exploring에서 New-Repository location 클릭하여 SVN 저장소를 추가합니다.
-![error](/resource/20151127/20151127-eclipse-install-5.png)  
+![error](/resource/2015/20151127/20151127-eclipse-install-5.png)  
 
 
 프로젝트가 maven과 연동되어 있는 프로젝트일 경우.
@@ -114,13 +114,13 @@ Svn Repository exploring에서 New-Repository location 클릭하여 SVN 저장�
     (maven을 위한 설정은 pom.xml에 있으며 이에 대한 내용은 생략)  
     프로젝트 선택 후 마우스 오른쪽 클릭 → maven → update porject  
 4) maven으로부터 정상적으로 라이브러리 추가 된 경우 아래와 같음.  
-![error](/resource/20151127/20151127-eclipse-install-6.png)
+![error](/resource/2015/20151127/20151127-eclipse-install-6.png)
 
 <br>
 
 # 6. Eclipse와 tomcat 연동  
 Eclipse에 sever를 추가합니다.  
-![error](/resource/20151127/20151127-eclipse-install-7.png)  
+![error](/resource/2015/20151127/20151127-eclipse-install-7.png)  
 Tomcat의 설치 디렉토리를와 사용될 JRE 위치를 지정합니다.  
 
 앞전에 Tomcat의 설정 파일 링크를 정상적으로 수행되지 않았을 경우 여기서 문제가 발생합니다.  

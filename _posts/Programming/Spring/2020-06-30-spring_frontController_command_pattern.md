@@ -14,7 +14,7 @@ Spring MVC는 다른 많은 웹프레임워크와 마찬가지로 Front Controll
 
 # 기본적인 Sevlet 구조
 Servlet은 다음과 같은 web.xml 설정을 통해 요청과 Servlet이 1:1로 mapping 됩니다.
-![defaultServlet](/resource/Spring/Concept/defaultServletPattern.png)
+![defaultServlet](/resource/2020/20200630/defaultServletPattern.png)
 > ```xml
 > <servlet>
 >   <servlet-name>hello</servlet-name>
@@ -60,7 +60,7 @@ Servlet은 다음과 같은 web.xml 설정을 통해 요청과 Servlet이 1:1로
 # Front Controller Pattern
 이러한 단점을 해결하고자 Front Controller Pattern이 등장하였습니다.  
 Front Controller을 해석하면 **"앞에 있는 컨트롤"**인 것처럼 모든 요청을 하나의 Servlet에서 받아 내부적으로 각 요청을 처리하는 형태입니다.
-![frontControllerPattern](/resource/Spring/Concept/frontControllerPattern.png)
+![frontControllerPattern](/resource/2020/20200630/frontControllerPattern.png)
 
 > ```xml
 > <servlet>
@@ -99,7 +99,7 @@ FrontController 패턴은 모든 처리를 하나의 서블릿에서 처리하�
 
 # Command Pattern
 Command 패턴은 Interface를 구현한 클래스에 요청을 분산 시켜 관리하는 디자인 패턴입니다.  
-![frontControllerPattern_and_commandPattern](/resource/Spring/Concept/frontControllerPattern_and_commandPattern.png)
+![frontControllerPattern_and_commandPattern](/resource/2020/20200630/frontControllerPattern_and_commandPattern.png)
 
 > ```xml
 > <servlet>
