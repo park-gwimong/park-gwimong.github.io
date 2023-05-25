@@ -23,7 +23,7 @@ linkedIn_username: 박귀몽
 description_footer: mong's blog
 
 # comments
-disqus_shortname: gwimong-github-io
+disqus_shortname: park.gwimong.github.io
 #google_analytics_id: UA-117259791-1
 google_analytics_id: G-43FMDRM60Z
 
@@ -52,3 +52,8 @@ gems:
   - jekyll-paginate
 
 paginate: 6
+
+
+layout: default
+comments: true
+# other options
