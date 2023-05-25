@@ -7,24 +7,26 @@
 
 # Site settings
 title: gwimong's blog
-brief-intro: Dev Engineer
+brief-intro: Software Engineer
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://gwimong.github.io" # the base hostname & protocol for your site
+url: "https://park-gwimong.github.io" # the base hostname & protocol for your site
 
 permalink: /:year/:month/:day/:title/
 
 # other links
 # twitter_username: gaohaoyang126
 facebook_username: gwimong
-github_username: gwimong
-email: scarcedream@gmail.com
-# linkedIn_username: gaohaoyang
+github_username: park-gwimong
+email: park.gwimong@gmail.com
+linkedIn_username: 박귀몽
 
 description_footer: mong's blog
 
 # comments
 disqus_shortname: gwimong-github-io
-google_analytics_id: UA-117259791-1
+#google_analytics_id: UA-117259791-1
+google_analytics_id: G-43FMDRM60Z
+
 
 # Build settings
 markdown: kramdown
