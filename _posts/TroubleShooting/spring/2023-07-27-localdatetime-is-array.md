@@ -51,7 +51,11 @@ Spring이 WebMvcConfigurerAdapter 클래스를 자동으로 등록할 때, confi
 이러한 문제를 해결하기 위해서는 해당 필드에 JsonFormat를 지정하거나, ObjectMapper를 등록 또는 재정의하는 방법이 있습니다.
 
 
-1. JsonFormat  
+1. Spring MVC 비활성화  
+    - @EnableWebMvc 제거
+    - WebMvcConfigurationSupport -> WebMvcConfiguration  
+   <br>
+2. JsonFormat  
     가장 간단한 방법으로, 해당 필드에 @JsonFormat를 지정하는 방법입니다.
     ```java
     @JsonFormat(shape = JsonFormat.Shape.STRING,
@@ -60,7 +64,7 @@ Spring이 WebMvcConfigurerAdapter 클래스를 자동으로 등록할 때, confi
     ```  
    간단하게 적용 할 수 있는 장점이 있지만, 매번 필드에 정의 해줘야 하는 불편함이 있습니다.
     <br><br>
-2. 사용자 정의 ObjectMapper 등록
+3. 사용자 정의 ObjectMapper 등록  
     사용자가 ObjectMapper를 구현하고 이를 Spring에 등록하는 방법입니다.  
     ```java
     @Configuration
@@ -81,7 +85,7 @@ Spring이 WebMvcConfigurerAdapter 클래스를 자동으로 등록할 때, confi
     }
     ```
    <br>
-3. ObjectMapper 재정의  
+4. ObjectMapper 재정의  
    Jackson2ObjectMapperBuilder 클래스를 재정의하는 방법입니다.  
     ```java
     @Configuration
