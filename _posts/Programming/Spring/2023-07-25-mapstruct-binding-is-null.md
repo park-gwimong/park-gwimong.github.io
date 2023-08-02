@@ -3,7 +3,7 @@ layout: post
 title: "Mapstruct로 DTO 변환 시 주의 사항"
 subtitle: "Unmapped target property 경고"
 date: 2023-07-25 18:45:00+0900
-categories: [ "TroubleShooting" ]
+categories: [ "Programming" ]
 tags: [ "Spring" "Mapstruct" ]
 mathjax: true
 ---

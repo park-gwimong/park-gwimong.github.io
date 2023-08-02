@@ -3,7 +3,7 @@ layout: post
 title: "Spring에서 Localdatetime이 Array 형태로 표출 되는 현상"
 subtitle: "jackson-datatype-jsr310와 MvcEnable"
 date: 2023-07-27 17:52:00+0900
-categories: [ "TroubleShooting" ]
+categories: [ "Programming" ]
 tags: [ "Spring" "Localdatetime" ]
 mathjax: true
 ---
