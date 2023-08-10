@@ -22,8 +22,9 @@ type: page
 * [Github](https://github.com/park-gwimong)
 * [Email](mailto:park.gwimong@gmail.com)
 
-## Visitor Statistics
-{% include analytics.html %}
+[//]: # (## Visitor Statistics)
+
+[//]: # ({% include analytics.html %})
 
 ## Comments
 {% include comments.html %}
