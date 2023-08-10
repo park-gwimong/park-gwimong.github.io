@@ -11,6 +11,7 @@ brief-intro: Software Engineer
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://park-gwimong.github.io" # the base hostname & protocol for your site
 
+
 permalink: /:year/:month/:day/:title/
 
 # other links
@@ -48,8 +49,10 @@ excerpt_separator: "\n\n\n\n"
 # paginate
 #gems: [jekyll-paginate]
 #plugins: [jekyll-paginate]
-gems:
-  - jekyll-paginate
+#gems:
+#  - jekyll-paginate
+plugins:
+  - jekyll-sitemap
 
 paginate: 6
 
