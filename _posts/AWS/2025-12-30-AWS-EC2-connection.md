@@ -1,7 +1,7 @@
 ---
 layout: post
 title: EC2 인스턴스 접속 방법
-date: 2024-12-30 18:47:00+0900
+date: 2025-12-30 18:47:00+0900
 categories: [AWS]
 tags: [EC2, SSH, AWS-CLI]
 mathjax: true
