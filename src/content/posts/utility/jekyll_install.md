@@ -2,6 +2,7 @@
 title: "Jekyll 설치"
 pubDate: 2019-03-06T20:00:00+09:00
 category: "utility"
+tags: ["Jekyll"]
 math: true
 ---
 

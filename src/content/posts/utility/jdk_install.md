@@ -2,6 +2,7 @@
 title: "OracleJDK 설치"
 pubDate: 2018-04-20T13:22:00+09:00
 category: "utility"
+tags: ["JDK", "Oracle", "Java"]
 math: true
 ---
 

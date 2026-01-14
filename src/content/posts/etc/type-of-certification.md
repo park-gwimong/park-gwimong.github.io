@@ -2,6 +2,7 @@
 title: "IT 자격증 종류"
 pubDate: 2019-11-14T01:00:00+09:00
 category: "etc"
+tags: ["Certification", "IT"]
 math: true
 ---
 

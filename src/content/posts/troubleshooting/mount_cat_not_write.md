@@ -3,6 +3,7 @@ title: "Windows에서 NFS 공유 폴더 쓰기 실패"
 subtitle: "오류 내용 : 이 작업을 수행하기 위한 권한이 필요합니다."
 pubDate: 2020-05-22T11:26:00+09:00
 category: "troubleshooting"
+tags: ["NFS", "Windows"]
 math: true
 ---
 

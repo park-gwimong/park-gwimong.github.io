@@ -2,6 +2,7 @@
 title: "IP 프로토콜 분석"
 pubDate: 2010-04-13T06:13:00+09:00
 category: "network"
+tags: ["IP"]
 math: true
 ---
 

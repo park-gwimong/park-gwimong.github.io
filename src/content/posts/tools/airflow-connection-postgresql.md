@@ -3,7 +3,7 @@ title: "Airflow connections 추가하기"
 subtitle: "Airflow Provider Package"
 pubDate: 2023-08-10T17:34:00+09:00
 category: "tools"
-tags: ["Airflow"]
+tags: ["Airflow", "PostgreSQL"]
 math: true
 ---
 

@@ -3,7 +3,7 @@ title: "QGroundControl 개발 환경 구축하기"
 subtitle: "QGC Build 방법"
 pubDate: 2023-06-19T12:26:00+09:00
 category: "aerospace"
-tags: ["Term", "Acronyms"]
+tags: ["QGroundControl", "Build", "Aerospace"]
 math: true
 ---
 

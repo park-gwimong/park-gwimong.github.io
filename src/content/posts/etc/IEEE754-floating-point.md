@@ -2,6 +2,7 @@
 title: "IEEE754 부동소수점 표현 방법"
 pubDate: 2022-11-17T15:00:00+09:00
 category: "etc"
+tags: ["IEEE 754", "Floating Point"]
 math: true
 ---
 

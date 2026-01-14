@@ -3,6 +3,7 @@ title: "Ubuntu에서 QT프로그래밍 시작하기 #1"
 subtitle: "QT 시작하기"
 pubDate: 2010-04-28T02:51:00+09:00
 category: "programming"
+tags: ["Qt", "C++", "Ubuntu"]
 math: true
 ---
 

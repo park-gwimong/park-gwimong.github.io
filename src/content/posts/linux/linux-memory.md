@@ -2,6 +2,7 @@
 title: "리눅스에서의 메모리 주소 지정 방법"
 pubDate: 2010-04-15T04:10:00+09:00
 category: "linux"
+tags: ["Linux", "Memory"]
 math: true
 ---
 

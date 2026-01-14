@@ -3,7 +3,7 @@ title: "Spring Boot JPA로 Entity의 Default 값 설정하기"
 subtitle: "@NotNull과 @ColumnDefault 차이"
 pubDate: 2023-08-02T16:44:00+09:00
 category: "programming"
-tags: ["Spring", "JPA", "hibernate", "validation"]
+tags: ["Spring Boot", "JPA", "Hibernate", "Validation"]
 math: true
 ---
 

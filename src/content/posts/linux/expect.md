@@ -2,6 +2,7 @@
 title: "Expect로 다수의 서버를 관리하자(1)"
 pubDate: 2020-03-12T11:00:00+09:00
 category: "linux"
+tags: ["Expect", "Automation"]
 math: true
 ---
 

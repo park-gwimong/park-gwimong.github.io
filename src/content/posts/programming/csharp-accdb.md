@@ -2,6 +2,7 @@
 title: "C#에서 accdb(Access2007) 연동하기"
 pubDate: 2011-03-06T21:01:00+09:00
 category: "programming"
+tags: ["C#", "Access"]
 math: true
 ---
 

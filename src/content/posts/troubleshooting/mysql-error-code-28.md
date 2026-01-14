@@ -2,6 +2,7 @@
 title: "MySQL Error code: 28"
 pubDate: 2016-01-20T15:28:00+09:00
 category: "troubleshooting"
+tags: ["MySQL"]
 math: true
 ---
 

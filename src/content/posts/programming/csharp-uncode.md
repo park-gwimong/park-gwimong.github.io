@@ -2,6 +2,7 @@
 title: "C#에서 문자인지 판단하기"
 pubDate: 2010-04-22T01:07:00+09:00
 category: "programming"
+tags: ["C#", "Unicode"]
 math: true
 ---
 

@@ -2,6 +2,7 @@
 title: "Ubuntu에 NTFS 파티션 자동으로 마운트 설정"
 pubDate: 2010-09-09T19:33:00+09:00
 category: "linux"
+tags: ["Ubuntu", "NTFS", "Mount"]
 math: true
 ---
 

@@ -2,6 +2,7 @@
 title: "OSI 7 Layer"
 pubDate: 2012-07-14T15:46:00+09:00
 category: "etc"
+tags: ["OSI 7 Layer", "Networking"]
 math: true
 ---
 

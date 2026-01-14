@@ -3,6 +3,7 @@ title: "데이터 유무 확인을 위한 SQL 구현"
 subtitle: "IN보다 Exists를 사용하자"
 pubDate: 2020-03-10T18:13:00+09:00
 category: "programming"
+tags: ["SQL", "Database"]
 math: true
 ---
 

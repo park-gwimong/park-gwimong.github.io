@@ -3,6 +3,7 @@ title: "Spring Framework 이해하기 #4"
 subtitle: "Spring의 IoC, 그리고 DI"
 pubDate: 2021-04-13T15:24:00+09:00
 category: "programming"
+tags: ["Spring", "IoC", "DI"]
 math: true
 ---
 

@@ -2,6 +2,7 @@
 title: "VMWare에서 리눅스 공유 폴더 설정하기"
 pubDate: 2010-12-01T04:40:00+09:00
 category: "linux"
+tags: ["VMware", "Shared Folder"]
 math: true
 ---
 

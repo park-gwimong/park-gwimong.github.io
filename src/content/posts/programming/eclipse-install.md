@@ -2,6 +2,7 @@
 title: "우분투에서 개발환경 구축하기(eclipse+tomcat+svn+maven)"
 pubDate: 2015-11-27T11:56:00+09:00
 category: "programming"
+tags: ["Eclipse", "Tomcat", "SVN", "Maven", "Ubuntu"]
 math: true
 ---
 

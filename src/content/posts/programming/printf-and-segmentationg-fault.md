@@ -2,6 +2,7 @@
 title: "printf()의 Segmentationg fault 차이"
 pubDate: 2010-02-19T18:16:00+09:00
 category: "programming"
+tags: ["C", "printf", "Segmentation Fault"]
 math: true
 ---
  

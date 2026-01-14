@@ -2,6 +2,7 @@
 title: ".NET에서 Oracle 연동"
 pubDate: 2018-05-24T18:43:00+09:00
 category: "programming"
+tags: [".NET", "Oracle"]
 math: true
 ---
 

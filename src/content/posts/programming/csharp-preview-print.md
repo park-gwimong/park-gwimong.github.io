@@ -2,6 +2,7 @@
 title: "C#에서 미리보기로 여라장 프린터 출력하기"
 pubDate: 2010-04-20T20:07:30+09:00
 category: "programming"
+tags: ["C#", "Printing"]
 math: true
 ---
 

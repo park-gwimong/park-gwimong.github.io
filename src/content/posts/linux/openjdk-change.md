@@ -2,6 +2,7 @@
 title: "CentOS openJDK 삭제 및 Oracle JDK 설치"
 pubDate: 2017-04-13T20:41:00+09:00
 category: "linux"
+tags: ["OpenJDK", "Oracle JDK", "Java", "CentOS"]
 math: true
 ---
 

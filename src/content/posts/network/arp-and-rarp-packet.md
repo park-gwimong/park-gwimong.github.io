@@ -2,6 +2,7 @@
 title: "ARP, RARP 패킷 구조"
 pubDate: 2010-04-16T04:04:00+09:00
 category: "network"
+tags: ["ARP", "RARP"]
 math: true
 ---
 

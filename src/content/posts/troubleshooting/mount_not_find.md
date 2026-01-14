@@ -3,6 +3,7 @@ title: "Windows 명령프롬프트에서 공유폴더 Mount 시 안보임"
 subtitle: "Mount를 성공하였는데, 탐색기에서 보이지 않음"
 pubDate: 2020-05-25T10:26:00+09:00
 category: "troubleshooting"
+tags: ["Windows", "SMB"]
 math: true
 ---
 

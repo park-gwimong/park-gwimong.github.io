@@ -2,6 +2,7 @@
 title: "SCP 사용법"
 pubDate: 2018-04-20T10:43:00+09:00
 category: "linux"
+tags: ["SCP", "SSH"]
 math: true
 ---
 

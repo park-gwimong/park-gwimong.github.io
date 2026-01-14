@@ -3,6 +3,7 @@ title: "윈도우 환경에서 커널 디버깅하기"
 subtitle: "Windbg와 vmwarfe 연경"
 pubDate: 2010-11-07T17:35:00+09:00
 category: "tools"
+tags: ["WinDbg", "VMware", "Kernel Debugging"]
 math: true
 ---
 

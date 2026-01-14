@@ -2,6 +2,7 @@
 title: "인터럽트와 예외"
 pubDate: 2012-02-07T17:48:00+09:00
 category: "system"
+tags: ["Interrupt", "Exception"]
 math: true
 ---
 

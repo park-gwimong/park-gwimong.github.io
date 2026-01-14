@@ -2,6 +2,7 @@
 title: "The path '.' appears to be part of a Subversion 1.7 or greater working copy"
 pubDate: 2016-03-18T09:40:00+09:00
 category: "troubleshooting"
+tags: ["Subversion", "SVN"]
 math: true
 ---
 

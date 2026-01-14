@@ -3,6 +3,7 @@ title: "Spring과 SpringBoot"
 subtitle: "Spring Boot의 이해"
 pubDate: 2020-07-23T15:00:00+09:00
 category: "programming"
+tags: ["Spring", "Spring Boot"]
 math: true
 ---
 

@@ -2,6 +2,7 @@
 title: "리눅스에서의 Process"
 pubDate: 2010-11-12T06:08:00+09:00
 category: "linux"
+tags: ["Linux", "Process"]
 math: true
 ---
 

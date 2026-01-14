@@ -3,6 +3,7 @@ title: "Expect로 다수의 서버를 관리하자(3)"
 subtitle: "Perl로 Expect 모듈 - NetSSHExpect"
 pubDate: 2020-03-16T14:00:00+09:00
 category: "linux"
+tags: ["Expect", "Automation"]
 math: true
 ---
 

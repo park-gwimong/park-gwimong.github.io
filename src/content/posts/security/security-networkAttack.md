@@ -2,6 +2,7 @@
 title: "네트워크 기반 공격 유형"
 pubDate: 2018-04-03T16:10:18+09:00
 category: "security"
+tags: ["Network Security", "Attack"]
 math: true
 ---
 

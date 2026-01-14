@@ -2,7 +2,7 @@
 title: "EC2 인스턴스 접속 방법"
 pubDate: 2025-12-30T18:47:00+09:00
 category: "aws"
-tags: ["EC2", "SSH", "AWS-CLI"]
+tags: ["AWS", "EC2", "SSH"]
 math: true
 ---
 

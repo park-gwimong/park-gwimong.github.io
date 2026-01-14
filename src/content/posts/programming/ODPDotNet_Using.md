@@ -2,6 +2,7 @@
 title: "ODP.NET을 사용하여 Oracle에 연동(C#)"
 pubDate: 2018-05-29T16:43:00+09:00
 category: "programming"
+tags: ["ODP.NET", "Oracle", "C#"]
 math: true
 ---
 

@@ -2,6 +2,7 @@
 title: "jQuery ajax 배열데이터 전송 시 직렬화"
 pubDate: 2016-12-21T14:57:00+09:00
 category: "programming"
+tags: ["jQuery", "AJAX", "Serialization"]
 math: true
 ---
 

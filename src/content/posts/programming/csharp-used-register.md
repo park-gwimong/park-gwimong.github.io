@@ -2,6 +2,7 @@
 title: "C#에서 Windows 레지스터리 이용하기"
 pubDate: 2010-08-05T14:27:00+09:00
 category: "programming"
+tags: ["C#", "Windows Registry"]
 math: true
 ---
 

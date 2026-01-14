@@ -2,6 +2,7 @@
 title: "C#에서 CrystallReport 사용하기 #1"
 pubDate: 2011-02-08T17:48:00+09:00
 category: "programming"
+tags: ["C#", "Crystal Reports"]
 math: true
 ---
 

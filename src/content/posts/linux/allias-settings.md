@@ -2,6 +2,7 @@
 title: "Linux alias 설정"
 pubDate: 2016-02-04T13:46:00+09:00
 category: "linux"
+tags: ["Shell", "Alias"]
 math: true
 ---
 

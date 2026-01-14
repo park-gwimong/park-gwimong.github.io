@@ -3,7 +3,7 @@ title: "UAM 용어 정리"
 subtitle: "UAM 용어 및 약어"
 pubDate: 2023-06-15T14:02:00+09:00
 category: "aerospace"
-tags: ["Term", "Acronyms"]
+tags: ["Aerospace", "Acronyms"]
 math: true
 ---
 

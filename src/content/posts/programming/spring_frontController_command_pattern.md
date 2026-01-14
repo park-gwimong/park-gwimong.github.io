@@ -3,6 +3,7 @@ title: "Spring Web MVC 이해하기 #2"
 subtitle: "Spring Web MVC 동작 구조"
 pubDate: 2020-06-30T17:00:00+09:00
 category: "programming"
+tags: ["Spring MVC", "Front Controller", "Command Pattern"]
 math: true
 ---
 

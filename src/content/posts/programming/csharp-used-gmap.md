@@ -2,6 +2,7 @@
 title: "C#에서 GMap.Net 사용하기"
 pubDate: 2010-08-24T06:02:00+09:00
 category: "programming"
+tags: ["C#", "GMap.NET"]
 math: true
 ---
 

@@ -2,6 +2,7 @@
 title: "RAID 구성 종류"
 pubDate: 2018-09-05T10:00:00+09:00
 category: "system"
+tags: ["RAID", "Storage"]
 math: true
 ---
 

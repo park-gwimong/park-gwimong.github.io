@@ -3,6 +3,7 @@ title: "vsfpt에서 파일 업로드가 되지 않는 현상"
 subtitle: "553 Could not create file."
 pubDate: 2010-11-07T17:35:00+09:00
 category: "troubleshooting"
+tags: ["vsftpd", "FTP"]
 math: true
 ---
 

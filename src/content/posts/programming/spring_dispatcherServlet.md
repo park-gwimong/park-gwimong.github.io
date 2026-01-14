@@ -3,6 +3,7 @@ title: "Spring Web MVC 이해하기 #3"
 subtitle: "DispatcherServlet의 이해"
 pubDate: 2020-07-01T17:00:00+09:00
 category: "programming"
+tags: ["Spring MVC", "DispatcherServlet"]
 math: true
 ---
 

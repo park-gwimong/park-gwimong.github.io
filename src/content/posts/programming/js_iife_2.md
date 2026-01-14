@@ -3,6 +3,7 @@ title: "javascript에서의 뻘짓 #2"
 subtitle: "IIFE와 Object"
 pubDate: 2020-04-17T13:13:00+09:00
 category: "programming"
+tags: ["JavaScript", "IIFE"]
 ---
 
 [javascript에서의 뻘짓 #1](/2020/04/16/js_iife)의 연장선인 뻘짓입니다.

@@ -3,6 +3,7 @@ title: "[phpldapadmin] Function create_function() is deprecated"
 subtitle: "Unrecoginized error number: 8192: Function create_function() is deprecated"
 pubDate: 2020-03-26T15:09:00+09:00
 category: "programming"
+tags: ["PHP", "phpLDAPadmin"]
 math: true
 ---
 

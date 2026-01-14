@@ -3,7 +3,7 @@ title: "REST Api 아키텍처"
 subtitle: "Restful한 Api 설계하기"
 pubDate: 2024-04-15T18:30:00+09:00
 category: "web"
-tags: ["RestAPI", "Architecture"]
+tags: ["REST API", "Architecture"]
 math: true
 ---
 

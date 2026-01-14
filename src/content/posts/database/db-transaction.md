@@ -3,6 +3,7 @@ title: "Database 이해하기 #1"
 subtitle: "DB Transaction이란"
 pubDate: 2023-05-23T18:09:00+09:00
 category: "database"
+tags: ["Database", "Transaction"]
 math: true
 ---
 

@@ -2,6 +2,7 @@
 title: "CentOS yum 저장소 변경하기"
 pubDate: 2016-10-17T16:26:00+09:00
 category: "linux"
+tags: ["CentOS", "YUM"]
 math: true
 ---
 

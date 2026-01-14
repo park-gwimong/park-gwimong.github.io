@@ -2,6 +2,7 @@
 title: "우분투에서 group 복구하기"
 pubDate: 2010-08-23T09:37:00+09:00
 category: "linux"
+tags: ["Ubuntu", "Group"]
 math: true
 ---
 

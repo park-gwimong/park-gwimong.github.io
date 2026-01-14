@@ -2,6 +2,7 @@
 title: "TCP/IP 소켓의 우아한 종료(Graceful shutdown)"
 pubDate: 2021-04-16 17:024:00+0900
 category: "network"
+tags: ["TCP", "Socket", "Graceful Shutdown"]
 math: true
 ---
 

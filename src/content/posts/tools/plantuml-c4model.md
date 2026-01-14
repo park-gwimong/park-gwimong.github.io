@@ -3,7 +3,7 @@ title: "plantuml로 Software Architecture 작성하기"
 subtitle: "C4 Model과 plantuml"
 pubDate: 2023-07-10T18:11:00+09:00
 category: "tools"
-tags: ["Plantuml", "C4 model"]
+tags: ["PlantUML", "C4 Model"]
 math: true
 ---
 

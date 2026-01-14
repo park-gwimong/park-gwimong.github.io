@@ -2,6 +2,7 @@
 title: "Expect Tools 활용 - expect_autoexpect"
 pubDate: 2020-03-17T11:00:00+09:00
 category: "linux"
+tags: ["Expect", "Automation"]
 math: true
 ---
 

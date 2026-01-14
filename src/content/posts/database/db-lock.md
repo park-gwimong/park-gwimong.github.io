@@ -3,6 +3,7 @@ title: "Database 이해하기 #2"
 subtitle: "DB Lock, 그리고 Dead lock"
 pubDate: 2023-05-24T13:09:00+09:00
 category: "database"
+tags: ["Database", "Locking"]
 math: true
 ---
 

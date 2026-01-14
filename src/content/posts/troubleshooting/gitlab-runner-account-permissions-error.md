@@ -3,7 +3,7 @@ title: "Gitlab-runner 특정 계정으로 실행하기"
 subtitle: "gitlab-runner 실행 권한"
 pubDate: 2023-09-19T17:21:00+09:00
 category: "troubleshooting"
-tags: ["Gitlab CI/CD"]
+tags: ["GitLab CI/CD", "Runner"]
 math: true
 ---
 

@@ -2,6 +2,7 @@
 title: "Ubuntu에서 MySQL 원격 접속하기"
 pubDate: 2010-08-03T00:19:00+09:00
 category: "linux"
+tags: ["Ubuntu", "MySQL", "Remote Access"]
 math: true
 ---
 

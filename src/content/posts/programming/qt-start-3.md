@@ -3,6 +3,7 @@ title: "Ubuntu에서 QT프로그래밍 시작하기 #3"
 subtitle: "QT에서 Opengl 사용하기"
 pubDate: 2010-04-28T19:38:00+09:00
 category: "programming"
+tags: ["Qt", "C++", "Ubuntu"]
 math: true
 ---
 

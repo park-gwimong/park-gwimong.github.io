@@ -3,6 +3,7 @@ title: "Expect로 다수의 서버를 관리하자(4)"
 subtitle: "범용적으로 사용 할 수 있는 코드를 구현해 보자"
 pubDate: 2020-03-16T16:00:00+09:00
 category: "linux"
+tags: ["Expect", "Automation"]
 math: true
 ---
 

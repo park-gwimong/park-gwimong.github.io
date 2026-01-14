@@ -2,6 +2,7 @@
 title: "vim 설정"
 pubDate: 2018-04-04T18:00:00+09:00
 category: "utility"
+tags: ["Vim"]
 math: true
 ---
 

@@ -2,6 +2,7 @@
 title: "DNS_PROBE_FINISHED_NXDOMAIN 오류"
 pubDate: 2015-10-30T09:45:00+09:00
 category: "troubleshooting"
+tags: ["DNS"]
 math: true
 ---
 

@@ -2,7 +2,7 @@
 title: "EC2 Instance Connect를 활용한 파일 전송"
 pubDate: 2025-12-30T19:18:00+09:00
 category: "aws"
-tags: ["EC2", "SSH", "SCP", "AWS-CLI", "EIC"]
+tags: ["AWS", "EC2", "EC2 Instance Connect", "SCP"]
 math: true
 ---
 

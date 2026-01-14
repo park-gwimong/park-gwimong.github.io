@@ -2,6 +2,7 @@
 title: "ptrace로 프로세스 추적하는 예제"
 pubDate: 2015-11-12T15:02:00+09:00
 category: "programming"
+tags: ["ptrace", "Debugging"]
 math: true
 ---
 

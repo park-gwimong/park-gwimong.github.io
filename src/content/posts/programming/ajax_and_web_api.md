@@ -2,6 +2,7 @@
 title: "비동기 통신을 위한 Ajax와 WEB API"
 pubDate: 2022-12-07T16:20:00+09:00
 category: "programming"
+tags: ["AJAX", "Web API", "JavaScript"]
 math: true
 ---
 

@@ -2,6 +2,7 @@
 title: "ptrace 기본적인 사용 방법"
 pubDate: 2015-11-13T18:43:00+09:00
 category: "programming"
+tags: ["ptrace", "Debugging"]
 math: true
 ---
 

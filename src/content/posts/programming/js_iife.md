@@ -3,6 +3,7 @@ title: "javascript에서의 뻘짓 #1"
 subtitle: "IITP 이해하기"
 pubDate: 2020-04-16T13:13:00+09:00
 category: "programming"
+tags: ["JavaScript", "IIFE"]
 ---
 
 # IIFE

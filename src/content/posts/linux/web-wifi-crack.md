@@ -3,6 +3,7 @@ title: "WEB 무선랙 크랙하기"
 subtitle: "aricrack"
 pubDate: 2010-09-10T10:57:00+09:00
 category: "linux"
+tags: ["WiFi", "Security"]
 math: true
 ---
 

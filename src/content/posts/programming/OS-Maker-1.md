@@ -3,6 +3,7 @@ title: "OS 만들기 #1"
 subtitle: "OS를 개발하기 위한 준비"
 pubDate: 2010-04-07T20:04:00+09:00
 category: "programming"
+tags: ["Operating System", "OS Development"]
 math: true
 ---
 

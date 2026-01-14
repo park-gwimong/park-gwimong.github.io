@@ -2,6 +2,7 @@
 title: "가상유저로 vsftpd 운영하기"
 pubDate: 2010-02-19T08:21:00+09:00
 category: "tools"
+tags: ["vsftpd", "FTP"]
 math: true
 ---
 
