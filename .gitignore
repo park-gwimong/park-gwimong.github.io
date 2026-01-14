@@ -1,14 +1,32 @@
-_site
-.sass-cache
-.jekyll-metadata
-.vscode
-.idea
-.DS_Store
-.jekyll-cache/
+# build output
+dist/
 
-# packages #
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.production
+
+# macOS
+.DS_Store
+
+# editor
+.vscode/
 *.swp
-*.dmg
-*.iso
-*.tar
-/CLAUDE.md
+*.swo
+
+# astro
+.astro/
+
+# Jekyll backup (can be removed after confirming migration)
+_jekyll_backup/
+
+# IDE
+.idea/

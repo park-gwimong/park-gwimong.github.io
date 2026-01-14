@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(dir:*)",
+      "Bash(node scripts/migrate.mjs:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(test:*)"
     ]
   }
 }
