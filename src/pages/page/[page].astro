@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+function slugifyTag(tag: string): string {
+  return tag.toLowerCase()
+    .replace(/\//g, '-')
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9가-힣-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('posts');
+  const sortedPosts = allPosts
+    .filter(post => !post.data.draft)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  const postsPerPage = 6;
+  const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
+
+  return Array.from({ length: totalPages - 1 }, (_, i) => ({
+    params: { page: String(i + 2) },
+    props: {
+      posts: sortedPosts.slice((i + 1) * postsPerPage, (i + 2) * postsPerPage),
+      currentPage: i + 2,
+      totalPages,
+      allPosts: sortedPosts,
+    },
+  }));
+}
+
+const { posts, currentPage, totalPages, allPosts } = Astro.props;
+
+const recentPosts = allPosts.slice(0, 10);
+
+const categories = allPosts.reduce((acc: Record<string, number>, post: any) => {
+  const cat = post.data.category;
+  acc[cat] = (acc[cat] || 0) + 1;
+  return acc;
+}, {});
+
+const tagsMap: Record<string, { count: number, originalName: string }> = {};
+allPosts.forEach((post: any) => {
+  post.data.tags.forEach((tag: string) => {
+    const slug = slugifyTag(tag);
+    if (!tagsMap[slug]) {
+      tagsMap[slug] = { count: 0, originalName: tag };
+    }
+    tagsMap[slug].count++;
+  });
+});
+
+function formatDate(date: Date): string {
+  return date.toISOString().split('T')[0];
+}
+
+function getPostUrl(post: any): string {
+  const date = new Date(post.data.pubDate);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const slugParts = post.slug.split('/');
+  const fileSlug = slugParts[slugParts.length - 1];
+  return `/${year}/${month}/${day}/${fileSlug}/`;
+}
+---
+
+<BaseLayout title={`Page ${currentPage}`}>
+  <div class="page clearfix" index>
+    <div class="left">
+      <h1>Welcome to gwimong's Blog!</h1>
+      <small>안녕하세요. 평범한 개발자의 블로그입니다.</small>
+      <hr>
+      <ul>
+        {posts.map((post: any) => (
+          <li>
+            <h2>
+              <a class="post-link" href={getPostUrl(post)}>{post.data.title}</a>
+            </h2>
+            <div class="label">
+              <div class="label-card">
+                <i class="fa fa-calendar"></i>{formatDate(post.data.pubDate)}
+              </div>
+              <div class="label-card">
+                <i class="fa fa-folder"></i>
+                <a href={`/category/${post.data.category.toLowerCase()}/`}>{post.data.category}</a>
+              </div>
+              {post.data.tags.length > 0 && (
+                <div class="label-card">
+                  <i class="fa fa-tags"></i>
+                  {post.data.tags.slice(0, 3).map((tag: string, i: number) => (
+                    <>
+                      <a href={`/tag/${slugifyTag(tag)}/`}>{tag}</a>
+                      {i < Math.min(post.data.tags.length, 3) - 1 && ', '}
+                    </>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div class="read-all">
+              <a href={getPostUrl(post)}><i class="fa fa-newspaper-o"></i>Read All</a>
+            </div>
+            <hr>
+          </li>
+        ))}
+      </ul>
+
+      <div class="pagination">
+        <a href="/" class="previous"><i class="fa fa-angle-double-left"></i></a>
+        <a href={currentPage === 2 ? '/' : `/page/${currentPage - 1}/`} class="previous"><i class="fa fa-angle-left"></i></a>
+        <span class="page_number">{currentPage}/{totalPages}</span>
+        {currentPage < totalPages ? (
+          <>
+            <a href={`/page/${currentPage + 1}/`} class="next"><i class="fa fa-angle-right"></i></a>
+            <a href={`/page/${totalPages}/`} class="next"><i class="fa fa-angle-double-right"></i></a>
+          </>
+        ) : (
+          <>
+            <span class="next disable"><i class="fa fa-angle-right"></i></span>
+            <span class="next disable"><i class="fa fa-angle-double-right"></i></span>
+          </>
+        )}
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="wrap">
+        <div class="side">
+          <div><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Recent Posts</div>
+          <ul class="content-ul" recent>
+            {recentPosts.map((post: any) => (
+              <li><a href={getPostUrl(post)}>{post.data.title}</a></li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="side">
+          <div><i class="fa fa-th-list"></i> Categories</div>
+          <ul class="content-ul" cate>
+            {Object.entries(categories).sort((a, b) => (b[1] as number) - (a[1] as number)).map(([cat, count]) => (
+              <li>
+                <a href={`/category/${cat.toLowerCase()}/`} class="categories-list-item">
+                  <span class="name">{cat}</span>
+                  <span class="badge">{count}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="side">
+          <div><i class="fa fa-tags"></i> Tags</div>
+          <div class="tags-cloud">
+            {Object.entries(tagsMap).map(([slug, { count, originalName }]) => {
+              const size = Math.min(9 + count * 2, 18);
+              return <a href={`/tag/${slug}/`} style={`font-size: ${size}pt;`}>{originalName}</a>;
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

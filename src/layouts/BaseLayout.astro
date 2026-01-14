@@ -1,0 +1,107 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = "gwimong's blog", description = "개발 메모장" } = Astro.props;
+const siteTitle = "gwimong's blog";
+const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+---
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{fullTitle}</title>
+  <meta name="description" content={description}>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="canonical" href={Astro.url.href}>
+  <link rel="alternate" type="application/rss+xml" title={siteTitle} href="/rss.xml">
+  <link rel="sitemap" href="/sitemap-index.xml">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-43FMDRM60Z"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-43FMDRM60Z');
+  </script>
+</head>
+<body>
+  <header id="top">
+    <div class="wrapper">
+      <a href="/" class="brand">gwimong's blog</a>
+      <small>Software Engineer</small>
+      <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+      <nav id="headerNav">
+        <ul>
+          <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+          <li><a href="/archives/"><i class="fa fa-archive"></i>Archives</a></li>
+          <li><a href="/category/"><i class="fa fa-th"></i>Category</a></li>
+          <li><a href="/tag/"><i class="fa fa-tags"></i>Tags</a></li>
+          <li><a href="/about/"><i class="fa fa-user"></i>About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="site-footer">
+    <div class="wrapper">
+      <p class="description">mong's blog</p>
+      <p class="contact">
+        Contact me at:
+        <a href="https://github.com/park-gwimong" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>
+        <a href="mailto:park.gwimong@gmail.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+        <a href="https://www.facebook.com/gwimong" title="Facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+        <a href="https://www.linkedin.com/in/박귀몽" title="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+      </p>
+      <p class="power">
+        <span>Site powered by <a href="https://astro.build/">Astro</a> & <a href="https://pages.github.com/">Github Pages</a>.</span>
+      </p>
+    </div>
+  </footer>
+
+  <div class="backToTop" id="backToTop">
+    <i class="fa fa-arrow-up"></i>
+  </div>
+
+  <script is:inline>
+    // Mobile menu toggle
+    const headerMenu = document.getElementById('headerMenu');
+    const headerNav = document.getElementById('headerNav');
+    if (headerMenu && headerNav) {
+      headerMenu.addEventListener('click', () => {
+        headerMenu.classList.toggle('active');
+        headerNav.classList.toggle('nav-show');
+      });
+    }
+
+    // Back to top button
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTop.style.display = 'block';
+        } else {
+          backToTop.style.display = 'none';
+        }
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  </script>
+</body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

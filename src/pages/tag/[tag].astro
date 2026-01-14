@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  function slugifyTag(tag: string): string {
+    return tag.toLowerCase()
+      .replace(/\//g, '-')
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9가-힣-]/g, '')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
+  const allPosts = await getCollection('posts');
+  const tagMap = new Map<string, string>(); // slug -> original tag
+
+  allPosts.forEach(post => {
+    post.data.tags.forEach(tag => {
+      const slug = slugifyTag(tag);
+      if (!tagMap.has(slug)) {
+        tagMap.set(slug, tag);
+      }
+    });
+  });
+
+  return [...tagMap.entries()].map(([slug, originalTag]) => ({
+    params: { tag: slug },
+    props: {
+      posts: allPosts
+        .filter(post => post.data.tags.some(t => slugifyTag(t) === slug) && !post.data.draft)
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+      tagName: originalTag,
+      tagSlug: slug,
+    },
+  }));
+}
+
+const { posts, tagName, tagSlug } = Astro.props;
+
+function formatDate(date: Date): string {
+  return date.toISOString().split('T')[0];
+}
+
+function getPostUrl(post: any): string {
+  const date = new Date(post.data.pubDate);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const slugParts = post.slug.split('/');
+  const fileSlug = slugParts[slugParts.length - 1];
+  return `/${year}/${month}/${day}/${fileSlug}/`;
+}
+---
+
+<BaseLayout title={`Tag: ${tagName}`}>
+  <div class="page clearfix">
+    <div class="left">
+      <h1>Tag: {tagName}</h1>
+      <p>{posts.length} posts</p>
+      <hr>
+      <ul>
+        {posts.map((post: any) => (
+          <li>
+            <time>{formatDate(post.data.pubDate)}</time>
+            <a class="title" href={getPostUrl(post)}>{post.data.title}</a>
+            <span class="categories">
+              <i class="fa fa-folder"></i>
+              <a href={`/category/${post.data.category.toLowerCase()}/`}>{post.data.category}</a>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

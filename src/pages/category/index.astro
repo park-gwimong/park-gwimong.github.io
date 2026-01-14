@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const sortedPosts = allPosts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Group posts by category
+const postsByCategory = sortedPosts.reduce((acc, post) => {
+  const cat = post.data.category;
+  if (!acc[cat]) acc[cat] = [];
+  acc[cat].push(post);
+  return acc;
+}, {} as Record<string, typeof sortedPosts>);
+
+const categories = Object.keys(postsByCategory).sort();
+
+function formatDate(date: Date): string {
+  return date.toISOString().split('T')[0];
+}
+
+function getPostUrl(post: typeof sortedPosts[0]): string {
+  const date = new Date(post.data.pubDate);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const slugParts = post.slug.split('/');
+  const fileSlug = slugParts[slugParts.length - 1];
+  return `/${year}/${month}/${day}/${fileSlug}/`;
+}
+---
+
+<BaseLayout title="Categories">
+  <div class="page clearfix">
+    <div class="left">
+      <h1>Categories</h1>
+      <hr>
+      <ul>
+        {categories.map(category => (
+          <>
+            <h2 id={category}>{category} ({postsByCategory[category].length})</h2>
+            {postsByCategory[category].map(post => (
+              <li>
+                <time>{formatDate(post.data.pubDate)}</time>
+                <a class="title" href={getPostUrl(post)}>{post.data.title}</a>
+              </li>
+            ))}
+          </>
+        ))}
+      </ul>
+    </div>
+    <div class="right">
+      <div class="wrap">
+        <div class="side">
+          <div><i class="fa fa-th-list"></i> Categories</div>
+          <ul class="content-ul" cate>
+            {categories.map(cat => (
+              <li>
+                <a href={`#${cat}`} class="categories-list-item">
+                  <span class="name">{cat}</span>
+                  <span class="badge">{postsByCategory[cat].length}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

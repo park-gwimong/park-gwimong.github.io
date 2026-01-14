@@ -1,0 +1,101 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  frontmatter: CollectionEntry<'posts'>['data'];
+  slug?: string;
+}
+
+const { frontmatter, slug } = Astro.props;
+const { title, subtitle, pubDate, category, tags, math } = frontmatter;
+
+function formatDate(date: Date): string {
+  return date.toISOString().split('T')[0];
+}
+
+function slugifyTag(tag: string): string {
+  return tag.toLowerCase()
+    .replace(/\//g, '-')
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9가-힣-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+---
+
+<BaseLayout title={title} description={subtitle || title}>
+  <div class="page clearfix" post>
+    <div class="left">
+      <h1>{title}</h1>
+      {subtitle && <p>{subtitle}</p>}
+      <div class="label">
+        <div class="label-card">
+          <i class="fa fa-calendar"></i>{formatDate(pubDate)}
+        </div>
+        <div class="label-card">
+          <i class="fa fa-folder"></i>
+          <a href={`/category/${category.toLowerCase()}/`}>{category}</a>
+        </div>
+        {tags.length > 0 && (
+          <div class="label-card">
+            <i class="fa fa-tags"></i>
+            {tags.map((tag, i) => (
+              <>
+                <a href={`/tag/${slugifyTag(tag)}/`}>{tag}</a>
+                {i < tags.length - 1 && ', '}
+              </>
+            ))}
+          </div>
+        )}
+      </div>
+      <hr>
+      <article itemscope itemtype="http://schema.org/BlogPosting">
+        <slot />
+      </article>
+      <hr>
+
+      <h2 id="comments">Comments</h2>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="right">
+      <div class="wrap">
+        <div class="side content">
+          <div>Content</div>
+          <ul id="content-side" class="content-ul">
+            <li><a href="#comments">Comments</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {math && (
+    <script is:inline>
+      window.MathJax = {
+        tex: { inlineMath: [["$","$"],["\\(","\\)"]] },
+        options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+      };
+    </script>
+    <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+  )}
+
+  <script is:inline>
+    // External links open in new tab
+    document.querySelectorAll('article a:not([id])').forEach(link => {
+      link.setAttribute('target', '_blank');
+    });
+
+    // Disqus
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = window.location.pathname;
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://park-gwimong-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+</BaseLayout>
