@@ -1,10 +1,10 @@
 ---
-layout: post
 title: JPA에서 @EntityGraph는 어떻게 N+1 문제를 해결할까?
-date: 2026-01-15 17:45:00+0900
-categories: [JPA]
+pubDate: 2025-01-15
+category: Programming
 tags: [jpa, entitygraph, n+1, performance, spring-data-jpa]
-mathjax: true
+math: true
+draft: false
 ---
 
 JPA를 쓰다 보면 거의 반드시 한 번은 마주치는 문제가 있다.
