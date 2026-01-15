@@ -60,7 +60,7 @@ function getPostUrl(post: typeof sortedPosts[0]): string {
 ---
 
 <BaseLayout>
-  <div class="page clearfix" index>
+  <div class="page clearfix" data-index>
     <div class="left">
       <h1>Welcome to gwimong's Blog!</h1>
       <small>안녕하세요. 귀몽이의 개인 블로그입니다.</small>
@@ -121,7 +121,7 @@ function getPostUrl(post: typeof sortedPosts[0]): string {
       <div class="wrap">
         <div class="side">
           <div><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Recent Posts</div>
-          <ul class="content-ul" recent>
+          <ul class="content-ul" data-recent>
             {recentPosts.map(post => (
               <li><a href={getPostUrl(post)}>{post.data.title}</a></li>
             ))}
@@ -130,7 +130,7 @@ function getPostUrl(post: typeof sortedPosts[0]): string {
 
         <div class="side">
           <div><i class="fa fa-th-list"></i> Categories</div>
-          <ul class="content-ul" cate>
+          <ul class="content-ul" data-cate>
             {Object.entries(categories).sort((a, b) => b[1] - a[1]).map(([cat, count]) => (
               <li>
                 <a href={`/category/${cat.toLowerCase()}/`} class="categories-list-item">

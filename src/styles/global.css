@@ -328,178 +328,178 @@ header nav ul li > .active {
 }
 
 /* Post specific */
-.page[post] .label {
+.page[data-post] .label {
   margin-top: 16px;
   overflow: hidden;
 }
 
-.page[post] .label .label-card {
+.page[data-post] .label .label-card {
   float: left;
   margin-right: 15px;
 }
 
-.page[post] .label .label-card .point {
+.page[data-post] .label .label-card .point {
   padding: 0 10px;
   color: #9d9d9d;
 }
 
-.page[post] .label .label-card i {
+.page[data-post] .label .label-card i {
   padding-right: 5px;
   color: #6b6a6a;
 }
 
-.page[post] a {
+.page[data-post] a {
   color: #4d6dad;
   transition: 0.5s ease;
 }
 
-.page[post] a:hover {
+.page[data-post] a:hover {
   color: #223253;
   background-color: #f4efeb;
 }
 
-.page[post] .left ul > h2 {
+.page[data-post] .left ul > h2 {
   color: #333;
 }
 
-.page[post] .left ul li {
+.page[data-post] .left ul li {
   color: #333;
   margin: 0;
 }
 
 /* Index specific */
-.page[index] a {
+.page[data-index] a {
   color: #4d6dad;
   transition: 0.5s ease;
 }
 
-.page[index] a:hover {
+.page[data-index] a:hover {
   color: #223253;
 }
 
-.page[index] .left > ul {
+.page[data-index] .left > ul {
   padding: 0;
 }
 
-.page[index] .left > ul > li {
+.page[data-index] .left > ul > li {
   list-style: none;
 }
 
-.page[index] .left > ul li {
+.page[data-index] .left > ul li {
   color: #333;
 }
 
-.page[index] .left > ul li h2 {
+.page[data-index] .left > ul li h2 {
   border: none;
   font-size: 27px;
   margin: 0;
 }
 
-.page[index] .left > ul li .label {
+.page[data-index] .left > ul li .label {
   margin-bottom: 15px;
   overflow: hidden;
 }
 
-.page[index] .left > ul li .label .label-card {
+.page[data-index] .left > ul li .label .label-card {
   float: left;
   margin-right: 15px;
 }
 
-.page[index] .left > ul li .label .label-card i {
+.page[data-index] .left > ul li .label .label-card i {
   padding-right: 0;
   margin-right: 3px;
   color: #6b6a6a;
 }
 
-.page[index] .left > ul li .excerpt h2 {
+.page[data-index] .left > ul li .excerpt h2 {
   font-size: 24px;
 }
 
-.page[index] .left > ul li .excerpt h3 {
+.page[data-index] .left > ul li .excerpt h3 {
   font-size: 22px;
 }
 
-.page[index] .left > ul li .excerpt h4 {
+.page[data-index] .left > ul li .excerpt h4 {
   font-size: 20px;
 }
 
-.page[index] .left > ul li .read-all {
+.page[data-index] .left > ul li .read-all {
   text-align: right;
   font-size: 14px;
 }
 
-.page[index] .left > ul li .read-all a {
+.page[data-index] .left > ul li .read-all a {
   color: #778ab0;
   transition: 0.2s ease;
 }
 
-.page[index] .left > ul li .read-all a:hover {
+.page[data-index] .left > ul li .read-all a:hover {
   color: #5872a7;
 }
 
-.page[index] .left > ul li .read-all a i {
+.page[data-index] .left > ul li .read-all a i {
   padding-right: 3px;
 }
 
-.page[index] .left .pagination {
+.page[data-index] .left .pagination {
   text-align: center;
 }
 
-.page[index] .left .pagination .previous,
-.page[index] .left .pagination .next {
+.page[data-index] .left .pagination .previous,
+.page[data-index] .left .pagination .next {
   font-size: 20px;
   padding: 0 5px;
 }
 
-.page[index] .left .pagination .page_number {
+.page[data-index] .left .pagination .page_number {
   padding: 0 5px;
 }
 
-.page[index] .left .pagination .disable {
+.page[data-index] .left .pagination .disable {
   color: #cbcbcb;
 }
 
-.page[index] .right .wrap .side {
+.page[data-index] .right .wrap .side {
   margin-bottom: 20px;
   padding-bottom: 0;
 }
 
-.page[index] .right .wrap .side i {
+.page[data-index] .right .wrap .side i {
   margin-right: 3px;
 }
 
-.page[index] .right .wrap .side .content-ul[cate] {
+.page[data-index] .right .wrap .side .content-ul[data-cate] {
   overflow: hidden;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.page[index] .right .wrap .side .content-ul[cate] li {
+.page[data-index] .right .wrap .side .content-ul[data-cate] li {
   font-size: 14px;
 }
 
-.page[index] .right .wrap .side .content-ul[cate] li a {
+.page[data-index] .right .wrap .side .content-ul[data-cate] li a {
   display: block;
   width: 100%;
   padding: 2px 0;
   border-bottom: 1px solid #eee;
 }
 
-.page[index] .right .wrap .side .content-ul[cate] li a:hover {
+.page[data-index] .right .wrap .side .content-ul[data-cate] li a:hover {
   background-color: #dbdfee;
 }
 
-.page[index] .right .wrap .side .content-ul[cate] li a:hover .badge {
+.page[data-index] .right .wrap .side .content-ul[data-cate] li a:hover .badge {
   background-color: #dbdfee;
   transform: scale(1.2) rotate(360deg);
 }
 
-.page[index] .right .wrap .side .content-ul[cate] li a .name {
+.page[data-index] .right .wrap .side .content-ul[data-cate] li a .name {
   padding-left: 15px;
 }
 
-.page[index] .right .wrap .side .content-ul[cate] li a .badge {
+.page[data-index] .right .wrap .side .content-ul[data-cate] li a .badge {
   display: block;
   float: right;
   text-align: center;
@@ -513,30 +513,30 @@ header nav ul li > .active {
   transition: 0.5s ease-in-out;
 }
 
-.page[index] .right .wrap .side .content-ul[cate] li:last-of-type a {
+.page[data-index] .right .wrap .side .content-ul[data-cate] li:last-of-type a {
   border: none;
 }
 
-.page[index] .right .wrap .side .content-ul[recent] {
+.page[data-index] .right .wrap .side .content-ul[data-recent] {
   padding-bottom: 16px;
 }
 
-.page[index] .right .wrap .side .content-ul[recent] li {
+.page[data-index] .right .wrap .side .content-ul[data-recent] li {
   color: #aaa;
   font-size: 14px;
 }
 
-.page[index] .right .wrap .side .tags-cloud {
+.page[data-index] .right .wrap .side .tags-cloud {
   font-weight: normal;
   padding: 10px 15px;
 }
 
-.page[index] .right .wrap .side .tags-cloud a {
+.page[data-index] .right .wrap .side .tags-cloud a {
   padding: 0 3px;
   border-radius: 5px;
 }
 
-.page[index] .right .wrap .side .tags-cloud a:hover {
+.page[data-index] .right .wrap .side .tags-cloud a:hover {
   background-color: #f0e7ce;
 }
 
@@ -814,47 +814,47 @@ code {
     display: none;
   }
 
-  .page[post] .left {
+  .page[data-post] .left {
     font-size: 15px;
   }
 
-  .page[post] .left h2 {
+  .page[data-post] .left h2 {
     font-size: 24px;
   }
 
-  .page[post] .left h3 {
+  .page[data-post] .left h3 {
     font-size: 20px;
   }
 
-  .page[post] .left h4 {
+  .page[data-post] .left h4 {
     font-size: 18px;
   }
 
-  .page[post] .left h5 {
+  .page[data-post] .left h5 {
     font-size: 16px;
   }
 
-  .page[post] .left h6 {
+  .page[data-post] .left h6 {
     font-size: 15px;
   }
 
-  .page[index] .left > ul li h2 {
+  .page[data-index] .left > ul li h2 {
     font-size: 22px;
   }
 
-  .page[index] .left > ul li .excerpt h2 {
+  .page[data-index] .left > ul li .excerpt h2 {
     font-size: 20px;
   }
 
-  .page[index] .left > ul li .excerpt h3 {
+  .page[data-index] .left > ul li .excerpt h3 {
     font-size: 18px;
   }
 
-  .page[index] .left > ul li .excerpt h4 {
+  .page[data-index] .left > ul li .excerpt h4 {
     font-size: 16px;
   }
 
-  .page[index] .left > ul li .excerpt li {
+  .page[data-index] .left > ul li .excerpt li {
     margin: 0;
   }
 

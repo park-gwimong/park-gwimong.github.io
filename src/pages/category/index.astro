@@ -55,7 +55,7 @@ function getPostUrl(post: typeof sortedPosts[0]): string {
       <div class="wrap">
         <div class="side">
           <div><i class="fa fa-th-list"></i> Categories</div>
-          <ul class="content-ul" cate>
+          <ul class="content-ul" data-cate>
             {categories.map(cat => (
               <li>
                 <a href={`#${cat}`} class="categories-list-item">
