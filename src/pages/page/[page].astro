@@ -17,7 +17,7 @@ export async function getStaticPaths() {
     .filter(post => !post.data.draft)
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-  const postsPerPage = 6;
+  const postsPerPage = 8;
   const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
 
   return Array.from({ length: totalPages - 1 }, (_, i) => ({
@@ -26,31 +26,12 @@ export async function getStaticPaths() {
       posts: sortedPosts.slice((i + 1) * postsPerPage, (i + 2) * postsPerPage),
       currentPage: i + 2,
       totalPages,
-      allPosts: sortedPosts,
+      recentPosts: sortedPosts.slice(0, 10),
     },
   }));
 }
 
-const { posts, currentPage, totalPages, allPosts } = Astro.props;
-
-const recentPosts = allPosts.slice(0, 10);
-
-const categories = allPosts.reduce((acc: Record<string, number>, post: any) => {
-  const cat = post.data.category;
-  acc[cat] = (acc[cat] || 0) + 1;
-  return acc;
-}, {});
-
-const tagsMap: Record<string, { count: number, originalName: string }> = {};
-allPosts.forEach((post: any) => {
-  post.data.tags.forEach((tag: string) => {
-    const slug = slugifyTag(tag);
-    if (!tagsMap[slug]) {
-      tagsMap[slug] = { count: 0, originalName: tag };
-    }
-    tagsMap[slug].count++;
-  });
-});
+const { posts, currentPage, totalPages, recentPosts } = Astro.props;
 
 function formatDate(date: Date): string {
   return date.toISOString().split('T')[0];
@@ -71,14 +52,17 @@ function getPostUrl(post: any): string {
   <div class="page clearfix" data-index>
     <div class="left">
       <h1>Welcome to gwimong's Blog!</h1>
-      <small>안녕하세요. 평범한 개발자의 블로그입니다.</small>
+      <small>안녕하세요. 귀몽이의 개인 블로그입니다.</small>
       <hr>
       <ul>
         {posts.map((post: any) => (
-          <li>
+          <li class="post-card">
             <h2>
               <a class="post-link" href={getPostUrl(post)}>{post.data.title}</a>
             </h2>
+            {post.data.subtitle && (
+              <p class="post-subtitle">{post.data.subtitle}</p>
+            )}
             <div class="label">
               <div class="label-card">
                 <i class="fa fa-calendar"></i>{formatDate(post.data.pubDate)}
@@ -88,21 +72,14 @@ function getPostUrl(post: any): string {
                 <a href={`/category/${post.data.category.toLowerCase()}/`}>{post.data.category}</a>
               </div>
               {post.data.tags.length > 0 && (
-                <div class="label-card">
+                <div class="label-card tags">
                   <i class="fa fa-tags"></i>
-                  {post.data.tags.slice(0, 3).map((tag: string, i: number) => (
-                    <>
-                      <a href={`/tag/${slugifyTag(tag)}/`}>{tag}</a>
-                      {i < Math.min(post.data.tags.length, 3) - 1 && ', '}
-                    </>
+                  {post.data.tags.slice(0, 5).map((tag: string) => (
+                    <a href={`/tag/${slugifyTag(tag)}/`} class="tag">{tag}</a>
                   ))}
                 </div>
               )}
             </div>
-            <div class="read-all">
-              <a href={getPostUrl(post)}><i class="fa fa-newspaper-o"></i>Read All</a>
-            </div>
-            <hr>
           </li>
         ))}
       </ul>
@@ -134,30 +111,6 @@ function getPostUrl(post: any): string {
               <li><a href={getPostUrl(post)}>{post.data.title}</a></li>
             ))}
           </ul>
-        </div>
-
-        <div class="side">
-          <div><i class="fa fa-th-list"></i> Categories</div>
-          <ul class="content-ul" data-cate>
-            {Object.entries(categories).sort((a, b) => (b[1] as number) - (a[1] as number)).map(([cat, count]) => (
-              <li>
-                <a href={`/category/${cat.toLowerCase()}/`} class="categories-list-item">
-                  <span class="name">{cat}</span>
-                  <span class="badge">{count}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div class="side">
-          <div><i class="fa fa-tags"></i> Tags</div>
-          <div class="tags-cloud">
-            {Object.entries(tagsMap).map(([slug, { count, originalName }]) => {
-              const size = Math.min(9 + count * 2, 18);
-              return <a href={`/tag/${slug}/`} style={`font-size: ${size}pt;`}>{originalName}</a>;
-            })}
-          </div>
         </div>
       </div>
     </div>

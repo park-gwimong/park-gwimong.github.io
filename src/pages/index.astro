@@ -16,30 +16,11 @@ const sortedPosts = allPosts
   .filter(post => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-// Get recent posts for sidebar
+// Recent posts for sidebar
 const recentPosts = sortedPosts.slice(0, 10);
 
-// Get all categories with counts
-const categories = sortedPosts.reduce((acc, post) => {
-  const cat = post.data.category;
-  acc[cat] = (acc[cat] || 0) + 1;
-  return acc;
-}, {} as Record<string, number>);
-
-// Get all tags with counts (using slug as key)
-const tagsMap: Record<string, { count: number, originalName: string }> = {};
-sortedPosts.forEach(post => {
-  post.data.tags.forEach(tag => {
-    const slug = slugifyTag(tag);
-    if (!tagsMap[slug]) {
-      tagsMap[slug] = { count: 0, originalName: tag };
-    }
-    tagsMap[slug].count++;
-  });
-});
-
 // Pagination
-const postsPerPage = 6;
+const postsPerPage = 8;
 const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
 const currentPage = 1;
 const paginatedPosts = sortedPosts.slice(0, postsPerPage);
@@ -67,10 +48,13 @@ function getPostUrl(post: typeof sortedPosts[0]): string {
       <hr>
       <ul>
         {paginatedPosts.map(post => (
-          <li>
+          <li class="post-card">
             <h2>
               <a class="post-link" href={getPostUrl(post)}>{post.data.title}</a>
             </h2>
+            {post.data.subtitle && (
+              <p class="post-subtitle">{post.data.subtitle}</p>
+            )}
             <div class="label">
               <div class="label-card">
                 <i class="fa fa-calendar"></i>{formatDate(post.data.pubDate)}
@@ -80,21 +64,14 @@ function getPostUrl(post: typeof sortedPosts[0]): string {
                 <a href={`/category/${post.data.category.toLowerCase()}/`}>{post.data.category}</a>
               </div>
               {post.data.tags.length > 0 && (
-                <div class="label-card">
+                <div class="label-card tags">
                   <i class="fa fa-tags"></i>
-                  {post.data.tags.slice(0, 3).map((tag, i) => (
-                    <>
-                      <a href={`/tag/${slugifyTag(tag)}/`}>{tag}</a>
-                      {i < Math.min(post.data.tags.length, 3) - 1 && ', '}
-                    </>
+                  {post.data.tags.slice(0, 5).map((tag, i) => (
+                    <a href={`/tag/${slugifyTag(tag)}/`} class="tag">{tag}</a>
                   ))}
                 </div>
               )}
             </div>
-            <div class="read-all">
-              <a href={getPostUrl(post)}><i class="fa fa-newspaper-o"></i>Read All</a>
-            </div>
-            <hr>
           </li>
         ))}
       </ul>
@@ -126,30 +103,6 @@ function getPostUrl(post: typeof sortedPosts[0]): string {
               <li><a href={getPostUrl(post)}>{post.data.title}</a></li>
             ))}
           </ul>
-        </div>
-
-        <div class="side">
-          <div><i class="fa fa-th-list"></i> Categories</div>
-          <ul class="content-ul" data-cate>
-            {Object.entries(categories).sort((a, b) => b[1] - a[1]).map(([cat, count]) => (
-              <li>
-                <a href={`/category/${cat.toLowerCase()}/`} class="categories-list-item">
-                  <span class="name">{cat}</span>
-                  <span class="badge">{count}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div class="side">
-          <div><i class="fa fa-tags"></i> Tags</div>
-          <div class="tags-cloud">
-            {Object.entries(tagsMap).map(([slug, { count, originalName }]) => {
-              const size = Math.min(9 + count * 2, 18);
-              return <a href={`/tag/${slug}/`} style={`font-size: ${size}pt;`}>{originalName}</a>;
-            })}
-          </div>
         </div>
       </div>
     </div>

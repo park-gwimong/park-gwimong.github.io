@@ -379,10 +379,28 @@ header nav ul li > .active {
 
 .page[data-index] .left > ul {
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .page[data-index] .left > ul > li {
   list-style: none;
+}
+
+.page[data-index] .left > ul > li.post-card {
+  flex: 0 0 calc(50% - 10px);
+  max-width: calc(50% - 10px);
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.page[data-index] .left > ul > li.post-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .page[data-index] .left > ul li {
@@ -391,18 +409,28 @@ header nav ul li > .active {
 
 .page[data-index] .left > ul li h2 {
   border: none;
-  font-size: 27px;
-  margin: 0;
+  font-size: 18px;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.page[data-index] .left > ul li .post-subtitle {
+  color: #666;
+  font-size: 14px;
+  margin: 0 0 12px 0;
+  line-height: 1.5;
 }
 
 .page[data-index] .left > ul li .label {
-  margin-bottom: 15px;
+  margin-bottom: 0;
   overflow: hidden;
+  font-size: 12px;
 }
 
 .page[data-index] .left > ul li .label .label-card {
   float: left;
-  margin-right: 15px;
+  margin-right: 12px;
+  margin-bottom: 4px;
 }
 
 .page[data-index] .left > ul li .label .label-card i {
@@ -411,34 +439,24 @@ header nav ul li > .active {
   color: #6b6a6a;
 }
 
-.page[data-index] .left > ul li .excerpt h2 {
-  font-size: 24px;
+.page[data-index] .left > ul li .label .label-card.tags {
+  float: none;
+  clear: both;
+  margin-top: 8px;
 }
 
-.page[data-index] .left > ul li .excerpt h3 {
-  font-size: 22px;
+.page[data-index] .left > ul li .label .label-card.tags a.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 2px 4px 2px 0;
+  background: #e8eef5;
+  border-radius: 12px;
+  font-size: 11px;
+  color: #4d6dad;
 }
 
-.page[data-index] .left > ul li .excerpt h4 {
-  font-size: 20px;
-}
-
-.page[data-index] .left > ul li .read-all {
-  text-align: right;
-  font-size: 14px;
-}
-
-.page[data-index] .left > ul li .read-all a {
-  color: #778ab0;
-  transition: 0.2s ease;
-}
-
-.page[data-index] .left > ul li .read-all a:hover {
-  color: #5872a7;
-}
-
-.page[data-index] .left > ul li .read-all a i {
-  padding-right: 3px;
+.page[data-index] .left > ul li .label .label-card.tags a.tag:hover {
+  background: #d0daea;
 }
 
 .page[data-index] .left .pagination {
@@ -655,6 +673,11 @@ code {
     font-size: 12px;
   }
 
+  .page[data-index] .left > ul > li.post-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
   header nav ul li a {
     padding: 0 8px;
     height: 50px;
@@ -838,24 +861,22 @@ code {
     font-size: 15px;
   }
 
+  .page[data-index] .left > ul {
+    gap: 10px;
+  }
+
+  .page[data-index] .left > ul > li.post-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 12px;
+  }
+
   .page[data-index] .left > ul li h2 {
-    font-size: 22px;
-  }
-
-  .page[data-index] .left > ul li .excerpt h2 {
-    font-size: 20px;
-  }
-
-  .page[data-index] .left > ul li .excerpt h3 {
-    font-size: 18px;
-  }
-
-  .page[data-index] .left > ul li .excerpt h4 {
     font-size: 16px;
   }
 
-  .page[data-index] .left > ul li .excerpt li {
-    margin: 0;
+  .page[data-index] .left > ul li .post-subtitle {
+    font-size: 13px;
   }
 
   .site-footer .wrapper {
