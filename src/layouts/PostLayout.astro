@@ -81,6 +81,46 @@ function slugifyTag(tag: string): string {
   )}
 
   <script is:inline>
+    // Generate Table of Contents from article headings
+    (function() {
+      const article = document.querySelector('article');
+      const tocList = document.getElementById('content-side');
+      const headings = article.querySelectorAll('h2, h3');
+
+      if (headings.length > 0 && tocList) {
+        // Clear existing items except Comments
+        tocList.innerHTML = '';
+
+        headings.forEach((heading, index) => {
+          // Add ID to heading if not present
+          if (!heading.id) {
+            heading.id = 'heading-' + index;
+          }
+
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = '#' + heading.id;
+          a.textContent = heading.textContent;
+
+          // Indent h3
+          if (heading.tagName === 'H3') {
+            li.style.paddingLeft = '1em';
+          }
+
+          li.appendChild(a);
+          tocList.appendChild(li);
+        });
+
+        // Add Comments link at the end
+        const commentsLi = document.createElement('li');
+        const commentsA = document.createElement('a');
+        commentsA.href = '#comments';
+        commentsA.textContent = 'Comments';
+        commentsLi.appendChild(commentsA);
+        tocList.appendChild(commentsLi);
+      }
+    })();
+
     // External links open in new tab
     document.querySelectorAll('article a:not([id])').forEach(link => {
       link.setAttribute('target', '_blank');
