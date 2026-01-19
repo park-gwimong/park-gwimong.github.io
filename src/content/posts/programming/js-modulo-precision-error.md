@@ -1,7 +1,7 @@
 ---
 title: "Javascript에서 9로 나눈 나머지가 틀리는 이유"
 subtitle: "부동소수점 정밀도 문제로 인한 모듈로 연산 오류"
-pubDate: 2025-01-19
+pubDate: 2026-01-19
 category: "Javascript"
 tags: [Javascript, 부동소수점, Number, BigInt, 코딩테스트]
 math: true

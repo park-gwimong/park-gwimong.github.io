@@ -1,7 +1,7 @@
 ---
 title: "N+1 문제"
 subtitle: "ORM 성능 문제의 핵심과 해결법"
-pubDate: 2025-01-19
+pubDate: 2026-01-19
 category: "database"
 tags: [jpa, orm, performance, database, query-optimization]
 math: true
