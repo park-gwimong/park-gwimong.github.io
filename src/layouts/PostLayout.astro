@@ -88,19 +88,23 @@ function slugifyTag(tag: string): string {
       const headings = article.querySelectorAll('h2, h3');
 
       if (headings.length > 0 && tocList) {
-        // Clear existing items except Comments
         tocList.innerHTML = '';
 
         headings.forEach((heading, index) => {
-          // Add ID to heading if not present
+          // Use existing ID or generate one
+          const headingId = heading.id || 'heading-' + index;
           if (!heading.id) {
-            heading.id = 'heading-' + index;
+            heading.id = headingId;
           }
 
           const li = document.createElement('li');
           const a = document.createElement('a');
-          a.href = '#' + heading.id;
-          a.textContent = heading.textContent;
+          a.href = '#' + headingId;
+
+          // Clean up heading text (remove leading numbers like "1." or "5.1")
+          let text = heading.textContent.trim();
+          text = text.replace(/^[\d.]+\s*/, '');
+          a.textContent = text;
 
           // Indent h3
           if (heading.tagName === 'H3') {
