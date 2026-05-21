@@ -8,6 +8,9 @@ math: false
 draft: false
 ---
 
+> 이 글은 2026-05-19 하루 동안 `artifact-transformer` 프로젝트에서 진행한 작업을 정리한 초안이다.
+> 
+
 ## 배경
 
 사내 표준 문서 산출물(운영 시험 정의서/계획서/절차서/결과서, 인수 시험 정의서/계획서/절차서/결과서)을 JSON 데이터로부터 자동 생성하는 `artifact-transformer`를 다듬는 중이다. 출력은 정해진 양식의 docx/xlsx로 떨어져야 하고, 입력은 `scenario.json`, `operational.json`, `acceptance.json`, `integration.json`처럼 도메인별 JSON 파일로 분리되어 있다.
