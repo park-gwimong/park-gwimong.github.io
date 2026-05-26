@@ -49,12 +49,20 @@ Posts require this front matter:
 title: Post Title
 subtitle: Optional Subtitle
 pubDate: 2024-01-15
-category: CategoryName
-tags: [tag1, tag2, tag3]
-math: true  # Optional: enable MathJax
+category: CategoryName       # must match a subdirectory under src/content/posts/ (all lowercase, single token: e.g. softwareengineering, troubleshooting)
+tags: [tag1, tag2, tag3]     # reflect the actual content; do not copy tags from a sibling post
+math: true                   # only set true when the post actually contains LaTeX/MathJax
 draft: false
 ---
 ```
+
+### File Naming Convention
+
+- Filenames are **kebab-case, lowercase only** (e.g. `software-development-life-cycle.md`).
+- Acronyms are lowercased too (`aws-ec2-connection.md`, not `AWS-EC2-connection.md`).
+- Series posts use a numeric suffix: `qt-start-1.md`, `qt-start-2.md`.
+- Filename = URL slug. Renaming an existing post **breaks its permalink** — only rename when fixing a real typo and verify no other post cross-links to it first.
+- When adding a new post, double-check `pubDate`, `tags`, and `math` are correct for the new content rather than left over from a copied template.
 
 ## Content Collections
 
