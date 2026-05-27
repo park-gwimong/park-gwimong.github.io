@@ -2,7 +2,7 @@
 title: "artifact-transformer 작업 일지 #6"
 subtitle: "산출물 4종 추가와 신규 프로젝트로의 패턴 이식"
 pubDate: 2026-05-21T18:00:00+09:00
-category: "softwareengineering"
+category: "devlog"
 tags: ["Python", "JSON Schema", "PlantUML", "Use Case", "Identifier Policy", "Document Generator", "Working Log"]
 math: false
 draft: false

@@ -2,7 +2,7 @@
 title: "artifact-transformer 작업 일지 #3"
 subtitle: "스키마 정리와 Skill 워크플로우 묶기"
 pubDate: 2026-05-21T20:00:00+09:00
-category: "softwareengineering"
+category: "devlog"
 tags: ["Python", "JSON Schema", "Jira", "Claude Code", "Skill", "Working Log"]
 math: false
 draft: false

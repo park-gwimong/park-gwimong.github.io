@@ -2,7 +2,7 @@
 title: "artifact-transformer 작업 일지 #1"
 subtitle: "산출물 데이터 구조 개선"
 pubDate: 2026-05-18T15:00:00+09:00
-category: "softwareengineering"
+category: "devlog"
 tags: ["Python", "docx", "JSON Schema", "Working Log"]
 math: false
 ---

@@ -2,7 +2,7 @@
 title: "artifact-transformer 작업 일지 #4"
 subtitle: "Generator/Parser 19개에서 공통 모듈 점진 추출"
 pubDate: 2026-05-22T15:00:00+09:00
-category: "softwareengineering"
+category: "devlog"
 tags: ["Python", "Refactoring", "Common Module", "docx", "Working Log"]
 math: false
 draft: false

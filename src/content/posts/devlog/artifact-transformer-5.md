@@ -2,7 +2,7 @@
 title: "artifact-transformer 작업 일지 #5"
 subtitle: "_project.json 패턴 이식과 유스케이스 식별자 정리"
 pubDate: 2026-05-23T15:00:00+09:00
-category: "softwareengineering"
+category: "devlog"
 tags: ["JSON Schema", "PlantUML", "Use Case", "Identifier Policy", "Working Log"]
 math: false
 draft: false
