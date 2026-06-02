@@ -31,3 +31,6 @@ _jekyll_backup/
 # IDE
 .idea/
 
+# Claude Code
+CLAUDE.md
+
