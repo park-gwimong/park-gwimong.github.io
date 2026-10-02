@@ -1,10 +1,119 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
-const posts = (await getCollection('posts')).filter(post => !post.data.draft);
-const categories = [...new Set(posts.map(post => post.data.category))];
-const tags = [...new Set(posts.flatMap(post => post.data.tags))];
+type Post = CollectionEntry<'posts'>;
+
+const posts: Post[] = (await getCollection('posts'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+function getPostUrl(post: Post): string {
+  const date = new Date(post.data.pubDate);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const fileSlug = post.slug.split('/').pop();
+  return `/${year}/${month}/${day}/${fileSlug}/`;
+}
+
+function formatDate(date: Date): string {
+  return date.toISOString().split('T')[0];
+}
+
+// 링크한 글이 삭제되거나 초안으로 돌아가면 빌드를 실패시켜 깨진 링크를 막는다.
+function pick(slug: string): Post {
+  const post = posts.find(p => p.slug === slug);
+  if (!post) throw new Error(`about.astro: published post not found: ${slug}`);
+  return post;
+}
+
+const interests = [
+  {
+    title: '산출물 사이의 추적성',
+    body: '요구사항, 유스케이스, 설계, 시험 산출물이 서로를 정확히 가리키게 만드는 일. 분류 체계를 늘리는 것보다 추적 체인을 끊기지 않게 유지하는 쪽이 일관성을 만든다고 봅니다.',
+    posts: [
+      'softwareengineering/traceability-not-classification',
+      'softwareengineering/writing-usecases-properly',
+    ],
+  },
+  {
+    title: '문서를 코드처럼 다루기',
+    body: '스키마를 단일 출처로 두고 산출물 문서를 생성하고, 다시 파싱해 검증합니다. 산출물 변환 도구를 만들며 그 과정을 작업 일지로 남기고 있습니다.',
+    posts: [
+      'devlog/artifact-transformer-1',
+      'devlog/artifact-transformer-7',
+      'tools/plantuml-c4model',
+    ],
+  },
+  {
+    title: '설계와 리팩토링을 백로그에 올리기',
+    body: '기능이 아닌 작업이 스프린트에서 사라지지 않도록 스토리를 나누고 관리하는 방법.',
+    posts: [
+      'etc/scrum-story-classification-guide',
+      'softwareengineering/software-development-methodology',
+    ],
+  },
+  {
+    title: '무인기 지상통제 소프트웨어',
+    body: '지상통제 소프트웨어의 개발 환경과 도메인 용어부터 정리해 두고 있습니다.',
+    posts: [
+      'aerospace/qgc-build',
+      'aerospace/aerospace-acronyms',
+    ],
+  },
+].map(item => ({ ...item, posts: item.posts.map(pick) }));
+
+const projects = [
+  {
+    name: 'repo-cloner',
+    url: 'https://github.com/park-gwimong/repo-cloner',
+    body: 'GitHub 계정·조직, Bitbucket 프로젝트의 저장소를 일괄 clone하고 안전하게 갱신하는 터미널 도구.',
+    meta: 'Python · TUI · 런타임 외부 의존성 없음 · CI 테스트',
+  },
+  {
+    name: 'notion-weblink-crawler',
+    url: 'https://github.com/park-gwimong/notion-weblink-crawler',
+    body: '국내 기술 블로그의 새 글을 수집해 Notion 데이터베이스에 자동으로 쌓습니다.',
+    meta: 'Python · GitHub Actions 스케줄 실행 · Notion API',
+  },
+  {
+    name: 'async-photo',
+    url: 'https://github.com/park-gwimong/async-photo',
+    body: 'NAS의 RAW 사진을 FTP로 받아 JPG로 단방향 동기화합니다. 매니페스트로 상태를 추적해 중단돼도 이어서 실행됩니다.',
+    meta: 'Python · FTP · RAW 변환',
+  },
+  {
+    name: 'park-gwimong.github.io',
+    url: 'https://github.com/park-gwimong/park-gwimong.github.io',
+    body: '지금 보고 있는 이 블로그. 구성은 아래 "이 사이트"에 적었습니다.',
+    meta: 'Astro · GitHub Actions · GitHub Pages',
+  },
+];
+
+// 연도별 글 수: 빌드 시점에 계산하므로 손으로 갱신할 필요가 없다.
+const countsByYear = new Map<number, number>();
+for (const post of posts) {
+  const y = post.data.pubDate.getFullYear();
+  countsByYear.set(y, (countsByYear.get(y) ?? 0) + 1);
+}
+const years = [...countsByYear.keys()];
+const firstYear = Math.min(...years);
+const lastYear = Math.max(...years);
+const maxCount = Math.max(...countsByYear.values());
+const yearly = Array.from({ length: lastYear - firstYear + 1 }, (_, i) => {
+  const year = firstYear + i;
+  const count = countsByYear.get(year) ?? 0;
+  return { year, count, ratio: count / maxCount };
+});
+
+const recentPosts = posts.slice(0, 5);
+const latest = posts[0];
+
+const stack = [
+  { label: '요즘 주로', items: 'Python, Java · Spring, C# · Qt, TypeScript, Kafka, Docker, Linux, Jira · Confluence' },
+  { label: '써 본 것', items: 'C/C++, JavaScript, AWS, MySQL · Oracle · PostgreSQL, Airflow, PlantUML, GitLab CI' },
+];
 ---
 
 <BaseLayout title="About">
@@ -13,121 +122,102 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags))];
       <h1>About</h1>
       <hr>
 
-      <div class="about-container">
-        <!-- Profile Section -->
-        <section class="profile-section">
-          <div class="profile-header">
-            <div class="profile-avatar">
-              <i class="fa fa-user-circle"></i>
-            </div>
-            <div class="profile-info">
-              <h2 class="profile-name">Gwimong Park</h2>
-              <p class="profile-role">Software Engineer / Team Lead</p>
-              <p class="profile-bio">
-                무인기 군집 관제 소프트웨어를 개발하고 있습니다.
-                개발하면서 겪었던 문제들과 해결 과정을 기록하고 공유합니다.
-              </p>
-            </div>
+      <div class="about">
+        <section class="intro">
+          <h2 class="name">Gwimong Park</h2>
+          <p>
+            무인기 관제 소프트웨어를 만들고, 그 과정에서 부딪힌 문제와 판단을 기록합니다.
+            요즘은 개발 산출물을 코드처럼 관리하는 방법에 가장 관심이 많습니다.
+          </p>
+        </section>
+
+        <section>
+          <h3>요즘 파고드는 문제</h3>
+          <div class="interests">
+            {interests.map(item => (
+              <article class="interest">
+                <h4>{item.title}</h4>
+                <p>{item.body}</p>
+                <div class="post-links">
+                  {item.posts.map(post => (
+                    <a href={getPostUrl(post)}>{post.data.title}</a>
+                  ))}
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
-        <!-- Stats Section -->
-        <section class="stats-section">
-          <div class="stat-item">
-            <span class="stat-number">{posts.length}</span>
-            <span class="stat-label">Posts</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">{categories.length}</span>
-            <span class="stat-label">Categories</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">{tags.length}</span>
-            <span class="stat-label">Tags</span>
-          </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section class="skills-section">
-          <h3><i class="fa fa-code"></i> Tech Stack</h3>
-          <div class="skill-groups">
-            <div class="skill-group">
-              <h4>Languages</h4>
-              <div class="skill-tags">
-                <span class="skill-tag">Java</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">C#</span>
-                <span class="skill-tag">C/C++</span>
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">TypeScript</span>
-              </div>
-            </div>
-            <div class="skill-group">
-              <h4>Frameworks</h4>
-              <div class="skill-tags">
-                <span class="skill-tag">Spring</span>
-                <span class="skill-tag">Qt</span>
-                <span class="skill-tag">.NET</span>
-              </div>
-            </div>
-            <div class="skill-group">
-              <h4>Infrastructure</h4>
-              <div class="skill-tags">
-                <span class="skill-tag">AWS</span>
-                <span class="skill-tag">Linux</span>
-                <span class="skill-tag">Docker</span>
-                <span class="skill-tag">GitLab CI/CD</span>
-              </div>
-            </div>
-            <div class="skill-group">
-              <h4>Messaging &amp; Security</h4>
-              <div class="skill-tags">
-                <span class="skill-tag">Kafka</span>
-                <span class="skill-tag">AMQP</span>
-                <span class="skill-tag">Redis</span>
-                <span class="skill-tag">Keycloak</span>
-              </div>
-            </div>
-            <div class="skill-group">
-              <h4>Process &amp; Tools</h4>
-              <div class="skill-tags">
-                <span class="skill-tag">Jira</span>
-                <span class="skill-tag">Confluence</span>
-                <span class="skill-tag">Git</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Blog Topics Section -->
-        <section class="topics-section">
-          <h3><i class="fa fa-folder-open"></i> Blog Topics</h3>
-          <div class="topic-list">
-            {categories.sort().map(category => (
-              <a href={`/category/${category.toLowerCase()}/`} class="topic-item">
-                {category}
+        <section>
+          <h3>만든 것</h3>
+          <div class="projects">
+            {projects.map(project => (
+              <a class="project" href={project.url} target="_blank" rel="noopener">
+                <span class="project-name">{project.name}</span>
+                <span class="project-body">{project.body}</span>
+                <span class="project-meta">{project.meta}</span>
               </a>
             ))}
           </div>
         </section>
 
-        <!-- Contact Section -->
-        <section class="contact-section">
-          <h3><i class="fa fa-envelope"></i> Contact</h3>
-          <div class="contact-links">
-            <a href="https://github.com/park-gwimong" class="contact-link github" target="_blank" rel="noopener">
-              <i class="fa fa-github"></i>
-              <span>GitHub</span>
-            </a>
-            <a href="mailto:park.gwimong@gmail.com" class="contact-link email">
-              <i class="fa fa-envelope"></i>
-              <span>Email</span>
-            </a>
-            <a href="https://www.linkedin.com/in/박귀몽" class="contact-link linkedin" target="_blank" rel="noopener">
-              <i class="fa fa-linkedin"></i>
-              <span>LinkedIn</span>
-            </a>
+        <section>
+          <h3>기록</h3>
+          <p class="record-summary">
+            {firstYear}년부터 {posts.length}편을 썼고, 마지막 글은 {formatDate(latest.data.pubDate)}에 올렸습니다.
+          </p>
+          <div class="yearly" role="img" aria-label={`연도별 글 수, ${firstYear}년부터 ${lastYear}년까지`}>
+            {yearly.map(({ year, count, ratio }) => (
+              <div class="year" title={`${year}년 ${count}편`}>
+                <span class="year-count">{count > 0 ? count : ''}</span>
+                <span class="year-bar" style={`height: ${Math.max(ratio * 100, count > 0 ? 4 : 0)}%`}></span>
+                <span class="year-label">{String(year).slice(2)}</span>
+              </div>
+            ))}
           </div>
+          <ol class="recent">
+            {recentPosts.map(post => (
+              <li>
+                <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+                <a href={getPostUrl(post)}>{post.data.title}</a>
+              </li>
+            ))}
+          </ol>
+          <p class="more"><a href="/archives/">전체 글 보기</a></p>
+        </section>
+
+        <section>
+          <h3>주로 쓰는 도구</h3>
+          <dl class="stack">
+            {stack.map(row => (
+              <>
+                <dt>{row.label}</dt>
+                <dd>{row.items}</dd>
+              </>
+            ))}
+          </dl>
+        </section>
+
+        <section>
+          <h3>이 사이트</h3>
+          <ul class="colophon">
+            <li><a href="https://astro.build/" target="_blank" rel="noopener">Astro</a>로 정적 빌드하고, <code>main</code>에 푸시하면 GitHub Actions가 GitHub Pages로 배포합니다.</li>
+            <li>글은 Markdown이고 frontmatter를 스키마로 검증합니다. <code>draft: true</code>인 글은 모든 목록과 RSS에서 빠집니다.</li>
+            <li>태그는 <a href="https://github.com/park-gwimong/park-gwimong.github.io/blob/main/TAGS.md" target="_blank" rel="noopener">TAGS.md</a>의 규칙을 따릅니다.</li>
+            <li>이 페이지의 숫자와 최근 글은 빌드할 때 계산하고, 위에 링크한 글이 사라지면 빌드가 실패합니다.</li>
+          </ul>
+          <p class="more"><a href="https://github.com/park-gwimong/park-gwimong.github.io" target="_blank" rel="noopener">소스 보기</a></p>
+        </section>
+
+        <section>
+          <h3>연락</h3>
+          <p class="contact">
+            <a href="https://github.com/park-gwimong" target="_blank" rel="noopener">GitHub</a>
+            <span aria-hidden="true">·</span>
+            <a href="mailto:park.gwimong@gmail.com">park.gwimong@gmail.com</a>
+            <span aria-hidden="true">·</span>
+            <a href="https://www.linkedin.com/in/박귀몽" target="_blank" rel="noopener">LinkedIn</a>
+          </p>
         </section>
       </div>
     </div>
@@ -135,286 +225,261 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags))];
 </BaseLayout>
 
 <style>
-  .about-container {
-    max-width: 800px;
+  .about {
+    max-width: 760px;
+    color: #333;
   }
 
-  /* Profile Section */
-  .profile-section {
-    margin-bottom: 40px;
+  .about section {
+    margin-bottom: 44px;
   }
 
-  .profile-header {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-  }
-
-  .profile-avatar {
-    width: 120px;
-    height: 120px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .profile-avatar i {
-    font-size: 60px;
-    color: #fff;
-  }
-
-  .profile-info {
-    flex: 1;
-  }
-
-  .profile-name {
-    font-size: 28px;
+  .about h3 {
+    font-size: 19px;
     font-weight: 600;
-    margin: 0 0 5px 0;
+    color: #223253;
+    margin: 0 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e3e5ec;
+  }
+
+  .about a {
+    color: #223253;
+  }
+
+  .about a:hover {
+    color: #4d6dad;
+  }
+
+  .about code {
+    font-size: 0.9em;
+    padding: 1px 5px;
+    background: #eceef4;
+    border-radius: 3px;
+  }
+
+  /* Intro */
+  .intro .name {
+    font-size: 26px;
+    font-weight: 600;
+    margin: 8px 0 10px 0;
     border: none;
-    color: #333;
+    color: #223253;
   }
 
-  .profile-role {
-    font-size: 18px;
-    color: #667eea;
-    margin: 0 0 10px 0;
-    font-weight: 500;
-  }
-
-  .profile-bio {
-    color: #666;
-    line-height: 1.6;
+  .intro p {
     margin: 0;
+    color: #555;
+    line-height: 1.75;
   }
 
-  /* Stats Section */
-  .stats-section {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 40px;
-    padding: 20px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-    border-radius: 12px;
-  }
-
-  .stat-item {
-    flex: 1;
-    text-align: center;
-    padding: 15px;
-  }
-
-  .stat-number {
-    display: block;
-    font-size: 32px;
-    font-weight: 700;
-    color: #667eea;
-  }
-
-  .stat-label {
-    font-size: 14px;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* Skills Section */
-  .skills-section {
-    margin-bottom: 40px;
-  }
-
-  .skills-section h3 {
-    font-size: 20px;
-    margin: 0 0 20px 0;
-    color: #333;
-    font-weight: 600;
-  }
-
-  .skills-section h3 i {
-    margin-right: 10px;
-    color: #667eea;
-  }
-
-  .skill-groups {
+  /* Interests */
+  .interests {
     display: grid;
-    gap: 20px;
+    gap: 22px;
   }
 
-  .skill-group h4 {
-    font-size: 14px;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0 0 10px 0;
-  }
-
-  .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .skill-tag {
-    padding: 6px 14px;
-    background: #f0f0f0;
-    border-radius: 20px;
-    font-size: 14px;
-    color: #555;
-    transition: all 0.2s ease;
-  }
-
-  .skill-tag:hover {
-    background: #667eea;
-    color: #fff;
-  }
-
-  /* Topics Section */
-  .topics-section {
-    margin-bottom: 40px;
-  }
-
-  .topics-section h3 {
-    font-size: 20px;
-    margin: 0 0 20px 0;
-    color: #333;
+  .interest h4 {
+    font-size: 16px;
     font-weight: 600;
+    margin: 0 0 4px 0;
+    color: #333;
   }
 
-  .topics-section h3 i {
-    margin-right: 10px;
-    color: #667eea;
+  .interest p {
+    margin: 0 0 8px 0;
+    color: #555;
+    line-height: 1.7;
   }
 
-  .topic-list {
+  .post-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .topic-item {
-    padding: 8px 16px;
-    background: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
+    gap: 6px 14px;
     font-size: 14px;
+  }
+
+  .post-links a {
+    border-bottom: 1px solid #c9cfdf;
+  }
+
+  .post-links a:hover {
+    border-bottom-color: #4d6dad;
+  }
+
+  /* Projects */
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .project {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid #e3e5ec;
+    border-radius: 6px;
+    transition: border-color 0.2s ease;
+  }
+
+  .project:hover {
+    border-color: #4d6dad;
+  }
+
+  .project-name {
+    font-family: Menlo, Consolas, 'Liberation Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    color: #223253;
+  }
+
+  .project-body {
+    font-size: 14px;
+    line-height: 1.6;
     color: #555;
-    transition: all 0.2s ease;
-    text-decoration: none;
   }
 
-  .topic-item:hover {
-    border-color: #667eea;
-    color: #667eea;
-    background: #f8f9ff;
+  .project-meta {
+    margin-top: auto;
+    font-size: 12px;
+    color: #888;
   }
 
-  /* Contact Section */
-  .contact-section {
+  /* Record */
+  .record-summary {
+    margin: 0 0 14px 0;
+    color: #555;
+  }
+
+  .yearly {
+    display: flex;
+    align-items: stretch;
+    gap: 4px;
+    height: 120px;
     margin-bottom: 20px;
   }
 
-  .contact-section h3 {
-    font-size: 20px;
-    margin: 0 0 20px 0;
-    color: #333;
-    font-weight: 600;
-  }
-
-  .contact-section h3 i {
-    margin-right: 10px;
-    color: #667eea;
-  }
-
-  .contact-links {
+  .year {
+    flex: 1;
+    min-width: 0;
     display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-
-  .contact-link {
-    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
-    gap: 10px;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 15px;
-    text-decoration: none;
-    transition: all 0.2s ease;
   }
 
-  .contact-link i {
-    font-size: 20px;
+  .year-count {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #888;
   }
 
-  .contact-link.github {
-    background: #24292e;
-    color: #fff;
+  .year-bar {
+    width: 100%;
+    max-width: 28px;
+    background: #4d6dad;
+    border-radius: 2px 2px 0 0;
   }
 
-  .contact-link.github:hover {
-    background: #000;
+  .year-label {
+    font-size: 11px;
+    line-height: 1.6;
+    color: #888;
+    border-top: 1px solid #d5d9e3;
+    width: 100%;
+    text-align: center;
   }
 
-  .contact-link.email {
-    background: #ea4335;
-    color: #fff;
+  .recent {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
-  .contact-link.email:hover {
-    background: #c5221f;
+  .page .left .recent li {
+    display: flex;
+    gap: 14px;
+    line-height: 1.9;
+    color: #333;
   }
 
-  .contact-link.linkedin {
-    background: #0077b5;
-    color: #fff;
+  .page .left .recent li time {
+    flex-shrink: 0;
+    width: auto;
+    color: #888;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
   }
 
-  .contact-link.linkedin:hover {
-    background: #005885;
+  .more {
+    margin: 10px 0 0 0;
+    font-size: 14px;
   }
 
-  /* Responsive */
+  /* Stack */
+  .stack {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 8px 20px;
+    margin: 0;
+  }
+
+  .stack dt {
+    color: #888;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .stack dd {
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  /* Colophon */
+  .colophon {
+    padding-left: 20px;
+    margin: 0;
+  }
+
+  .page .left .colophon li {
+    color: #444;
+    line-height: 1.8;
+  }
+
+  .contact {
+    margin: 0;
+  }
+
+  .contact span {
+    margin: 0 8px;
+    color: #aaa;
+  }
+
   @media screen and (max-width: 770px) {
-    .profile-header {
+    .projects {
+      grid-template-columns: 1fr;
+    }
+
+    .stack {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+
+    .stack dd {
+      margin-bottom: 10px;
+    }
+
+    .page .left .recent li {
       flex-direction: column;
-      text-align: center;
+      gap: 0;
+      margin-bottom: 8px;
     }
 
-    .profile-avatar {
-      width: 100px;
-      height: 100px;
-    }
-
-    .profile-avatar i {
-      font-size: 50px;
-    }
-
-    .profile-name {
-      font-size: 24px;
-    }
-
-    .stats-section {
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .stat-item {
-      padding: 10px;
-    }
-
-    .stat-number {
-      font-size: 28px;
-    }
-
-    .contact-links {
-      flex-direction: column;
-    }
-
-    .contact-link {
-      justify-content: center;
+    .year-count {
+      font-size: 9px;
     }
   }
 </style>
