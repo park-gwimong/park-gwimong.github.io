@@ -5,7 +5,7 @@ pubDate: 2026-10-06T10:00:00+09:00
 category: "softwareengineering"
 tags: ["AI Agent", "Workflow", "Governance", "CI/CD", "Approval Gate"]
 math: false
-draft: true
+draft: false
 ---
 
 에이전트 도입을 검토하는 자리에서는 대개 모델부터 고른다. 어떤 모델이 코드를 더 잘 쓰는지, 비용은 얼마인지, 어느 도구에 붙일지를 먼저 본다.
