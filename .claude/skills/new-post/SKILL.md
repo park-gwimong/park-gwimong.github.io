@@ -121,7 +121,7 @@ draft: false                 # 공개면 false. 작성 중이면 true
 
 번호 매겨진 `##` 헤더, 굵게 표시한 핵심 단어, 간헐적 `>` 블록인용이 이 패턴의 시그니처.
 
-### Pattern C — 작업 일지 (artifact-transformer 시리즈류)
+### Pattern C — 작업 일지 (BATON 시리즈류, 옛 이름 artifact-transformer)
 **언제**: 하루치 작업을 회고. 제목은 보통 `<프로젝트명> 작업 일지 #N`.
 **카테고리**: 거의 항상 `softwareengineering`.
 
@@ -148,7 +148,7 @@ draft: false                 # 공개면 false. 작성 중이면 true
 1~2개 핵심 + 다음에 할 일.
 ```
 
-- 제목 형식: `"artifact-transformer 작업 일지 #2"` (따옴표 안에 #).
+- 제목 형식: `"BATON 작업 일지 #48"` (따옴표 안에 #). #47까지는 `"artifact-transformer 작업 일지 #N"`이었고, #48부터 프로젝트 개명에 맞춰 바꿨다. 번호는 이어 쓴다. 파일명은 `baton-N.md`.
 - 부제는 *오늘의 좁은 초점*: `"산출물 출력 개선"`.
 - 태그에 `"Working Log"` 포함.
 - 일자 시각 `+09:00` 까지 명시: `pubDate: 2026-05-20T15:00:00+09:00`.
