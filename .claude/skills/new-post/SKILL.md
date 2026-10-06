@@ -149,6 +149,8 @@ draft: false                 # 공개면 false. 작성 중이면 true
 ```
 
 - 제목 형식: `"BATON 작업 일지 #48"` (따옴표 안에 #). #47까지는 `"artifact-transformer 작업 일지 #N"`이었고, #48부터 프로젝트 개명에 맞춰 바꿨다. 번호는 이어 쓴다. 파일명은 `baton-N.md`.
+- 경로: `src/content/posts/devlog/<프로젝트>/<프로젝트>-N.md`. 프로젝트마다 폴더를 따로 둔다(현재 `devlog/baton/`에 #1~#48. #1~#47은 옛 이름 `artifact-transformer-N.md` 그대로). 새 프로젝트의 일지는 새 폴더를 만든다. permalink은 파일명만 쓰므로 폴더를 옮겨도 URL은 변하지 않는다.
+- `src/pages/about.astro`가 일지를 `devlog/baton/artifact-transformer-1`처럼 폴더를 포함한 slug로 직접 가리킨다. 파일을 옮기거나 이름을 바꾸면 이 slug도 고친다. 안 고치면 빌드가 실패한다.
 - 부제는 *오늘의 좁은 초점*: `"산출물 출력 개선"`.
 - 태그에 `"Working Log"` 포함.
 - 일자 시각 `+09:00` 까지 명시: `pubDate: 2026-05-20T15:00:00+09:00`.
