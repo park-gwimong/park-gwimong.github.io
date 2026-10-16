@@ -58,7 +58,7 @@ pubDate: 2026-05-20         # 단순 날짜 또는 2026-05-20T15:00:00+09:00 (KS
 category: "softwareengineering"  # §1의 폴더명과 동일
 tags: ["Python", "JSON Schema"]  # 글의 실제 내용을 반영, 다른 글에서 복붙 금지
 math: false                  # 본문에 LaTeX/MathJax가 실제로 있을 때만 true
-draft: false                 # 공개면 false. 작성 중이면 true
+draft: true                 # 공개면 false. 작성 중이면 true
 ---
 ```
 

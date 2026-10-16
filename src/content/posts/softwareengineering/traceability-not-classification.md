@@ -5,7 +5,7 @@ pubDate: 2026-05-29
 category: "softwareengineering"
 tags: ["Traceability", "RTM", "Requirements", "System Design", "Methodology"]
 math: false
-draft: false
+draft: true
 ---
 
 산출물 체계를 설계하다 보면 한 번쯤 이 질문 앞에 멈춰선다. 업무, 요구사항, 기능, 유스케이스, 시퀀스, 시나리오, 테스트까지 일곱 단계로 이어지는 산출물의 분류를 어떻게 잡을 것인가. 모든 단계에 같은 분류 라벨을 달아 통일할 것인가, 단계마다 다른 분류를 둘 것인가.

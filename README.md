@@ -71,7 +71,7 @@ pubDate: 2024-01-15
 category: softwareengineering  # posts 하위 디렉터리명과 일치 (소문자)
 tags: [tag1, tag2, tag3]
 math: true                     # LaTeX/MathJax 포함 시에만 true
-draft: false
+draft: true
 ---
 ```
 

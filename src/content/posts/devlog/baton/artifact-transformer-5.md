@@ -5,7 +5,7 @@ pubDate: 2026-05-23T15:00:00+09:00
 category: "devlog"
 tags: ["JSON Schema", "PlantUML", "Use Case", "Identifier Policy", "Working Log"]
 math: false
-draft: false
+draft: true
 ---
 
 > 이 글은 2026-05-21 하루 동안 `artifact-transformer` 패턴을 다른 프로젝트에 적용하면서 정리한 작업 기록이다.

@@ -5,7 +5,7 @@ pubDate: 2026-10-16T10:00:00+09:00
 category: "softwareengineering"
 tags: ["AI Agent", "Approval Gate", "Human in the Loop", "Review", "BATON"]
 math: false
-draft: false
+draft: true
 ---
 
 2026년 10월 6일, OpenAI와 Atlassian이 파트너십 확대를 발표했다. 두 회사는 Jira 업무를 사람에게 하듯 AI 에이전트에게 배정하고, 진행과 결과를 추적하는 연동을 검토 중이라고 밝혔다. 아직 출시된 기능이 아니다.

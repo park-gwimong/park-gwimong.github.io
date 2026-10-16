@@ -5,7 +5,7 @@ pubDate: 2026-05-28T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "JSON Schema", "Single Source of Truth", "Data Modeling", "Cross Reference", "Working Log"]
 math: false
-draft: false
+draft: true
 ---
 
 > 이 글은 2026-05-28 하루 동안 `artifact-transformer`의 스키마와 샘플 데이터 전체를 정합성 기준으로 정리한 작업 기록이다.

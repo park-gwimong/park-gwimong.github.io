@@ -5,7 +5,7 @@ pubDate: 2026-05-22T15:00:00+09:00
 category: "devlog"
 tags: ["Python", "Refactoring", "Common Module", "docx", "Working Log"]
 math: false
-draft: false
+draft: true
 ---
 
 > 어제 하루 동안 `artifact-transformer`의 Parser 2개 + Generator 17개(총 19개 파이썬 파일, 약 6,400줄)를 두 worktree(`condescending-easley`, `serene-faraday`)에서 점진적으로 공통 모듈화했다. 한 번에 큰 `common/` 패키지를 설계해 일괄 추출하지 않고, 좁은 도메인에서 추출 → 검증 → 일반화의 6단계로 나눠서 진행한 과정과 그 이유를 정리한다. 메타데이터·식별자 정책 흐름은 [#3]에 따로 있다.
