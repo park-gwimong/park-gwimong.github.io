@@ -5,7 +5,7 @@ pubDate: 2026-08-04T10:00:00+09:00
 category: "devlog"
 tags: ["UX", "React", "Concurrency", "Git", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-08-04 하루의 기록이다. 오전엔 발행 파이프라인 3탭(생성·개정·배포)을 좌우 레이아웃으로 전면 개편했고, 낮엔 다중 세션 충돌에 잠금을 걸었다. 저녁엔 자잘한 버그를 사냥하다가 "변경이 없는데 개정 기록이 생기는" 오탐의 뿌리를 뽑았다.

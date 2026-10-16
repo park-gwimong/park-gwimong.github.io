@@ -5,7 +5,7 @@ pubDate: 2026-07-08T10:00:00+09:00
 category: "devlog"
 tags: ["UI/UX", "PlantUML", "Round-trip", "Tool Limitation", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-07-08 하루의 기록이다. 같은 도구를 두 채널(터미널 세션, Agent Mode 세션)에서 동시에 손봤고, 그 사이 하위 프로젝트 SUOMS에서는 비즈니스 모델 재정의가 도구를 타고 흘러들어왔다. 하루치 로그를 다시 읽으며 남는 건 결과물 목록이 아니라, **어디서 사람이 잘못 짚었고 어디서 도구가 대신 걸러 줬는지**다.

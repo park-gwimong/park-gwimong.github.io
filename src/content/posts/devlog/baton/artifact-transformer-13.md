@@ -5,7 +5,7 @@ pubDate: 2026-06-11T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "Google Drive", "CLI", "PlantUML", "OOXML", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-06-11 하루 동안 `artifact-transformer` 파이프라인의 **입구**(아키텍처 다이어그램 → participant.json 초기화)와 **출구**(Google Drive 업로드 + 관리 시트 갱신)를 자동화하고, 정합성 검증을 **Claude 스킬에서 독립 실행 코드로 분리**하고, 시퀀스 파서의 왕복 드리프트를 잡은 작업 기록이다.

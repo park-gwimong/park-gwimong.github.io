@@ -5,7 +5,7 @@ pubDate: 2026-09-21T10:00:00+09:00
 category: "devlog"
 tags: ["React", "TypeScript", "Jira", "Claude Code", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-09-21 하루의 기록이다. 다이어그램 편집 화면에서 접힌 JSON 편집 영역을 팝업으로 옮기는 일로 시작했다. 이어서 한 프로젝트의 Task 진행 상황을 검토했고, 상태가 실제 작업보다 뒤처진 6건을 Jira에서 옮기려다 권한 검사에 두 번 막혔다.

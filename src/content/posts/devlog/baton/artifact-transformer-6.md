@@ -5,7 +5,7 @@ pubDate: 2026-05-21T18:00:00+09:00
 category: "devlog"
 tags: ["Python", "JSON Schema", "PlantUML", "Use Case", "Identifier Policy", "Document Generator", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-05-21 하루 동안 `artifact-transformer`의 산출물 파이프라인을 확장하고, 그동안 정리한 패턴을 신규 프로젝트의 문서 저장소에 이식한 작업 기록이다.

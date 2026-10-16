@@ -5,7 +5,7 @@ pubDate: 2026-09-22T10:00:00+09:00
 category: "devlog"
 tags: ["Jira", "PlantUML", "Docker", "Bitbucket", "Claude Code", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-09-22 하루의 기록이다. 전날 남긴 할 일 세 가지(SVG 정리, 다이어그램 키 정정, v1.2 버전 올리기)로 시작했다. 이어서 v1.2 개정 Task 15건의 댓글을 데이터와 하나씩 대조했고, 마지막에 15건을 모두 해결됨으로 옮겼다. 데이터 파일 16개와 다이어그램 82개에는 1.2.0을 붙였다.

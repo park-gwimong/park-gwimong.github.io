@@ -5,7 +5,7 @@ pubDate: 2026-08-11T10:00:00+09:00
 category: "devlog"
 tags: ["Notion", "PlantUML", "LLM", "Dogfooding", "Git", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-08-11 하루의 기록이다. 오전엔 이 도구로 이 도구 자신의 산출물을 처음부터 만들었고, 오후엔 Notion에 깔리던 정적 산출물 표를 인라인 DB로 갈아엎어 9개 프로젝트 342종을 다시 올렸다. 그 사이 다른 두 세션이 같은 워킹트리에서 AI 응답 속도와 통계 대시보드를 동시에 건드렸고, 그 동시성 자체가 오늘의 가장 값비싼 함정이 됐다.

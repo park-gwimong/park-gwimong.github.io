@@ -5,7 +5,7 @@ pubDate: 2026-08-20T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "Monorepo", "Git Subtree", "Architecture", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-08-20 하루의 기록이다. 스캔 설정 한 줄이 코드-매핑 게이트를 무력화하고 있었다는 걸 고쳤고, 그 여세로 모노레포를 세 저장소로 쪼갰다. 쪼개려고 결합도를 재보니 세 축은 애초에 대칭이 아니었다.

@@ -5,7 +5,7 @@ pubDate: 2026-06-29T10:00:00+09:00
 category: "devlog"
 tags: ["Keycloak", "Identity", "C4 Model", "Versioning", "Idempotency", "Consistency Check", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-06-29 하루 동안 `artifact-transformer`와 그 산하 일곱 도메인 저장소(SULAS·SUOMS·PADX·IAMS·SUGCS·LORAS·FDSP)에서 **흩어진 것을 한 줄기로 모은** 작업 기록이다. 제각각이던 개정 이력을 1.0.x 한 줄기로, partial 조각들을 OVERVIEW로, 남처럼 그려져 있던 Keycloak을 IAMS 안으로 모았다. 그리고 그 와중에 — 환원해도 되살아나는 가짜 엔티티를, 도출 경로 자체에 가드를 박아 막았다.

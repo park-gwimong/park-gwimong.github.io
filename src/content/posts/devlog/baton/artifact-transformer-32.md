@@ -5,7 +5,7 @@ pubDate: 2026-08-06T10:00:00+09:00
 category: "devlog"
 tags: ["Keycloak", "HTTPS", "OAuth", "UX", "PlantUML", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-08-06 하루의 기록이다. 오전엔 단계 전환 게이트의 수동 점검을 시스템이 먼저 판정하도록 뒤집었고, 낮부터 저녁까지는 외부 접속 로그인이 깨지는 문제를 쫓다가 HTTPS 전환과 Keycloak 컨테이너 이관까지 갔다. 밤엔 게이트 미달 항목에 "그 자리로 가는 길"을 붙였다.

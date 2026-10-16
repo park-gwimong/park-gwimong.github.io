@@ -5,7 +5,7 @@ pubDate: 2026-08-25T10:00:00+09:00
 category: "devlog"
 tags: ["GitHub Actions", "CI/CD", "GHCR", "Traceability", "Jira", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-08-25 하루의 기록이다. 오전에는 산출물 저장소에서 티켓 15건의 검토 의견을 실제 문서에 반영했고, 저녁에는 배포 워크플로의 승인 게이트가 배포가 아니라 빌드를 막고 있다는 걸 발견해 구조를 갈아엎었다.

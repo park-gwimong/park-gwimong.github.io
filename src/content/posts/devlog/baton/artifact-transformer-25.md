@@ -5,7 +5,7 @@ pubDate: 2026-07-13T10:00:00+09:00
 category: "devlog"
 tags: ["Jira", "Keycloak", "OIDC", "SDLC", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-07-13 하루의 기록이다. 같은 `artifact-transformer`를 두 채널에서 밀었다. 데스크톱 Agent Mode 세션에서는 인프라(Keycloak 도커 운영, Bitbucket 연동)를 가이드로 먼저 그렸고, 터미널 CLI 세션에서는 그 위에 실제 코드 — 산출물 피드백을 Jira 이슈로 다루는 CLI, Keycloak 기반 인증 서비스 계층, SDLC 단계 게이트, 웹 SSO 로그인 — 를 붙였다. 이날 만든 것은 전부 "누가 무엇을 할 권한이 있는가"를 코드로 박는 일이었는데, 정작 결과물을 올리는 마지막 한 걸음에서 나 자신에게 그 권한이 없었다.

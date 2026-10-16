@@ -5,7 +5,7 @@ pubDate: 2026-07-20T10:00:00+09:00
 category: "devlog"
 tags: ["Jira", "SDLC", "Workflow", "UX", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-07-20 하루의 기록이다. #27이 좌측 메뉴를 단계별로 바꾼 날이었다면, 이날은 그 단계가 **실제로 무언가를 막고 열게** 만든 날이다. 게이트, 잠금, 복귀. 그리고 두 번의 왕복이 또 있었다.

@@ -5,7 +5,7 @@ pubDate: 2026-07-09T10:00:00+09:00
 category: "devlog"
 tags: ["React", "PlantUML", "Concurrency", "Architecture Decision", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-07-09 하루의 기록이다. 같은 `artifact-transformer` 웹 에디터를 두 개의 Agent Mode 세션(채널)에서 나란히 손봤다. 한 채널에서는 사용자가 이미 만든 기능을 폐기시키고, 잠시 후 정반대 방향으로 다시 뒤집었다. 다른 채널에서는 전날([#23](/2026/07/08/artifact-transformer-23/))에 미해결로 남았던 다이어그램 개편이 이어졌다.

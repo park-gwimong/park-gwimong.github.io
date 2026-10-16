@@ -5,7 +5,7 @@ pubDate: 2026-06-24T10:00:00+09:00
 category: "devlog"
 tags: ["C4 Model", "ERD", "Foreign Key", "Consistency Check", "Domain Modeling", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-06-24 하루 동안 `artifact-transformer`와 그 산하 도메인 저장소들에서 **경계를 긋고, 끊긴 관계를 이은** 작업 기록이다. 한쪽 손으로는 아키텍처 다이어그램을 boundary로 쪼개고 도메인을 제 소관으로 갈라 보냈고, 다른 손으로는 ERD에서 끊겨 있던 FK를 메웠다. 나누는 일과 잇는 일을 같은 날에 했다.

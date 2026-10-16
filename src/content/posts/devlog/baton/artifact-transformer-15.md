@@ -5,7 +5,7 @@ pubDate: 2026-06-17T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "Jira", "semver", "Bootstrapping", "RAG", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-06-16 하루 동안 `artifact-transformer`를 **여러 시스템에 반복 적용하며 드러난 규약들을 도구·스킬로 일반화**한 작업 기록이다. 그린필드 프로젝트를 한 명령으로 부트스트랩하는 `init.py` 오케스트레이터를 세우고, Epic 명명을 행위명사로 통일했으며, 산출물 버전을 3자리 semver로 전환하고, 위험도 평가 AI 역량을 신규로 기획했다.

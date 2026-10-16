@@ -5,7 +5,7 @@ pubDate: 2026-06-04T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "JSON Schema", "Schema Migration", "Test Artifacts", "Scaffolding", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-06-04 하루 동안 `artifact-transformer`의 시험 산출물 generate/parse를 바뀐 스키마·양식에 다시 맞추고, 비어 있던 init 스캐폴딩을 채운 작업 기록이다.

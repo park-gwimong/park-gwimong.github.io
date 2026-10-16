@@ -5,7 +5,7 @@ pubDate: 2026-10-02T10:00:00+09:00
 category: "devlog"
 tags: ["BATON", "AI Assist", "Timeout", "3-way Merge", "PlantUML", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-10-01과 10-02 이틀의 기록이다. 첫날은 AI가 낸 변경안이 서버 검증에서 떨어지는 사례를 하나씩 고쳤다. 둘째 날은 전체 정합성 수정 요청 하나가 세 시간을 쓴 일에서 시작해 요청에 상한을 뒀고, 상한 때문에 드러난 문제를 고쳤고, PlantUML 원본 544개를 구조 정의로 옮겼다. API 테스트는 이틀 사이 226건에서 576건이 됐다.

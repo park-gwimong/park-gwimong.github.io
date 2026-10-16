@@ -5,7 +5,7 @@ pubDate: 2026-05-21T20:00:00+09:00
 category: "devlog"
 tags: ["Python", "JSON Schema", "Jira", "Claude Code", "Skill", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-05-20 하루 동안 `artifact-transformer` 프로젝트에서 진행한 작업을 정리한 초안이다.

@@ -5,7 +5,7 @@ pubDate: 2026-08-24T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "TypeScript", "Prompt Engineering", "Traceability", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-08-24 하루의 기록이다. 기능 ID 주석이 없는 기존 코드를 소급으로 잇는 "분석가" 프롬프트를 반복 실행하며 다듬었고, 그 근거를 "구현자" 프롬프트가 그대로 물려받아 화면 버그 하나를 고쳤다.

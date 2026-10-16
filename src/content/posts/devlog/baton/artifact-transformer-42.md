@@ -5,7 +5,7 @@ pubDate: 2026-09-02T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "FastAPI", "React", "pytest", "Git", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-09-02 하루의 기록이다. 오후에는 밀린 변경을 커밋 둘로 갈라 내보냈고, 그 뒤로는 하루 종일 **이름과 실체가 어긋난 것들**을 밟았다. `build`라는 이름의 런타임 데이터 디렉터리를 지웠고, 매핑처럼 생겼지만 위치 정보가 0인 주석 299건을 걷어냈고, git이 모르는 파일 셋이 CI의 필수 의존물이라는 걸 마지막에야 확인했다.

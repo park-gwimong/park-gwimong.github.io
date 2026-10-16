@@ -5,7 +5,7 @@ pubDate: 2026-06-10T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "JSON Schema", "OOXML", "CI", "PlantUML", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-06-10 하루 동안 `artifact-transformer`의 연동 데이터(IDR/IDS) 라인을 **역파서까지 닫고**, 실데이터를 계기로 스키마를 **중계형 모델로 갈아엎고**, 스키마 검증·추적성 게이트를 **CI로 묶은** 뒤, 그 도구를 **두 실제 시스템(IAMS·FDSP)에 일괄 투입**한 작업 기록이다.

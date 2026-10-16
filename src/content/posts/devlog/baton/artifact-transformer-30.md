@@ -5,7 +5,7 @@ pubDate: 2026-07-22T10:00:00+09:00
 category: "devlog"
 tags: ["UX", "IDE", "React", "CSS", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-07-22 하루의 기록이다. #29가 화면을 지우고 도크 하나로 모은 날이었다면, 이날은 그 남은 표면 전체를 **IntelliJ의 시각 언어로 끝까지 따라간** 날이었다. 헤더·좌측·우측·하단 네 벽을 순서대로 손댔고, 그중 하나(정합성 검사)는 방향이 다섯 번 뒤집혔다.

@@ -5,7 +5,7 @@ pubDate: 2026-08-19T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "C4 Model", "Traceability", "Architecture", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-08-19 하루의 기록이다. 설계의 C4 구성 요소가 코드에 전혀 닿지 못하고 있다는 것을 확인하고, 그 축을 새로 놓았다. 저장소 셋에 걸쳐 여섯 커밋이고, 도구를 고치는 과정이 그대로 설계 검증이 됐다.

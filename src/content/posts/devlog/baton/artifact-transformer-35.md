@@ -5,7 +5,7 @@ pubDate: 2026-08-18T10:00:00+09:00
 category: "devlog"
 tags: ["React", "TypeScript", "Python", "UI", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-08-18 하루의 기록이다. 화면 쪽 빚을 네 갈래로 갚았다. 검토 절차, 작업 생성 동선, 데이터 편집기 레이아웃, 도구 창 문법. 코드로는 네 커밋에 걸쳐 25개 파일 +2,033/-576이고, 마지막에 조용히 실패하던 스케줄러 하나를 덤으로 잡았다.

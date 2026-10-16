@@ -5,7 +5,7 @@ pubDate: 2026-09-30T10:00:00+09:00
 category: "devlog"
 tags: ["Jira", "BATON", "Backlog", "Epic", "Claude Code", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-09-30 하루의 기록이다. 코드는 거의 건드리지 않았다. 하루 내내 SURAS Jira의 에픽 두 개와 그 아래 작업 구성을 다시 짰다. 그 결과를 BATON 로컬 Task DB와 맞췄다.

@@ -5,7 +5,7 @@ pubDate: 2026-08-10T10:00:00+09:00
 category: "devlog"
 tags: ["Notion", "docx", "PlantUML", "JSON Schema", "Dogfooding", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-08-10 하루의 기록이다. 오전부터 오후까지 Notion에 발행한 산출물을 로컬로 되돌리는 역복원 파이프라인을 .docx → .puml → 발행 측 정비 순으로 완성했고, 그 사이 복원이 드러낸 스키마 오류·개정이력 유실을 연쇄로 잡았다. 오후엔 앱의 AI 편집 기능으로 FDSP 문서 정비를 앱 자신에게 시켜 봤다 — 그리고 빈 프롬프트 호출 버그도 같이 얻었다.

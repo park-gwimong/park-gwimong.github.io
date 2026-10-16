@@ -5,7 +5,7 @@ pubDate: 2026-09-01T10:00:00+09:00
 category: "devlog"
 tags: ["React", "TypeScript", "UX", "FastAPI", "GitHub Actions", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-09-01 하루의 기록이다. 낮에는 "재생성 필요"라는 한 가지 사실이 화면 네 곳에서 서로 다른 이름으로 불리던 걸 한 벌로 묶었고, 저녁에는 점검에서 처리까지 이어지는 흐름을 만들다가 정의된 적 없는 CSS 클래스와 파일에 박힌 NUL 바이트를 차례로 밟았다.

@@ -5,7 +5,7 @@ pubDate: 2026-09-15T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "FastAPI", "SQLite", "PlantUML", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-09-15 하루의 기록이다. 업무 모델을 코드 변경에 맞춰 갱신하는 조사로 시작해, 승인 전 정본 파일을 잘못 건드려 불변식을 두 번 깼고, 화면 승인 경로가 막히자 코드로 직접 뚫었고, 끝나고 나서도 브라우저에 남은 낡은 초안 하나가 새 에러를 냈다.

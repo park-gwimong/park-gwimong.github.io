@@ -5,7 +5,7 @@ pubDate: 2026-06-16T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "Jira", "PlantUML", "REST API", "Traceability", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-06-15 하루 동안 `artifact-transformer` 파이프라인을 **LORAS·SUGCS·SUOMS을 비롯한 여러 시스템에 동시에 투입**하며, 각 시스템의 데이터 정합성을 맞추고, **Jira Capability Code를 요구사항 분류의 원천으로 묶고**, 비어 있던 다이어그램을 데이터로 채우고, **식별자와 액터를 `as` 별칭·아키텍처 기준으로 일원화**한 작업 기록이다. 세션을 프로젝트별로 갈라 병렬로 돌렸다.

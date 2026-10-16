@@ -5,7 +5,7 @@ pubDate: 2026-06-17T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "CLI", "Round-trip", "CI", "Refactoring", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-06-17 하루 동안 `artifact-transformer` **자신의 구조를 정리한** 작업 기록이다. 설정 파일을 실행 코드에서 떼어내 `env/`로 분리하고 경로 해석을 한곳으로 모았으며, 손으로 두 단계 밟던 라운드트립 전체 점검을 `roundtrip.py` 일급 명령으로 끌어올렸다.

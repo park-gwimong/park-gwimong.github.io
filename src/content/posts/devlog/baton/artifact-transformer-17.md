@@ -5,7 +5,7 @@ pubDate: 2026-06-18T10:00:00+09:00
 category: "devlog"
 tags: ["PlantUML", "CI", "Bitbucket", "Diagram", "Round-trip", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-06-18 하루 동안 `artifact-transformer`와 그 산하 문서 저장소들에서 **다이어그램을 둘러싼 길을 정리한** 작업 기록이다. `.puml`에서 사람이 보는 `.png`로 가는 렌더, 그 결과를 산출물 관리 대장에 등록하는 일, 새 다이어그램을 일관되게 작성하는 규약 — 세 갈래를 하나로 꿰었다.

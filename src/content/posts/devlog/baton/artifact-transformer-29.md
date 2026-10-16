@@ -5,7 +5,7 @@ pubDate: 2026-07-21T10:00:00+09:00
 category: "devlog"
 tags: ["UX", "IDE", "SQLite", "Jira", "Workflow", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-07-21 하루의 기록이다. #28이 단계에 힘을 준 날이었다면, 이날은 그 위에 얹힌 화면들을 **줄이는** 날이었다. 탭이 화면이 되고, 화면이 도크가 됐다. 그리고 그 과정에서 잠금·상태·실행 정보가 각각 제자리를 찾아 옮겨 갔다.

@@ -5,7 +5,7 @@ pubDate: 2026-10-07T10:00:00+09:00
 category: "softwareengineering"
 tags: ["AI Agent", "Verification", "Validation", "BATON", "Clean Architecture", "국방 R&D"]
 math: false
-draft: true
+draft: false
 ---
 
 대형 LLM이 나왔을 때 처음 시험해 본 일은 개발 중이던 프로젝트의 리팩토링이었다. 바로 코드를 고치게 하지는 않았다. 먼저 시스템마다 어울리는 디자인 패턴을 검토하게 했다.

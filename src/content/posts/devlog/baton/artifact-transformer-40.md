@@ -5,7 +5,7 @@ pubDate: 2026-08-31T10:00:00+09:00
 category: "devlog"
 tags: ["PlantUML", "Static Analysis", "Git", "GitHub Actions", "CI/CD", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-08-31 하루의 기록이다. 낮에는 다이어그램 partial 조합이 왜 깨지는지를 실측으로 확정하고 그걸 게이트로 만들었고, 저녁에는 지난 회차에 남겨 뒀던 `v1.1.0` 태그를 밀어 CD를 끝까지 돌렸다.

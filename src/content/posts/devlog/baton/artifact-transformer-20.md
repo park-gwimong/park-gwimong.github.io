@@ -5,7 +5,7 @@ pubDate: 2026-06-25T10:00:00+09:00
 category: "devlog"
 tags: ["Use Case", "C4 Model", "Authentication", "Domain Modeling", "Consistency Check", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-06-25 하루 동안 `artifact-transformer`와 그 산하 도메인 저장소들에서 **무엇을 어떤 단위로 묶고 가를지**를 바로잡은 작업 기록이다. 유스케이스는 기능이 아니라 사용자 목표 단위로, 시퀀스는 데이터 유형 단위로, 인증은 제 소관으로 돌려보냈다. 그리고 그 사이 두 번 — 진단이 파일을 덮어썼고, 남이 이미 한 일을 다시 했다.

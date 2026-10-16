@@ -5,7 +5,7 @@ pubDate: 2026-07-07T10:00:00+09:00
 category: "devlog"
 tags: ["Consistency Check", "Round-trip", "Naming Convention", "CI/CD", "Tooling", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-07-01~07-07 일주일 동안 `artifact-transformer`가 **개발 국면을 지나 적용 국면으로 넘어간** 기록이다. 핵심 파이프라인(생성·역파싱·검증·라운드트립)이 큰 틀에서 자리를 잡자, 하루의 일은 새 기능을 얹는 게 아니라 이미 세운 규약을 산하 아홉 저장소(fdsp·iam·loras·padx·paix·sdsp·sugcs·sulas·suoms)에 전수 적용하며 **도구의 남은 모서리를 다듬는** 쪽으로 옮겨 갔다. 산출물을 어떻게 정리했는지가 아니라, 여러 프로젝트에 밀어넣는 동안 도구가 어디까지 지켜 줬고 어디서 멈췄는지에 초점을 둔다.

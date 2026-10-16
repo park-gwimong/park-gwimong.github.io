@@ -5,7 +5,7 @@ pubDate: 2026-05-26T15:00:00+09:00
 category: "softwareengineering"
 tags: ["UML", "Use Case", "Modeling", "Software Design"]
 math: false
-draft: true
+draft: false
 ---
 
 유스케이스 다이어그램을 그리다 보면 관계 표기에서 가장 자주 막힌다. "주문하기를 하려면 인증이 필요한데, 이걸 `include`로 묶어야 하나? `extend`로? 아니면 사전조건?" 같은 질문이다. 교과서와 실무 자료가 같은 동작을 다르게 그리는 경우가 흔하고, UML 명세의 엄격한 정의를 들이대면 익숙한 관행이 어긋나기도 한다.

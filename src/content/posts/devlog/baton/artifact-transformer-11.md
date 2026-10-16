@@ -5,7 +5,7 @@ pubDate: 2026-06-09T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "JSON Schema", "OOXML", "CI", "Smoke Test", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-06-09 하루 동안 `artifact-transformer`의 데이터 산출물을 **인터페이스까지** 갈라 마무리하고, generate→parse 왕복을 **CI 게이트**로 묶고, 분리 과정에서 남았던 **과도기 폴백·로고 좌표**를 정리한 작업 기록이다.

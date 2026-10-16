@@ -5,7 +5,7 @@ pubDate: 2026-06-23T10:00:00+09:00
 category: "devlog"
 tags: ["ERD", "Consistency Check", "Semver", "Traceability", "Domain Modeling", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-06-23 하루 동안 `artifact-transformer`와 그 산하 문서 저장소들에서 **도구를 실제로 풀어내고, 맞다고 믿어 온 창들을 실제와 맞춘** 작업 기록이다. 오전엔 생성된 명세서 표지의 버전·일자를, 오후·저녁엔 ERD가 데이터 정의와 어긋난 자리를 — 두 종류의 "어긋남"을 같은 손으로 메웠다.

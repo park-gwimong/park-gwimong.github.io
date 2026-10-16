@@ -5,7 +5,7 @@ pubDate: 2026-07-15T10:00:00+09:00
 category: "devlog"
 tags: ["Jira", "Agile", "SDLC", "UX", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-07-15 하루의 기록이다. #26에서 뷰어를 편집기로 바꿨다면, 이날은 그 편집기가 놓일 자리 자체를 다시 그렸다 — **산출물 관리 도구에서 SW 개발 전주기 플랫폼으로.** 오전엔 "요구사항을 Jira로 옮길 것인가"를 놓고 데스크톱 Agent Mode에서 설계 문답만 했고, 오후엔 Task를 Story로 바꿨다가 두 시간 만에 Task로 되돌렸다. 그 왕복이 이날 배운 것의 전부다.
