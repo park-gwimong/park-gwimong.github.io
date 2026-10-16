@@ -5,7 +5,7 @@ pubDate: 2026-06-01T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "JSON Schema", "Schema Migration", "Round Trip", "Backward Compatibility", "Working Log"]
 math: false
-draft: false
+draft: true
 ---
 
 > 이 글은 2026-06-01 하루 동안 `artifact-transformer`의 바뀐 스키마와 양식을 generate/parse 코드에 다시 정합시킨 작업 기록이다.

@@ -5,7 +5,7 @@ pubDate: 2026-06-08T10:00:00+09:00
 category: "devlog"
 tags: ["Python", "OOXML", "python-docx", "JSON Schema", "CLI", "Working Log"]
 math: false
-draft: false
+draft: true
 ---
 
 > 이 글은 2026-06-08 하루 동안 `artifact-transformer`에 **데이터 정의서·명세서** 산출물을 더하고, 그것을 **논리/물리로 갈라** Word·Excel 양식까지 정제 산출물과 정합시킨 작업 기록이다.

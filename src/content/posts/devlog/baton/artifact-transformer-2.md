@@ -5,7 +5,7 @@ pubDate: 2026-05-19T15:00:00+09:00
 category: "devlog"
 tags: ["Python", "docx", "JSON Schema", "Working Log"]
 math: false
-draft: false
+draft: true
 ---
 
 > 이 글은 2026-05-19 하루 동안 `artifact-transformer` 프로젝트에서 진행한 작업을 정리한 초안이다.
