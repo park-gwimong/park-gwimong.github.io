@@ -34,3 +34,6 @@ _jekyll_backup/
 # Claude Code
 CLAUDE.md
 
+
+# local-only sensitive term list (see scripts/check-content.mjs)
+.sensitive-terms

@@ -4,9 +4,11 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev --port 5000",
-    "build": "astro build",
+    "build": "npm run check:content && astro build",
     "preview": "astro preview --port 5000",
-    "astro": "astro"
+    "astro": "astro",
+    "check:content": "node scripts/check-content.mjs",
+    "check": "astro check"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.0",

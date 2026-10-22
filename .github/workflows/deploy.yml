@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -11,8 +13,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: pages-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
@@ -30,15 +32,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # 글에 실제 프로젝트명·내부 경로가 섞였는지 검사한다. 걸리면 여기서 실패한다.
+      # SENSITIVE_TERMS 시크릿(줄바꿈 또는 쉼표 구분)이 없으면 기본 규칙만 검사한다.
+      # fork에서 온 PR에는 시크릿이 전달되지 않으므로 빈 값으로 들어간다.
+      - name: Check content for sensitive information
+        env:
+          SENSITIVE_TERMS: ${{ secrets.SENSITIVE_TERMS }}
+        run: npm run check:content
+
+      - name: Type check
+        run: npm run check
+
       - name: Build
         run: npm run build
 
       - name: Upload artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
   deploy:
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
