@@ -1,7 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import type { MarkdownHeading } from 'astro';
-import { type Post, formatDate, slugifyTag, categoryUrl, getPostUrl } from '../lib/posts';
+import { type Post, formatDate, slugifyTag, categoryUrl, getPostUrl, seriesUrl } from '../lib/posts';
 
 interface Props {
   frontmatter: Post['data'];
@@ -9,9 +9,11 @@ interface Props {
   readingTime: number;
   prev?: Post;
   next?: Post;
+  series?: { key: string; title: string; index: number; total: number };
+  related?: Post[];
 }
 
-const { frontmatter, headings, readingTime, prev, next } = Astro.props;
+const { frontmatter, headings, readingTime, prev, next, series, related = [] } = Astro.props;
 const { title, subtitle, pubDate, updatedDate, category, tags, math } = frontmatter;
 
 const toc = headings
@@ -22,13 +24,20 @@ const toc = headings
 <BaseLayout title={title} description={subtitle || title} showProgress>
   <div class="container">
     <div class="post-wrap">
-      <article itemscope itemtype="http://schema.org/BlogPosting">
+      <article itemscope itemtype="http://schema.org/BlogPosting" data-pagefind-body>
         <header class="post-header">
-          <a class="category-chip" href={categoryUrl(category)}>{category}</a>
-          <h1 itemprop="headline">{title}</h1>
-          {subtitle && <p class="subtitle">{subtitle}</p>}
+          <div class="chips">
+            <a class="category-chip" href={categoryUrl(category)} data-pagefind-filter="category">{category}</a>
+            {series && (
+              <a class="series-chip" href={seriesUrl(series.key)} data-pagefind-ignore>
+                {series.title} · {series.index} / {series.total}
+              </a>
+            )}
+          </div>
+          <h1 itemprop="headline" data-pagefind-meta="title">{title}</h1>
+          {subtitle && <p class="subtitle" data-pagefind-meta="subtitle">{subtitle}</p>}
           <div class="meta">
-            <time datetime={pubDate.toISOString()} itemprop="datePublished">{formatDate(pubDate)}</time>
+            <time datetime={pubDate.toISOString()} itemprop="datePublished" data-pagefind-meta="date[datetime]">{formatDate(pubDate)}</time>
             {updatedDate && (
               <span class="dot">수정 <time datetime={updatedDate.toISOString()} itemprop="dateModified">{formatDate(updatedDate)}</time></span>
             )}
@@ -36,13 +45,13 @@ const toc = headings
           </div>
           {tags.length > 0 && (
             <ul class="tag-list">
-              {tags.map(tag => <li><a class="tag" href={`/tag/${slugifyTag(tag)}/`}>#{tag}</a></li>)}
+              {tags.map(tag => <li><a class="tag" href={`/tag/${slugifyTag(tag)}/`} data-tag={tag} data-pagefind-filter="tag[data-tag]">#{tag}</a></li>)}
             </ul>
           )}
         </header>
 
         {toc.length > 1 && (
-          <details class="toc-inline">
+          <details class="toc-inline" data-pagefind-ignore>
             <summary>목차</summary>
             <nav class="toc" aria-label="목차">
               <ul>
@@ -56,7 +65,7 @@ const toc = headings
           <slot />
         </div>
 
-        <footer class="post-footer">
+        <footer class="post-footer" data-pagefind-ignore>
           {(prev || next) && (
             <nav class="post-nav" aria-label="이전·다음 글">
               {prev && (
@@ -74,6 +83,20 @@ const toc = headings
             </nav>
           )}
 
+          {related.length > 0 && (
+            <section class="related" aria-labelledby="related-title">
+              <h2 id="related-title">관련 글</h2>
+              <ul>
+                {related.map(r => (
+                  <li>
+                    <a href={getPostUrl(r)}>{r.data.title}</a>
+                    <time datetime={r.data.pubDate.toISOString()}>{formatDate(r.data.pubDate)}</time>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           <section class="comments">
             <h2 id="comments">Comments</h2>
             <div id="disqus_thread"></div>
@@ -81,7 +104,7 @@ const toc = headings
         </footer>
       </article>
 
-      <aside class="toc-aside">
+      <aside class="toc-aside" data-pagefind-ignore>
         {toc.length > 1 && (
           <>
             <p class="toc-title">On this page</p>

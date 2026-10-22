@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev --port 5000",
-    "build": "npm run check:content && astro build",
+    "build": "npm run check:content && astro build && pagefind --site dist",
     "preview": "astro preview --port 5000",
     "astro": "astro",
     "check:content": "node scripts/check-content.mjs",
@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
+    "pagefind": "1.3.0",
     "typescript": "^5.9.3"
   }
 }

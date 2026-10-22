@@ -43,3 +43,60 @@ export function readingMinutes(body: string): number {
   const words = text.replace(/[가-힣]/g, ' ').split(/\s+/).filter(w => /[a-zA-Z0-9]/.test(w)).length;
   return Math.max(1, Math.round(korean / 500 + words / 220));
 }
+
+// ---- 시리즈 ------------------------------------------------------------
+// 카테고리 폴더 아래에 한 단계 더 폴더가 있으면 그 폴더가 시리즈다.
+// 예) devlog/baton/artifact-transformer-1 → 시리즈 "baton"
+const SERIES_TITLES: Record<string, string> = {
+  baton: 'BATON 작업 일지',
+};
+
+export function getSeriesKey(post: Post): string | undefined {
+  const parts = post.slug.split('/');
+  return parts.length > 2 ? parts[1] : undefined;
+}
+
+export function seriesTitle(key: string): string {
+  return SERIES_TITLES[key] ?? key;
+}
+
+export function seriesUrl(key: string): string {
+  return `/series/${key}/`;
+}
+
+// 파일명 끝의 번호(artifact-transformer-7, baton-48 → 7, 48). 접두사가 바뀌어도 번호는 이어진다.
+function seriesNumber(post: Post): number | undefined {
+  const m = post.slug.match(/-(\d+)$/);
+  return m ? Number(m[1]) : undefined;
+}
+
+/** 시리즈에 속한 공개 글을 순서대로 돌려준다. 글 번호가 있으면 번호순, 없으면 날짜순이다. */
+export function getSeriesPosts(posts: Post[], key: string): Post[] {
+  return posts
+    .filter(p => getSeriesKey(p) === key)
+    .sort((a, b) => {
+      const na = seriesNumber(a);
+      const nb = seriesNumber(b);
+      if (na !== undefined && nb !== undefined && na !== nb) return na - nb;
+      return a.data.pubDate.valueOf() - b.data.pubDate.valueOf();
+    });
+}
+
+// ---- 관련 글 -----------------------------------------------------------
+/** 겹치는 태그가 많은 순으로 관련 글을 고른다. 같은 시리즈 글은 시리즈 탐색이 있어 제외한다. */
+export function getRelated(post: Post, published: Post[], limit = 3): Post[] {
+  const key = getSeriesKey(post);
+  const tags = new Set(post.data.tags.map(t => slugifyTag(t)));
+  return published
+    .filter(p => p.id !== post.id && !(key && getSeriesKey(p) === key))
+    .map(p => ({
+      post: p,
+      score:
+        p.data.tags.filter(t => tags.has(slugifyTag(t))).length * 2 +
+        (p.data.category === post.data.category ? 1 : 0),
+    }))
+    .filter(x => x.score >= 2)
+    .sort((a, b) => b.score - a.score || b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf())
+    .slice(0, limit)
+    .map(x => x.post);
+}

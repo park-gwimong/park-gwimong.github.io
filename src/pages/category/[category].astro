@@ -1,12 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostList from '../../components/PostList.astro';
-import { getCollection } from 'astro:content';
 import { getPublishedPosts } from '../../lib/posts';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('posts');
   const published = await getPublishedPosts();
+  const allPosts = published;
   const categories = [...new Set(allPosts.map(post => post.data.category.toLowerCase()))];
 
   return categories.map(category => ({

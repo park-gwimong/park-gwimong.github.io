@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  getPublishedPosts, getSeriesKey, getSeriesPosts, seriesTitle,
+  getPostUrl, formatDate,
+} from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const keys = [...new Set(posts.map(getSeriesKey).filter((k): k is string => !!k))];
+  return keys.map(key => ({
+    params: { series: key },
+    props: { key, posts: getSeriesPosts(posts, key) },
+  }));
+}
+
+const { key, posts } = Astro.props;
+const first = posts[0];
+const last = posts[posts.length - 1];
+---
+
+<BaseLayout title={seriesTitle(key)}>
+  <div class="container">
+    <div style="max-width: var(--prose)">
+      <header class="page-head">
+        <p class="eyebrow">Series</p>
+        <h1>{seriesTitle(key)}</h1>
+        <p>
+          {posts.length}편 · {formatDate(first.data.pubDate)} ~ {formatDate(last.data.pubDate)}
+        </p>
+      </header>
+
+      <ol class="series-list">
+        {posts.map((post, i) => (
+          <li>
+            <span class="series-no">{i + 1}</span>
+            <div>
+              <a class="title" href={getPostUrl(post)}>{post.data.title}</a>
+              {post.data.subtitle && <p class="series-sub">{post.data.subtitle}</p>}
+            </div>
+            <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</BaseLayout>

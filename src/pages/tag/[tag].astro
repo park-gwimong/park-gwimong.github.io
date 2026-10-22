@@ -1,12 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostList from '../../components/PostList.astro';
-import { getCollection } from 'astro:content';
 import { getPublishedPosts, slugifyTag } from '../../lib/posts';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('posts');
   const published = await getPublishedPosts();
+  const allPosts = published;
   const tagMap = new Map<string, string>(); // slug -> original tag
 
   allPosts.forEach(post => {

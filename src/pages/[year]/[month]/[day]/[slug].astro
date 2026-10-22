@@ -1,10 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 import PostLayout from '../../../../layouts/PostLayout.astro';
-import { getPostUrl, readingMinutes } from '../../../../lib/posts';
+import {
+  getPostUrl, readingMinutes, getSeriesKey, getSeriesPosts, seriesTitle, getRelated,
+} from '../../../../lib/posts';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts');
+  // 초안은 개발 서버에서만 보이고, 프로덕션 빌드에서는 페이지·검색·사이트맵에서 모두 빠진다
+  const posts = await getCollection('posts', ({ data }) => !import.meta.env.PROD || !data.draft);
   // 이전·다음 글은 공개된 글 사이에서만 연결한다 (오래된 글 → 최신 글 순)
   const published = posts
     .filter(p => !p.data.draft)
@@ -13,21 +16,37 @@ export async function getStaticPaths() {
   return posts.map((post) => {
     const [, year, month, day, slug] = getPostUrl(post).split('/');
     const i = published.indexOf(post);
+    const key = getSeriesKey(post);
+    let series;
+    let seriesPrev: typeof post | undefined;
+    let seriesNext: typeof post | undefined;
+    if (key) {
+      const members = getSeriesPosts(published, key);
+      const idx = members.findIndex(m => m.id === post.id);
+      if (idx >= 0) {
+        series = { key, title: seriesTitle(key), index: idx + 1, total: members.length };
+        seriesPrev = members[idx - 1];
+        seriesNext = members[idx + 1];
+      }
+    }
     return {
       params: { year, month, day, slug },
       props: {
         post,
-        prev: i > 0 ? published[i - 1] : undefined,
-        next: i >= 0 && i < published.length - 1 ? published[i + 1] : undefined,
+        // 시리즈 글은 시리즈 안에서, 나머지는 전체 글 순서로 이전·다음을 잇는다
+        prev: series ? seriesPrev : i > 0 ? published[i - 1] : undefined,
+        next: series ? seriesNext : i >= 0 && i < published.length - 1 ? published[i + 1] : undefined,
+        series,
+        related: getRelated(post, published),
       },
     };
   });
 }
 
-const { post, prev, next } = Astro.props;
+const { post, prev, next, series, related } = Astro.props;
 const { Content, headings } = await post.render();
 ---
 
-<PostLayout frontmatter={post.data} headings={headings} readingTime={readingMinutes(post.body)} prev={prev} next={next}>
+<PostLayout frontmatter={post.data} headings={headings} readingTime={readingMinutes(post.body)} prev={prev} next={next} series={series} related={related}>
   <Content />
 </PostLayout>

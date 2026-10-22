@@ -1,5 +1,5 @@
 ---
-import { type Post, categoryUrl, slugifyTag } from '../lib/posts';
+import { type Post, categoryUrl, slugifyTag, getSeriesKey, seriesTitle, seriesUrl } from '../lib/posts';
 
 interface Props {
   posts: Post[];
@@ -19,11 +19,28 @@ for (const post of posts) {
   }
 }
 
+const seriesCounts = new Map<string, number>();
+for (const post of posts) {
+  const key = getSeriesKey(post);
+  if (key) seriesCounts.set(key, (seriesCounts.get(key) ?? 0) + 1);
+}
+const series = [...seriesCounts.entries()];
+
 const categories = [...categoryCounts.entries()].sort((a, b) => b[1] - a[1]);
 const topTags = [...tagCounts.entries()].sort((a, b) => b[1].count - a[1].count).slice(0, 16);
 ---
 
 <aside class="sidebar">
+  {series.length > 0 && (
+    <section class="side-section">
+      <h2>Series</h2>
+      <ul class="side-list">
+        {series.map(([key, count]) => (
+          <li><a href={seriesUrl(key)}><span>{seriesTitle(key)}</span><span class="count">{count}</span></a></li>
+        ))}
+      </ul>
+    </section>
+  )}
   <section class="side-section">
     <h2>Categories</h2>
     <ul class="side-list">

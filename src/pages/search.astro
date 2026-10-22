@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Search" description="블로그 글 검색">
+  <div class="container">
+    <header class="page-head">
+      <h1>Search</h1>
+      <p>제목, 본문, 코드까지 검색합니다. <kbd>/</kbd> 키로 어느 페이지에서나 이 화면을 열 수 있습니다.</p>
+    </header>
+
+    <div id="search" class="search-box" style="max-width: 900px"></div>
+    <p id="searchNote" class="search-note" hidden>
+      검색 색인은 빌드할 때 만들어집니다. 개발 서버에서는 동작하지 않으니
+      <code>npm run build &amp;&amp; npm run preview</code>로 확인하세요.
+    </p>
+  </div>
+
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" id="pagefindCss" onerror="this.remove()">
+  <script is:inline>
+    (function () {
+      var s = document.createElement('script');
+      s.src = '/pagefind/pagefind-ui.js';
+      s.onload = function () {
+        var ui = new PagefindUI({
+          element: '#search',
+          showImages: false,
+          showSubResults: true,
+          resetStyles: false,
+          autofocus: true,
+          translations: { placeholder: '검색어를 입력하세요' },
+          // 결과에 원시 메타데이터가 그대로 보이지 않도록 정리한다
+          processResult: function (r) {
+            var d = r.meta.date;
+            delete r.meta.date;
+            delete r.meta.subtitle;
+            if (d) r.meta['작성일'] = String(d).slice(0, 10);
+            return r;
+          },
+        });
+        var q = new URLSearchParams(location.search).get('q');
+        if (q) ui.triggerSearch(q);
+      };
+      s.onerror = function () {
+        document.getElementById('searchNote').hidden = false;
+      };
+      document.head.appendChild(s);
+    })();
+  </script>
+</BaseLayout>
