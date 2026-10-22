@@ -106,7 +106,7 @@ draft: false
 
 > `inline-flex` 버튼 안에 `viewBox` 기반 스케일러블 SVG를 넣으면 flex 주축(가로)에서 min-content가 0으로 계산되며 붕괴하는 전형적인 flexbox-SVG 버그였다.
 
-`flex: none; width: 15px; height: 15px`를 SVG에 직접 못 박아 해결했다. 이날 마지막 커밋은 개정 영향성 화면을 추적성과 같은 3분할 구조로 재작성한 것 — FDSP 프로젝트의 실제 개정 데이터(132개 리프)로 검증까지 마쳤다.
+`flex: none; width: 15px; height: 15px`를 SVG에 직접 못 박아 해결했다. 이날 마지막 커밋은 개정 영향성 화면을 추적성과 같은 3분할 구조로 재작성한 것 — INDIA 프로젝트의 실제 개정 데이터(132개 리프)로 검증까지 마쳤다.
 
 ## 의도치 않은 함정
 

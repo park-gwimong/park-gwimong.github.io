@@ -14,7 +14,7 @@ draft: false
 
 두 갈래 일이 하루에 겹쳤다.
 
-한쪽은 SURAS 산출물이다. 위험도 평가 편의성 개선을 위해 산출물 단계별로 티켓(SURAS-1584~1598) 15건이 이미 만들어져 있었다. 개선 방향은 셋이었다 — 평가에 실제로 쓰이는 정보만 입력받기, SORA와 SRM을 분리하기, 기체·인적 같은 자원을 이 시스템이 직접 관리하지 않기(추후 OMS 연동).
+한쪽은 MIKE 산출물이다. 위험도 평가 편의성 개선을 위해 산출물 단계별로 티켓(MIKE-1584~1598) 15건이 이미 만들어져 있었다. 개선 방향은 셋이었다 — 평가에 실제로 쓰이는 정보만 입력받기, SORA와 SRM을 분리하기, 기체·인적 같은 자원을 이 시스템이 직접 관리하지 않기(추후 OMS 연동).
 
 다른 한쪽은 baton 저장소다. 오전에 모노레포로 합쳤고(`978f1d4`), 오후에 git flow와 전달 파이프라인을 세웠다(`27659cb`). 그 워크플로가 실제로 원하는 걸 막고 있는지는 세우고 나서야 들여다보게 됐다.
 
@@ -51,8 +51,8 @@ draft: false
 검사와 개정은 CLI가 결정한다.
 
 ```bash
-python check.py --env env/project.suras.env
-python revise.py apply --env env/project.suras.env --check --desc-per "function.json=..."
+python check.py --env env/project.mike.env
+python revise.py apply --env env/project.mike.env --check --desc-per "function.json=..."
 ```
 
 스키마·추적성·다이어그램 정합성 검사를 통과하고 `function.json` v1.1.4 → v1.1.5로 기록됐다(`9c7a231`).
@@ -70,9 +70,9 @@ python revise.py apply --env env/project.suras.env --check --desc-per "function.
 같은 회차에 근거가 확실한 것들은 전부 반영됐다. SORA/SRM 분리는 기존 ID를 SORA 전용으로 재정의하고 SRM 전용 ID를 신설하는 쌍 구조로 갔다.
 
 ```text
-LORAS-BIZ-RSK-003 · LORAS-BIZ-DAT-002 · LORAS-REQ-RSK-057
-LORAS-USC-RSK-017 · LORAS-OSC-RSK-004 · LORAS-ASC-RSK-003
-LORAS-IDE-SDSP-001
+GOLF-BIZ-RSK-003 · GOLF-BIZ-DAT-002 · GOLF-REQ-RSK-057
+GOLF-USC-RSK-017 · GOLF-OSC-RSK-004 · GOLF-ASC-RSK-003
+GOLF-IDE-KILO-001
 ```
 
 부수적으로 `REQ-RSK-008/028/038`이 SRM 관련 요구사항인데 SORA 업무를 참조하고 있던 오류도 이때 드러나 정정됐다. 분리를 하려고 참조를 훑지 않았으면 그대로 남았을 오류다.
@@ -135,9 +135,9 @@ docker buildx imagetools create --tag "ghcr.io/${OWNER}/baton-${component}:lates
 
 ## 의도치 않은 함정 — 사라진 env 경로와, 이슈 키로 오인된 식별자
 
-두 번째 세션을 시작하자마자 `/scope suras`가 실패했다. `env/project.suras.env`가 없다고 나왔고, `env/` 디렉터리 자체가 비어 있었다.
+두 번째 세션을 시작하자마자 `/scope mike`가 실패했다. `env/project.mike.env`가 없다고 나왔고, `env/` 디렉터리 자체가 비어 있었다.
 
-오전에 모노레포로 합치면서 설정 파일이 저장소 루트 `config/`로 옮겨졌기 때문이다. 스킬 문서에 적힌 경로는 옛 구조를 가리키고 있었다. 이후 호출은 전부 `--env ../../config/project.suras.env`로 바꿨다.
+오전에 모노레포로 합치면서 설정 파일이 저장소 루트 `config/`로 옮겨졌기 때문이다. 스킬 문서에 적힌 경로는 옛 구조를 가리키고 있었다. 이후 호출은 전부 `--env ../../config/project.mike.env`로 바꿨다.
 
 > 구조를 옮기면 문서에 박힌 경로도 같이 옮겨야 한다. 이건 항상 옮기고 나서 알게 된다.
 

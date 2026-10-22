@@ -42,7 +42,7 @@ draft: false
 첫 시도는 대상 저장소부터 틀렸다. `baton-api` 안에서 `diagramSync.ts`, `DiagramSession.tsx`, `DocEditor.tsx`를 찾았는데 하나도 없었다. `find`로 상위 디렉터리를 다시 훑어서야 실제 프런트엔드 저장소가 `baton-web`이라는 걸 확인했다.
 
 ```bash
-cd /c/Users/parkg/Documents/Git/park-gwimong/baton/baton-web && find . -maxdepth 1
+cd ~/baton/baton-web && find . -maxdepth 1
 ```
 
 저장소를 잘못 짚었다는 걸 확인하고 나서야 실제 발췌를 볼 수 있었다. 이 실수 자체는 사소하지만, 다음 결정과 이어진다 — 틀린 곳을 뒤진 상태에서 나온 결과를 그대로 내지 않고, 저장소가 맞는지부터 재확인한 뒤에 판단을 미뤘다.

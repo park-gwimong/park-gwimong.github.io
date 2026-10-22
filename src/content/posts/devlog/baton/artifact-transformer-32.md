@@ -75,7 +75,7 @@ draft: false
 
 ```ini
 KEYCLOAK_ISSUER=http://localhost:8080/realms/artifact-transformer                 # 서버 → Keycloak
-KEYCLOAK_PUBLIC_URL=http://at-lan.pabloair.com:8080/realms/artifact-transformer   # 브라우저 → Keycloak
+KEYCLOAK_PUBLIC_URL=http://baton.example.com:8080/realms/artifact-transformer   # 브라우저 → Keycloak
 ```
 
 `/api/auth/config`가 `authBase`를 내려주고 프런트가 authorize/token/logout을 이 주소로 호출한다. 토큰 검증은 두 발급자를 모두 허용하도록 했다 — Keycloak은 `KC_HOSTNAME`을 고정하지 않으면 접속에 쓰인 호스트로 `iss`를 찍기 때문이다. 물론 목록 밖 발급자는 거부한다.
@@ -109,8 +109,8 @@ issuer만 평문 loopback으로 남긴 건 의도적이다. 자체 서명 인증
 그리고 저녁에 로그인이 계속 막혔다. authorize URL은 완벽했다 — 8443 HTTPS 주소, `code_challenge_method=S256`, redirect_uri도 정확. Keycloak이 거부하는 것 같다는 짐작으로 그 URL을 그대로 호출해 봤다.
 
 ```
-https://at-lan.pabloair.com:8443  → Connection refused
-http://at-lan.pabloair.com:8080   → 200
+https://baton.example.com:8443  → Connection refused
+http://baton.example.com:8080   → 200
 ```
 
 Keycloak이 거부한 게 아니라 **HTTPS 리스너 자체가 없었다.** 컨테이너를 확인하니 `start-dev`로, 8080만 열고, 볼륨 없이 떠 있었다. HTTPS를 켜려면 컨테이너를 다시 만들어야 하는데 볼륨이 없어서 realm 설정이 컨테이너 안에만 있었다.
@@ -141,11 +141,11 @@ Keycloak이 거부한 게 아니라 **HTTPS 리스너 자체가 없었다.** 컨
 ③ 없으면 좌표 없음
 ```
 
-FDSP 실측에서 배너 3행을 짚던 것이 실제 선언부로 교정됐다.
+INDIA 실측에서 배너 3행을 짚던 것이 실제 선언부로 교정됐다.
 
 ```text
-＋ packages[0].id   — (없음) → DAT     | FDSP-UCDG-DAT.puml:31   ← !startsub DAT
-＋ packages[0].name — (없음) → 데이터   | FDSP-UCDG-DAT.puml:36   ← package "데이터" as DAT {
+＋ packages[0].id   — (없음) → DAT     | INDIA-UCDG-DAT.puml:31   ← !startsub DAT
+＋ packages[0].name — (없음) → 데이터   | INDIA-UCDG-DAT.puml:36   ← package "데이터" as DAT {
 ```
 
 화면에서는 `dgfocus.ts`(신규, `hl.ts`와 같은 초경량 구독)로 "이 .puml의 이 줄" 요청을 카드에 전달한다. 근거를 클릭하면 해당 다이어그램 카드가 자동으로 펼쳐지고, 뷰어 전용 모드였으면 분할로 전환해 코드를 띄운다. textarea는 DOM 강조를 못 얹으므로 `setSelectionRange`로 네이티브 선택을 잡았다 — 브라우저가 선택 색을 입히고, 그 자리에서 바로 편집할 수 있다.
@@ -207,6 +207,6 @@ FDSP 실측에서 배너 3행을 짚던 것이 실제 선언부로 교정됐다.
 다음에 남는 것:
 
 - 단계별 라운드트립 검사 범위가 실사용에서 오탐 없이 자기 단계에서 잡히는지 관찰.
-- FDSP의 UCDG ↔ `usecase.json` 드리프트 실제 해소 — 분석 복귀 후 처리할지 CLI로 돌릴지 결정 필요.
+- INDIA의 UCDG ↔ `usecase.json` 드리프트 실제 해소 — 분석 복귀 후 처리할지 CLI로 돌릴지 결정 필요.
 - 자체 서명 인증서의 두 origin(앱 8000, Keycloak 8443) 예외 수락이 실사용자에게 얼마나 걸림돌이 되는지 확인.
 - `tests/test_assist.py` 2건 실패는 이번 변경 전에도 동일하게 재현되므로 별건으로 조사.

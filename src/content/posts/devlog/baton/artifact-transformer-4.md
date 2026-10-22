@@ -28,7 +28,7 @@ draft: false
 
 1. **CSV 인코딩 불일치** — `parse_jira.py`는 `utf-8-sig`, 다른 파일은 `utf-8`. 한글 문자 손상 가능성.
 2. **JSON 로드 예외 처리 부재** — 모든 `load_json()` 호출에 try/except 없음. 손상된 파일이면 즉시 크래시.
-3. **Windows 하드코딩 경로** — `project.env`에 `WORK_DIR=C:\Users\parkg\...` 같은 백슬래시 경로가 그대로 노출됨.
+3. **Windows 하드코딩 경로** — `project.env`에 `WORK_DIR=C:\Users\<user>\...` 같은 백슬래시 경로가 그대로 노출됨.
 4. **양식 파일 인덱스 의존** — `doc.tables[14]` 같은 절대 인덱스를 직접 참조. 표 한 개만 추가해도 깨짐.
 5. **메타데이터 중복** — `project_code`, `system_code`, `writer/reviewer/approver` 등 동일한 메타데이터가 19개 generator에서 따로 채워짐.
 
@@ -97,7 +97,7 @@ Parser 호출 시 매번 `--input C:\...\Jira.csv --output C:\...\requirements.j
 기본 출력: {WORK_DIR}/documents/{타입명}.json
 ```
 
-이 과정에서 다른 프로젝트(`loras-docs`)의 잔여 경로가 기본값으로 박혀 있던 버그를 찾아 같이 제거했다.
+이 과정에서 다른 프로젝트(`golf-docs`)의 잔여 경로가 기본값으로 박혀 있던 버그를 찾아 같이 제거했다.
 
 ## 결정 6 — 스키마 변경을 같은 흐름에 흡수
 
