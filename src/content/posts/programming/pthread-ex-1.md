@@ -3,7 +3,7 @@ title: "ptrace 기본적인 사용 방법"
 pubDate: 2015-11-13T18:43:00+09:00
 category: "programming"
 tags: ["ptrace", "Debugging"]
-math: true
+math: false
 ---
 
 리눅스에서는 프로세스보다 작은 개념인 쓰레드를 이용해 다중 작업을 구현할 수 있습니다.  

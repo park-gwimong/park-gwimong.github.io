@@ -3,7 +3,7 @@ title: "AMD CPU 코드명 정리"
 pubDate: 2010-03-17T00:05:00+09:00
 category: "etc"
 tags: ["Intel", "CPU"]
-math: true
+math: false
 ---
 
 # 콘로(Conroe) 계열의 데스크탑용 코어2듀오

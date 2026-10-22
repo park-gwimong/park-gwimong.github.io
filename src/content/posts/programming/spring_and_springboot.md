@@ -4,7 +4,7 @@ subtitle: "Spring Boot의 이해"
 pubDate: 2020-07-23T15:00:00+09:00
 category: "programming"
 tags: ["Spring", "Spring Boot"]
-math: true
+math: false
 ---
 
 Spring Framework(이하 Spring)은 Java 기반의 **엔터프라이즈 응용 프로그램**를 좀 더 편하게 개발하기 위한 프레임워크입니다.  

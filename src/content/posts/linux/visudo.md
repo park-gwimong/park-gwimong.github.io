@@ -4,7 +4,7 @@ subtitle: "visudo를 사용하자"
 pubDate: 2020-03-09T18:19:00+09:00
 category: "linux"
 tags: ["sudo", "Permissions"]
-math: true
+math: false
 ---
 
 ===

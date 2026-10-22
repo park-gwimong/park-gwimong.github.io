@@ -4,7 +4,7 @@ subtitle: "모델2와 MVC Pattern"
 pubDate: 2020-06-24T11:00:00+09:00
 category: "programming"
 tags: ["Spring MVC", "MVC"]
-math: true
+math: false
 ---
 
 # Spring MVC

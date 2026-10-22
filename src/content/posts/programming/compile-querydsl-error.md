@@ -4,7 +4,7 @@ subtitle: "QueryDSL 설정 시 유의 사항"
 pubDate: 2023-09-08T19:08:00+09:00
 category: "programming"
 tags: ["Java", "Spring", "QueryDSL", "Gradle"]
-math: true
+math: false
 ---
 
 # QueryDSL?

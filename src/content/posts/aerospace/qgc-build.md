@@ -4,7 +4,7 @@ subtitle: "QGC Build 방법"
 pubDate: 2023-06-19T12:26:00+09:00
 category: "aerospace"
 tags: ["QGroundControl", "Build", "Aerospace"]
-math: true
+math: false
 ---
 
 QGroundControl 소스 코드를 가져와 기본적으로 빌드하는 방법을 설명합니다.

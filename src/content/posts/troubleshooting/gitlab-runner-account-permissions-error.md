@@ -4,7 +4,7 @@ subtitle: "gitlab-runner 실행 권한"
 pubDate: 2023-09-19T17:21:00+09:00
 category: "troubleshooting"
 tags: ["GitLab CI/CD", "Runner"]
-math: true
+math: false
 ---
 
 # 오류 내용

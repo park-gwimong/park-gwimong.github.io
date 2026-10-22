@@ -4,7 +4,7 @@ subtitle: "Unmapped target property 경고"
 pubDate: 2023-07-25T18:45:00+09:00
 category: "programming"
 tags: ["Spring", "MapStruct"]
-math: true
+math: false
 ---
 
 # Mapstruct 

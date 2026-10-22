@@ -3,7 +3,7 @@ title: "AMD CPU 코드명 정리"
 pubDate: 2010-03-17T00:05:00+09:00
 category: "etc"
 tags: ["AMD", "CPU"]
-math: true
+math: false
 ---
 AMD와 Intel
 AMD사의 싱글코어 CPU로써 Intel사의 펜티엄4와 경쟁관계입니다.

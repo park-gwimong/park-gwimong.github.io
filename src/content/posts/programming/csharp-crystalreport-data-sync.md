@@ -3,7 +3,7 @@ title: "C#에서 CrystallReport 사용하기 #2"
 pubDate: 2011-02-08T13:04:00+09:00
 category: "programming"
 tags: ["C#", "Crystal Reports"]
-math: true
+math: false
 ---
 
 mdb 파일을 이용하여 데이터를 표로 출력하는 방법입니다.

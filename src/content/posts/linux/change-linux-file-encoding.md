@@ -3,7 +3,7 @@ title: "Linux에서 파일명이 한글인 파일의 인코딩을 일괄 변경"
 pubDate: 2015-11-18T21:17:00+09:00
 category: "linux"
 tags: ["Linux", "Encoding", "Filename"]
-math: true
+math: false
 ---
 
 파일의 이름이 한글인 경우 시스템의 환경과 맞지 않으면 깨져서 보이게 됩니다.  

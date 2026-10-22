@@ -3,7 +3,7 @@ title: "printf()의 Segmentationg fault 차이"
 pubDate: 2010-02-19T18:16:00+09:00
 category: "programming"
 tags: ["C", "printf", "Segmentation Fault"]
-math: true
+math: false
 ---
  
 C의 표준 입출력 함수인 printf()에서 Segmentationg fault 발생 시 유의 할 사항에 대해 정리하고자 합니다.  

@@ -3,7 +3,7 @@ title: "ICMP 프로토콜 분석"
 pubDate: 2010-04-14T04:04:00+09:00
 category: "network"
 tags: ["ICMP"]
-math: true
+math: false
 ---
 
 IP 프로토콜은 오류제어에 대한 메커니즘이 포함되어 있지 않습니다.  

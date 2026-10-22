@@ -4,7 +4,7 @@ subtitle: "aricrack"
 pubDate: 2010-09-10T10:57:00+09:00
 category: "linux"
 tags: ["WiFi", "Security"]
-math: true
+math: false
 ---
 
 무선랜의 암호화 방식중 WEP의 암호키를 알아내는 방법입니다.

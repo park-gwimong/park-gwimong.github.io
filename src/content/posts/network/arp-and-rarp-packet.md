@@ -3,7 +3,7 @@ title: "ARP, RARP 패킷 구조"
 pubDate: 2010-04-16T04:04:00+09:00
 category: "network"
 tags: ["ARP", "RARP"]
-math: true
+math: false
 ---
 
 ARP(주소 변환 프로토콜)은 DNS에서 논리주소를 물리주소로 변환하기 위해 사용됩니다.  

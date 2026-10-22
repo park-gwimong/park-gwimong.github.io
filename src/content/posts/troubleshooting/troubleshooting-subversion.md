@@ -3,7 +3,7 @@ title: "The path '.' appears to be part of a Subversion 1.7 or greater working c
 pubDate: 2016-03-18T09:40:00+09:00
 category: "troubleshooting"
 tags: ["Subversion", "SVN"]
-math: true
+math: false
 ---
 
 기존에 사용하던 SVN을 다시 사용하려고 실행하는데 다음과 같은 에러가 떴습니다.

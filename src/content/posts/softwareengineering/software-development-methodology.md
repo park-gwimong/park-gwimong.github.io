@@ -4,7 +4,7 @@ subtitle: "소프트웨어 개발 방법론"
 pubDate: 2023-05-25T17:00:00+09:00
 category: "softwareengineering"
 tags: ["Software Engineering", "Methodology"]
-math: true
+math: false
 ---
 
 # 소프트웨어 개발방법론

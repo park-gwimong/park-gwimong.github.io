@@ -3,7 +3,7 @@ title: "HTTP Cookie의 Security"
 pubDate: 2023-05-18T14:47:00+09:00
 category: "security"
 tags: ["HTTP", "Cookie", "Security"]
-math: true
+math: false
 ---
 
 # Http Cookie

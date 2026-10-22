@@ -4,7 +4,7 @@ subtitle: "QT Designer로 위젯 디자인하기"
 pubDate: 2010-04-28T03:53:00+09:00
 category: "programming"
 tags: ["Qt", "C++", "Ubuntu"]
-math: true
+math: false
 ---
 
 QT에서는 위젯을 디자인하는 것이 프로그래밍과 분리가 되어있습니다.  

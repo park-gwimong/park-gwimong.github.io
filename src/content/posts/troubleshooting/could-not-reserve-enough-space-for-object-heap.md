@@ -4,7 +4,7 @@ subtitle: "553 Could not create file."
 pubDate: 2023-05-19T10:23:00+09:00
 category: "troubleshooting"
 tags: ["JVM", "Heap", "Java"]
-math: true
+math: false
 ---
 
 # 장애 현상

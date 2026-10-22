@@ -4,7 +4,7 @@ subtitle: "소프트웨어 개발 수명 주기(SDLC)"
 pubDate: 2023-05-25T15:00:00+09:00
 category: "softwareengineering"
 tags: ["Software Engineering", "SDLC"]
-math: true
+math: false
 ---
 
 # 소프트웨어 개발 수명 주기

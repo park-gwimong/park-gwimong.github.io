@@ -4,7 +4,7 @@ subtitle: "Unrecoginized error number: 8192: Function create_function() is depre
 pubDate: 2020-03-26T15:09:00+09:00
 category: "programming"
 tags: ["PHP", "phpLDAPadmin"]
-math: true
+math: false
 ---
 
 # 오류 내용

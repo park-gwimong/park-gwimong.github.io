@@ -4,7 +4,7 @@ subtitle: "Perl로 Expect 구현하기"
 pubDate: 2020-03-12T14:00:00+09:00
 category: "linux"
 tags: ["Expect", "Automation"]
-math: true
+math: false
 ---
 
 Expect는 기본적으로 tcl로 작성됩니다. 하지만 tcl는 그리 친숙한 언어가 아니죠...

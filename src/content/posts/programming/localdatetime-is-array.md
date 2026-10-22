@@ -4,7 +4,7 @@ subtitle: "jackson-datatype-jsr310와 MvcEnable"
 pubDate: 2023-07-27T17:52:00+09:00
 category: "programming"
 tags: ["Spring", "LocalDateTime"]
-math: true
+math: false
 ---
 
 ## 오류 현상

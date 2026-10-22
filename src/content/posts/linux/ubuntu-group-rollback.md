@@ -3,7 +3,7 @@ title: "우분투에서 group 복구하기"
 pubDate: 2010-08-23T09:37:00+09:00
 category: "linux"
 tags: ["Ubuntu", "Group"]
-math: true
+math: false
 ---
 
 우분투와 윈도우를 멀티부팅으로 사용하다가 윈도우를 포맷을 하고 다시 설치하니 Grub가 날아갔습니다.  

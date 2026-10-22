@@ -4,7 +4,7 @@ subtitle: "Windbg와 vmwarfe 연경"
 pubDate: 2010-11-07T17:35:00+09:00
 category: "tools"
 tags: ["WinDbg", "VMware", "Kernel Debugging"]
-math: true
+math: false
 ---
 
 vmware를 이용하여 커널 디버깅하기 위한 환경 설정 하는 자료는 구글링을 하시면 쉽게 찾을수 있습니다.

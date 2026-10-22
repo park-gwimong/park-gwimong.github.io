@@ -3,7 +3,7 @@ title: "Ubuntu에 NTFS 파티션 자동으로 마운트 설정"
 pubDate: 2010-09-09T19:33:00+09:00
 category: "linux"
 tags: ["Ubuntu", "NTFS", "Mount"]
-math: true
+math: false
 ---
 
 우분투 9.04 이후에는 NTFS를 마운트 시키기 위해 별다른 작업을 하지 않더라도 이미 인식은 되어 있어서 윈도우창에서 한번만 NTFS 파티션에 접속하기만 하면 자동으로 마운트됩니다.  

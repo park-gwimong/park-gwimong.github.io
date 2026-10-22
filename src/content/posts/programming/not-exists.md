@@ -4,7 +4,7 @@ subtitle: "IN보다 Exists를 사용하자"
 pubDate: 2020-03-10T18:13:00+09:00
 category: "programming"
 tags: ["SQL", "Database"]
-math: true
+math: false
 ---
 
 IN 연산자는 보통 특정 Table(or View) Data에서 데이터를 추출하기 위해 사용합니다.  이를 응용하여 해당 테이블에 IN에서 지정된 데이터가 있는지 확인하는 용도로도 사용됩니다.

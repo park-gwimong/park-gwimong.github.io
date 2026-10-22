@@ -3,7 +3,7 @@ title: "HTTP의 발전"
 pubDate: 2023-01-10T18:43:00+09:00
 category: "web"
 tags: ["HTTP", "Protocol"]
-math: true
+math: false
 ---
 
 # HTTP의 시작

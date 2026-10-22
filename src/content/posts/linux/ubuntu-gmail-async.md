@@ -3,7 +3,7 @@ title: "Ubuntu 전자우편 클라이언트에서 gmail 연동하기"
 pubDate: 2015-11-10T13:33:00+09:00
 category: "linux"
 tags: ["Ubuntu", "Gmail", "Email"]
-math: true
+math: false
 ---
 
 Thunderbird, Evolution 등 전자우편 클라이언트를 통해 기존의 사용하던 전자우편 서비스를 이용할 수 있습니다.

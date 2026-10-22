@@ -3,7 +3,7 @@ title: "Jekyll 설치"
 pubDate: 2019-03-06T20:00:00+09:00
 category: "utility"
 tags: ["Jekyll"]
-math: true
+math: false
 ---
 
 현재 운영 중인 블로그는 Jekyll을 이용하여 Gaohaoyang님의 테마를 적용하였습니다.  

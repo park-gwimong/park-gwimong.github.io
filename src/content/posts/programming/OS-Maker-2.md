@@ -4,7 +4,7 @@ subtitle: "최초의 OS"
 pubDate: 2010-04-08T01:04:00+09:00
 category: "programming"
 tags: ["Operating System", "OS Development"]
-math: true
+math: false
 ---
 
 ```assembly

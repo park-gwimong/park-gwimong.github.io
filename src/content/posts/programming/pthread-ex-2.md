@@ -3,7 +3,7 @@ title: "ptrace로 프로세스 추적하는 예제"
 pubDate: 2015-11-12T15:02:00+09:00
 category: "programming"
 tags: ["ptrace", "Debugging"]
-math: true
+math: false
 ---
 
 GDB등 리눅스 디벙깅 툴에서도 ptrace를 기본적으로 사용하여 프로세스를 추적합니다.

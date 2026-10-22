@@ -4,7 +4,7 @@ subtitle: "Restful한 Api 설계하기"
 pubDate: 2024-04-15T18:30:00+09:00
 category: "web"
 tags: ["REST API", "Architecture"]
-math: true
+math: false
 ---
 
 # REST

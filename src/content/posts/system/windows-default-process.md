@@ -3,7 +3,7 @@ title: "Windows 기본 프로세스 정리"
 pubDate: 2011-08-25T00:01:00+09:00
 category: "system"
 tags: ["Windows", "Process"]
-math: true
+math: false
 ---
 
 Visual Studio를 깔아놓으니까 먼 충돌을 이리 많이 일으키는지..

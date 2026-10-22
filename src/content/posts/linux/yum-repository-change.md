@@ -3,7 +3,7 @@ title: "Feodra 리눅스 yum 저장소 변경"
 pubDate: 2010-12-01T03:34:00+09:00
 category: "linux"
 tags: ["Fedora", "YUM"]
-math: true
+math: false
 ---
 
 ===

@@ -3,7 +3,7 @@ title: "vim plugin 설정"
 pubDate: 2018-04-05T17:45:00+09:00
 category: "utility"
 tags: ["Vundle", "Vim"]
-math: true
+math: false
 ---
 
 # [Vundle](https://github.com/VundleVim/Vundle.vim)이란?

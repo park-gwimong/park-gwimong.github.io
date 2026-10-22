@@ -3,7 +3,7 @@ title: "ODP.NET 설치"
 pubDate: 2018-05-29T02:43:00+09:00
 category: "programming"
 tags: ["ODP.NET", "Oracle"]
-math: true
+math: false
 ---
 
 ODP.NET Install

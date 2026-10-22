@@ -3,7 +3,7 @@ title: "해커의 분류(Gilbert Alaverdian 분류)"
 pubDate: 2012-07-14T15:56:00+09:00
 category: "etc"
 tags: ["Hacking", "Security"]
-math: true
+math: false
 ---
 
 1. 레이머(Lamer)  

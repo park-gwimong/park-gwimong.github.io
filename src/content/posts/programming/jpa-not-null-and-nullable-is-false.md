@@ -4,7 +4,7 @@ subtitle: "@NotNull과 @ColumnDefault 차이"
 pubDate: 2023-08-02T16:44:00+09:00
 category: "programming"
 tags: ["Spring Boot", "JPA", "Hibernate", "Validation"]
-math: true
+math: false
 ---
 
 Spring Boot JPA로 Entity 설계 시, 컬럼에 Null을 허용하지 않도록 설정하기 위해  

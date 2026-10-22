@@ -4,7 +4,7 @@ subtitle: "C4 Model과 plantuml"
 pubDate: 2023-07-10T18:11:00+09:00
 category: "tools"
 tags: ["PlantUML", "C4 Model"]
-math: true
+math: false
 ---
 
 Software architecture를 표현하기 위한 다양한 방법들이 있지만, 저는 시스템을 분석 및 설계할 때 주로 아래의 문서를 작성합니다.

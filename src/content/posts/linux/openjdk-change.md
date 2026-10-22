@@ -3,7 +3,7 @@ title: "CentOS openJDK 삭제 및 Oracle JDK 설치"
 pubDate: 2017-04-13T20:41:00+09:00
 category: "linux"
 tags: ["OpenJDK", "Oracle JDK", "Java", "CentOS"]
-math: true
+math: false
 ---
 
 CentOS에 기본적으로 설치되어 있는 OpenJDK는 OracleJDK 보다 낮은 안정성을 제공합니다.

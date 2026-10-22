@@ -3,7 +3,7 @@ title: "C#에서 Mysql 데이터 받아올 때 한글 깨짐 현상"
 pubDate: 2010-08-30T00:38:00+09:00
 category: "programming"
 tags: ["C#", "MySQL", "Encoding"]
-math: true
+math: false
 ---
 
 MySQL에서 한글로 된 데이터를 바로 받아오면 한글이 깨져서 날라오는 경우가 있습니다.  

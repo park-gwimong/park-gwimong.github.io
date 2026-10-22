@@ -4,7 +4,7 @@ subtitle: "ORM 성능 문제의 핵심과 해결법"
 pubDate: 2026-01-19
 category: "database"
 tags: [jpa, orm, performance, database, query-optimization]
-math: true
+math: false
 ---
 
 ORM을 쓰다 보면 반드시 한 번은 만나는 문제가 있다.

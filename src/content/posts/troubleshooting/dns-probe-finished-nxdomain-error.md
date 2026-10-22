@@ -3,7 +3,7 @@ title: "DNS_PROBE_FINISHED_NXDOMAIN 오류"
 pubDate: 2015-10-30T09:45:00+09:00
 category: "troubleshooting"
 tags: ["DNS"]
-math: true
+math: false
 ---
 
 해당 오류는 구글 크롬 사용 시 DNS에서 주소를 찾을 수 없는 경우에 발생하는 오류입니다.  

@@ -3,7 +3,7 @@ title: "C#에서 GMap.Net 사용하기"
 pubDate: 2010-08-24T06:02:00+09:00
 category: "programming"
 tags: ["C#", "GMap.NET"]
-math: true
+math: false
 ---
 
 Google, Bing, Daum, Naver 등 많은 포털 사이트에서 Open Maps 서비스를 제공합니다.  

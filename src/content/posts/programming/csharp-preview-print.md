@@ -3,7 +3,7 @@ title: "C#에서 미리보기로 여라장 프린터 출력하기"
 pubDate: 2010-04-20T20:07:30+09:00
 category: "programming"
 tags: ["C#", "Printing"]
-math: true
+math: false
 ---
 
 .NET 프레임워크에서는 프린터로 출력하기위한 여러가지 출력 기능을 제공해줍니다.  

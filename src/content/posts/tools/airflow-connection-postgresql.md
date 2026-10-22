@@ -4,7 +4,7 @@ subtitle: "Airflow Provider Package"
 pubDate: 2023-08-10T17:34:00+09:00
 category: "tools"
 tags: ["Airflow", "PostgreSQL"]
-math: true
+math: false
 ---
 
 # airflow

@@ -4,7 +4,7 @@ subtitle: "오류 내용 : 이 작업을 수행하기 위한 권한이 필요합
 pubDate: 2020-05-22T11:26:00+09:00
 category: "troubleshooting"
 tags: ["NFS", "Windows"]
-math: true
+math: false
 ---
 
 # 시스템 구성

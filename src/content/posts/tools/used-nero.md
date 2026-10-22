@@ -3,7 +3,7 @@ title: "시디 굽는 방법 - Nero"
 pubDate: 2012-03-11T17:40:00+09:00
 category: "tools"
 tags: ["Nero", "Optical Disc"]
-math: true
+math: false
 ---
 
 CD 굽는데 가장 일반적으로 사용되는 Nero 프로그램입니다.

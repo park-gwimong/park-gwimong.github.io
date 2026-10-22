@@ -4,7 +4,7 @@ subtitle: "553 Could not create file."
 pubDate: 2010-11-07T17:35:00+09:00
 category: "troubleshooting"
 tags: ["vsftpd", "FTP"]
-math: true
+math: false
 ---
 
 서버와 클라이언트 환경 둘 다 우분투 9.04이다.

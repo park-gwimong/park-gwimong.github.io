@@ -3,7 +3,7 @@ title: "VMWare에서 리눅스 공유 폴더 설정하기"
 pubDate: 2010-12-01T04:40:00+09:00
 category: "linux"
 tags: ["VMware", "Shared Folder"]
-math: true
+math: false
 ---
 
 VMware에 리눅스를 설치하여 사용하는 경우가 많은데 이때 공유 폴더를 설정하면 편리합니다.  

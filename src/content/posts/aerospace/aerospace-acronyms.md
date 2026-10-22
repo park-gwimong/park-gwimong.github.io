@@ -4,7 +4,7 @@ subtitle: "UAM 용어 및 약어"
 pubDate: 2023-06-15T14:02:00+09:00
 category: "aerospace"
 tags: ["Aerospace", "Acronyms"]
-math: true
+math: false
 ---
 
 ATM / UAM / UTM 서비스를 위해 사용되는 용어를 정리하고 있습니다.  

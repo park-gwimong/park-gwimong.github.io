@@ -4,7 +4,7 @@ subtitle: "QT에서 Opengl 사용하기"
 pubDate: 2010-04-28T19:38:00+09:00
 category: "programming"
 tags: ["Qt", "C++", "Ubuntu"]
-math: true
+math: false
 ---
 
 QT 응용프로그램에서 OpenGl를 사용하기 위해서는 QtOpenGL과 OpenGL 라이브러리에 링크를 해야 합니다.

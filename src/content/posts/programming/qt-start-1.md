@@ -4,7 +4,7 @@ subtitle: "QT 시작하기"
 pubDate: 2010-04-28T02:51:00+09:00
 category: "programming"
 tags: ["Qt", "C++", "Ubuntu"]
-math: true
+math: false
 ---
 
 우분투 배포판을 설치할때 개발자 툴도 함께 설치 하였으면 설치 되어있겟지만 설치가 되어 있지 않다면 설치해줍니다.  
