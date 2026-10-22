@@ -45,7 +45,7 @@ OVERVIEW는 **모든 partial의 NODES를 먼저 전부 조합하고, 그다음 R
 
 구 형태 `CONTENT`는 호환 항목으로 남겼다. 교차 참조가 없거나 방향이 include 순서와 맞으면 그대로 동작한다. 다만 화살표 하나만 반대로 추가돼도 깨지므로 신규 작성은 NODES/RELS로 못 박았다.
 
-스킬 문서(`SKILL.md` §1, `reference/conventions.md`)의 BCDG partial·OVERVIEW 규약과 UCDG 분할 규약을 여기에 맞춰 개정하고, **왜 나누는가**를 실패 메커니즘과 함께 적었다. 순서로 못 고치는 사례로 BATON의 PIP↔COL 순환을, 변형 사례로 PAIX(NODES만 조합하고 관계선은 OVERVIEW에서 큐레이트)를 정본 예시로 달았다.
+스킬 문서(`SKILL.md` §1, `reference/conventions.md`)의 BCDG partial·OVERVIEW 규약과 UCDG 분할 규약을 여기에 맞춰 개정하고, **왜 나누는가**를 실패 메커니즘과 함께 적었다. 순서로 못 고치는 사례로 BATON의 PIP↔COL 순환을, 변형 사례로 LIMA(NODES만 조합하고 관계선은 OVERVIEW에서 큐레이트)를 정본 예시로 달았다.
 
 ## 결정 2 — 규칙은 문서가 아니라 실측이 정한다
 
@@ -109,17 +109,17 @@ sub 본문을 유닛(`package {…}` 블록 / 단일 줄)으로 쪼개 선언·�
 
 | 프로젝트 | 이관한 OVERVIEW | partial |
 | --- | --- | --- |
-| fdsp | BCDG, DFDG | 4 |
-| iams | BCDG, UCDG, DFDG | 18 |
-| padx | BCDG, DFDG | 12 |
-| paix | UCDG | 5 |
-| sdsp | UCDG | 7 |
-| sugcs | DFDG | 8 |
-| sulas | BCDG, DFDG | 8 |
-| suoms | DFDG | 6 |
-| suras | BCDG, DFDG | 12 |
+| india | BCDG, DFDG | 4 |
+| delta | BCDG, UCDG, DFDG | 18 |
+| charlie | BCDG, DFDG | 12 |
+| lima | UCDG | 5 |
+| kilo | UCDG | 7 |
+| tango | DFDG | 8 |
+| alpha | BCDG, DFDG | 8 |
+| bravo | DFDG | 6 |
+| mike | BCDG, DFDG | 12 |
 
-2건은 손으로 고쳤다. `PADX-DFDG-OVERVIEW`(`rectangle "TKN · 디자인 토큰" { … }`)와 `SDSP-UCDG-OVERVIEW`(`together { … }`)는 include가 그룹 블록 **안에** 중첩돼 있어서, 일괄 재작성하면 그룹핑이 깨진다. 그룹 안에는 `!NODES`만 남기고 `!RELS`를 그룹 밖으로 빼는 형태로 직접 처리했다.
+2건은 손으로 고쳤다. `CHARLIE-DFDG-OVERVIEW`(`rectangle "TKN · 디자인 토큰" { … }`)와 `KILO-UCDG-OVERVIEW`(`together { … }`)는 include가 그룹 블록 **안에** 중첩돼 있어서, 일괄 재작성하면 그룹핑이 깨진다. 그룹 안에는 `!NODES`만 남기고 `!RELS`를 그룹 밖으로 빼는 형태로 직접 처리했다.
 
 스크립트도 이런 경우를 사전 검사하게 고쳤다. partial만 바꾸고 OVERVIEW를 방치하면 깨진 상태로 남기 때문이다.
 
@@ -138,7 +138,7 @@ sub 본문을 유닛(`package {…}` 블록 / 단일 줄)으로 쪼개 선언·�
 
 그 뒤 push·PR·병합까지 이어졌는데, 저장소마다 사정이 달라서 매번 방법이 달랐다.
 
-**fdsp** — 로컬 `main`이 원격보다 2커밋 앞서 있어서, 그 위에 쌓인 내 브랜치를 밀자 PR diff에 커밋 3개가 잡혔다. 앞선 2건은 내가 만든 게 아니다. `origin/main` 기준으로 내 커밋만 다시 올리는 게 맞는데, 워킹트리에 미커밋 CMPDG 4건이 있어 브랜치를 갈아탈 수 없었다.
+**india** — 로컬 `main`이 원격보다 2커밋 앞서 있어서, 그 위에 쌓인 내 브랜치를 밀자 PR diff에 커밋 3개가 잡혔다. 앞선 2건은 내가 만든 게 아니다. `origin/main` 기준으로 내 커밋만 다시 올리는 게 맞는데, 워킹트리에 미커밋 CMPDG 4건이 있어 브랜치를 갈아탈 수 없었다.
 
 임시 worktree를 `origin/main`에 만들어 그 안에서 cherry-pick 했다. 실제 워킹트리는 건드리지 않는다. 옮기기 전에 내 커밋(BCDG·DFDG 6파일)과 건너뛸 2커밋(CMPDG·data JSON), 미커밋 4파일(CMPDG) 사이에 겹치는 파일이 **하나도 없음**을 먼저 확인했고, 체크아웃 전후로 미커밋 4파일의 md5를 대조해 보존을 확인했다.
 
@@ -152,9 +152,9 @@ git checkout main                                 # 같은 커밋이라 파일 �
 
 base가 feature와 같은 커밋이 된 뒤에 체크아웃하므로 파일이 한 번도 바뀌지 않는다. 10개 전부 fast-forward라 머지 커밋 없이 히스토리가 선형으로 남았다.
 
-fdsp만 FF가 안 됐다. 직전에 CDG 커밋을 main에 올려 feature가 1 behind였다. 새 main 위로 다시 리베이스한 뒤 병합했다. 로컬 브랜치 삭제도 `-d`가 거부됐는데(리베이스로 origin 추적 SHA와 달라졌다), `merge-base --is-ancestor`로 내용이 main에 포함됐음을 확인한 뒤 `-D`로 지웠다.
+india만 FF가 안 됐다. 직전에 CDG 커밋을 main에 올려 feature가 1 behind였다. 새 main 위로 다시 리베이스한 뒤 병합했다. 로컬 브랜치 삭제도 `-d`가 거부됐는데(리베이스로 origin 추적 SHA와 달라졌다), `merge-base --is-ancestor`로 내용이 main에 포함됐음을 확인한 뒤 `-D`로 지웠다.
 
-세션 시작 때 fdsp만 CDG 드리프트 `[+84 -3 ~187]`로 게이트에 걸려 있었다. 8/19자 미커밋 CMPDG 편집이 `parse.py cdg`로 반영되지 않은 상태였다. 그 편집의 의도("컴포넌트 경계를 코드의 실제 소유 구조에 맞춤")를 확인받고 반영했다.
+세션 시작 때 india만 CDG 드리프트 `[+84 -3 ~187]`로 게이트에 걸려 있었다. 8/19자 미커밋 CMPDG 편집이 `parse.py cdg`로 반영되지 않은 상태였다. 그 편집의 의도("컴포넌트 경계를 코드의 실제 소유 구조에 맞춤")를 확인받고 반영했다.
 
 | 컬렉션 | 변화 |
 | --- | --- |
@@ -203,7 +203,7 @@ run 33385335214  (push · v1.1.0)  status=completed  conclusion=success
 
 이관 검증을 하려고 9개 프로젝트에 `parse.py --diff`를 돌렸다. 미리보기라고 생각했다.
 
-아니었다. `--diff`의 실제 의미는 *"역추출 **전후**의 변경 필드를 요약 출력"* — **쓰고 나서 보여주는** 것이지 dry-run이 아니다. 8개는 diff가 0이라 무해했지만, **fdsp는 검토되지 않은 기존 CDG 드리프트를 `participant.json`에 그대로 반영**했다(209 insertions).
+아니었다. `--diff`의 실제 의미는 *"역추출 **전후**의 변경 필드를 요약 출력"* — **쓰고 나서 보여주는** 것이지 dry-run이 아니다. 8개는 diff가 0이라 무해했지만, **india는 검토되지 않은 기존 CDG 드리프트를 `participant.json`에 그대로 반영**했다(209 insertions).
 
 되돌렸고, 전 프로젝트 `data/`를 재확인해 깨끗한 것까지 봤다. 비파괴 검증은 `check.py` ③단(임시본을 파싱해 비교)이 맞다. 나를 오도한 스킬 문구("항상 `--diff`로 먼저 확인한다")도 정정했다.
 

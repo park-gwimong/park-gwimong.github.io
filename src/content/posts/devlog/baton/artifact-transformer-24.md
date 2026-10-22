@@ -58,7 +58,7 @@ React 18 + Vite + TS로 전체를 다시 짰다. 의존성은 최소화하고 �
 | --- | --- | --- |
 | 모듈 소스를 고쳐도 OVERVIEW가 재렌더링 안 됨 | `ensure_svg` 캐시가 OVERVIEW 파일 자체의 mtime만 보고 `!include`로 딸린 모듈 파일은 안 봄 | `_dep_mtime`으로 include 의존성을 재귀 추적 |
 | C4 레벨1~2 OVERVIEW를 편집할 수 없음 | "이 다이어그램 그룹에 모듈 파일이 있나" 체크가 세션 전체 레벨로 적용돼, 레벨3(CMPDG) 모듈이 하나라도 있으면 레벨1/2까지 잠김 | `hasModulesOfKind`로 종류별(per-kind) 체크로 분리 |
-| `SUOMS-CNTDG-COM-001` 렌더링 실패 | PlantUML은 출력 파일명을 소스 파일명이 아니라 `@startuml <name>` 내부 이름으로 정하는데, 레거시 SUOMS 문서는 내부 이름이 파일명과 다름 | `common/plantuml.py`가 이미 쓰던 관례로 `_svg_path`를 통일 (레거시 데이터는 안 건드림) |
+| `BRAVO-CNTDG-COM-001` 렌더링 실패 | PlantUML은 출력 파일명을 소스 파일명이 아니라 `@startuml <name>` 내부 이름으로 정하는데, 레거시 BRAVO 문서는 내부 이름이 파일명과 다름 | `common/plantuml.py`가 이미 쓰던 관례로 `_svg_path`를 통일 (레거시 데이터는 안 건드림) |
 | 다이어그램 확대·축소와 페이지 스크롤이 동시에 반응 | React의 `onWheel`은 passive라서 `preventDefault()`가 조용히 무시됨 | 네이티브 non-passive wheel 리스너 + `overscroll-behavior: contain` / `touch-action: none` |
 
 네 건 다 겉으로 보이는 증상은 UI 레이어였지만, 원인은 캐시 의존성 추적, 체크 범위, 외부 도구(PlantUML)의 이름 규칙, 브라우저 API의 passive 기본값처럼 서로 다른 층에 흩어져 있었다.

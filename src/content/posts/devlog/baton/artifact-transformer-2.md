@@ -43,9 +43,9 @@ TC.steps를 제거하는 대신 `verification_points`라는 필드를 새로 두
 
 ```json
 {
-  "tc_id": "IAMS-OT-AUTH-001",
+  "tc_id": "DELTA-OT-AUTH-001",
   "name": "로그인 응답 검증",
-  "related_scenarios": ["IAMS-SC-AUTH-001"],
+  "related_scenarios": ["DELTA-SC-AUTH-001"],
   "verification_points": [
     { "point": "POST /auth/login 응답 코드", "expected": 200 },
     { "point": "응답 본문의 access_token 디코딩", "expected": "sub=사용자 ID, exp>now" }
@@ -56,22 +56,22 @@ TC.steps를 제거하는 대신 `verification_points`라는 필드를 새로 두
 
 ## 결정 2 — 매핑 단위는 시나리오 레벨 (1:N)
 
-처음에는 `IAMS-SC-AUTH-001-01` 같은 step_id 단위로 매핑했다. 정밀해 보였지만 의미가 어색한 케이스가 곧 드러났다. "관리자 계정 초기 생성"(`IAMS-OT-INIT-001`)이라는 TC가 "로그인" step(`IAMS-SC-AUTH-001-02`)에 매핑되는 식이었다. 실제로 이 TC는 *계정 생성 + 로그인 + 토큰 확인*을 포괄하는 운영 흐름이지, 로그인이라는 한 step만 검증하는 게 아니다.
+처음에는 `DELTA-SC-AUTH-001-01` 같은 step_id 단위로 매핑했다. 정밀해 보였지만 의미가 어색한 케이스가 곧 드러났다. "관리자 계정 초기 생성"(`DELTA-OT-INIT-001`)이라는 TC가 "로그인" step(`DELTA-SC-AUTH-001-02`)에 매핑되는 식이었다. 실제로 이 TC는 *계정 생성 + 로그인 + 토큰 확인*을 포괄하는 운영 흐름이지, 로그인이라는 한 step만 검증하는 게 아니다.
 
 시나리오 레벨로 올리니 관계가 자연스러워졌다.
 
-> `IAMS-OT-INIT-001`은 `IAMS-SC-AUTH-001`(인증 및 세션 관리 시나리오)을 *초기 구축 관점*에서 검증한다.
+> `DELTA-OT-INIT-001`은 `DELTA-SC-AUTH-001`(인증 및 세션 관리 시나리오)을 *초기 구축 관점*에서 검증한다.
 > 
 
-복수 시나리오에 걸치는 TC는 `related_scenarios: ["IAMS-SC-AUTH-001", "IAMS-SC-USR-001"]`처럼 배열로 다중 참조하면 된다. "운영/인수 시험은 시나리오 전체 흐름을 운용 관점에서 검증하는 것"이라는 도메인의 성격이 결정의 근거였다.
+복수 시나리오에 걸치는 TC는 `related_scenarios: ["DELTA-SC-AUTH-001", "DELTA-SC-USR-001"]`처럼 배열로 다중 참조하면 된다. "운영/인수 시험은 시나리오 전체 흐름을 운용 관점에서 검증하는 것"이라는 도메인의 성격이 결정의 근거였다.
 
 공통 헬퍼 `load_scenarios_map`은 두 종류 키를 모두 등록하도록 짰다. 시나리오 ID로도, step_id로도 룩업이 되어야 다른 생성기들이 깨지지 않는다.
 
 ```python
 def load_scenarios_map(json_path: Path) -> dict:
     """scenario.json을 같은 디렉토리에서 로드해 두 키로 인덱싱.
-    - scenario_id (예: IAMS-SC-AUTH-001) → scenario dict
-    - step_id    (예: IAMS-SC-AUTH-001-01) → step + 시나리오 컨텍스트
+    - scenario_id (예: DELTA-SC-AUTH-001) → scenario dict
+    - step_id    (예: DELTA-SC-AUTH-001-01) → step + 시나리오 컨텍스트
     """
     sc_path = json_path.parent / "scenario.json"
     if not sc_path.exists():

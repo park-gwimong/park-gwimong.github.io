@@ -137,10 +137,10 @@ AI 제안·편집의 컨텍스트 스코프도 같은 표를 따른다.
 
 ## 덤 — 도구가 자기 데이터에서 잡아낸 것
 
-낮에 FDSP `sequence.json`으로 작업 제안을 한 번 돌렸다. 나온 두 건이 둘 다 실제 불일치였다.
+낮에 INDIA `sequence.json`으로 작업 제안을 한 번 돌렸다. 나온 두 건이 둘 다 실제 불일치였다.
 
-- 리비전 이력 1.2.0에 "기간 통계(MON-002) 신설"이라 적혀 있는데 `sequences` 배열에 `FDSP-SEQ-MON-002`가 없다.
-- `FDSP-SEQ-MON-001`이 order 3에서 `cached=true`로 반환한 뒤 order 4~7의 개별 점검이 그대로 이어진다. 5초 캐시의 hit/miss 두 경로가 분기 표기 없이 평면으로 섞여 있다.
+- 리비전 이력 1.2.0에 "기간 통계(MON-002) 신설"이라 적혀 있는데 `sequences` 배열에 `INDIA-SEQ-MON-002`가 없다.
+- `INDIA-SEQ-MON-001`이 order 3에서 `cached=true`로 반환한 뒤 order 4~7의 개별 점검이 그대로 이어진다. 5초 캐시의 hit/miss 두 경로가 분기 표기 없이 평면으로 섞여 있다.
 
 리비전에 적힌 것과 실제 배열이 어긋나는 건 사람이 훑어서는 잘 안 걸린다. 제안 근거를 "문서에서 실제로 확인한 항목 id"로 강제해 둔 게 여기서 값을 했다.
 
@@ -149,8 +149,8 @@ AI 제안·편집의 컨텍스트 스코프도 같은 표를 따른다.
 저녁에 블로그 자동화가 안 돈다는 걸 알아챘다. Windows 작업 스케줄러의 `Claude Daily Blog Draft`가 `~/.claude/daily-blog/run.ps1`을 실행하는 구조인데, 그 안에 저장소 경로가 하드코딩돼 있었다.
 
 ```
-[2026-08-18T09:17:22] starting daily-blog run (cwd=C:\Users\parkg\Git\park-gwimong\park-gwimong.github.io)
-[2026-08-18T09:17:22] ERROR: blog repo not found at C:\Users\parkg\Git\park-gwimong\park-gwimong.github.io
+[2026-08-18T09:17:22] starting daily-blog run (cwd=C:\Users\<user>\Git\park-gwimong.github.io)
+[2026-08-18T09:17:22] ERROR: blog repo not found at C:\Users\<user>\Git\park-gwimong.github.io
 ```
 
 저장소를 `Documents\Git` 아래로 옮긴 시점부터 매일 아침 이 두 줄만 찍고 끝나고 있었다. `run.ps1`의 `$blogRepo`와 `~/.claude/settings.json`의 `additionalDirectories` 양쪽을 새 경로로 고쳤다.

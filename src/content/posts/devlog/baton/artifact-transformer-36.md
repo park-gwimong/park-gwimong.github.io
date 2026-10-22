@@ -12,12 +12,12 @@ draft: false
 
 ## 배경 — 구성 요소 축은 사실상 끊겨 있었다
 
-발단은 단순한 검토 요청이었다. FDSP의 ETL 파이프라인(`fdsp-pipe`)에서 컴포넌트와 코드를 어떻게 맵핑하면 좋을지 보자는 것.
+발단은 단순한 검토 요청이었다. INDIA의 ETL 파이프라인(`india-pipe`)에서 컴포넌트와 코드를 어떻게 맵핑하면 좋을지 보자는 것.
 
 설계는 3계층(REST API / ETL Pipeline / Domain Core) 31개 컴포넌트로 정의돼 있었다. 그런데 `build/code-repos.json`은 한 줄뿐이었다.
 
 ```json
-[{ "container": "celery", "path": "…/fdsp-pipe" }]
+[{ "container": "celery", "path": "…/india-pipe" }]
 ```
 
 이 한 줄이 두 가지를 동시에 망가뜨리고 있었다.
@@ -26,7 +26,7 @@ draft: false
 
 **둘째, 31개 컴포넌트 전부 코드 히트가 0이었다.** 스캔 히트의 `container`는 *저장소 설정*에서 찍힌다. 즉 모든 히트가 `container="celery"`인데, 컴포넌트 노드의 `members`는 `[자기 id]`뿐이다. `"celery" ∉ ["ulogParser"]` — 영영 만나지 않는다.
 
-그리고 등록 자체가 사실과 달랐다. `docker-compose.local.yml`을 보면 이 저장소는 이미지 하나로 컨테이너 셋을 띄운다. `api`(uvicorn), `worker`(celery), `migrate`(alembic). "fdsp-pipe = ETL Pipeline"이 아니라 **fdsp-pipe = api + celery + dbMigrator + 공유 Domain Core**였다.
+그리고 등록 자체가 사실과 달랐다. `docker-compose.local.yml`을 보면 이 저장소는 이미지 하나로 컨테이너 셋을 띄운다. `api`(uvicorn), `worker`(celery), `migrate`(alembic). "india-pipe = ETL Pipeline"이 아니라 **india-pipe = api + celery + dbMigrator + 공유 Domain Core**였다.
 
 ## 문제
 
@@ -69,14 +69,14 @@ C4에서 컴포넌트는 파일이 아니라 "**잘 정의된 인터페이스 �
 
 두 방식이 후보였고, 마커를 골랐다. 이유는 하나다. **마커는 경계 오류를 스스로 드러낸다.**
 
-`FDSP-CMP-sensorParquetWriter`를 `worker/tasks/parse_log.py`에 붙이려는 순간, 거기엔 이미 `FDSP-CMP-parseLogTask`가 있다. "두 컴포넌트가 같은 파일을 주장한다"가 눈에 보인다. 경로 글롭으로는 이게 조용히 겹쳐 지나간다.
+`INDIA-CMP-sensorParquetWriter`를 `worker/tasks/parse_log.py`에 붙이려는 순간, 거기엔 이미 `INDIA-CMP-parseLogTask`가 있다. "두 컴포넌트가 같은 파일을 주장한다"가 눈에 보인다. 경로 글롭으로는 이게 조용히 겹쳐 지나간다.
 
 즉 마커를 다는 작업은 매핑을 채우는 일인 동시에 **전수 검증**이다. 24개를 붙이면서 "이 마커를 어디 붙여야 하지?"가 막히는 지점이 곧 설계 결함 후보다.
 
 형태는 `{SYSTEM_CODE}-CMP-{컴포넌트 id}`로 정했다.
 
 ```python
-# FDSP-CMP-sessionScope — SessionScope (Cross-cutting): DB 세션 수명·트랜잭션 경계 관리
+# INDIA-CMP-sessionScope — SessionScope (Cross-cutting): DB 세션 수명·트랜잭션 경계 관리
 from contextlib import contextmanager
 ```
 
@@ -153,7 +153,7 @@ owners = sorted({cid for tok, cid in markers.items() if tok in text})
 
 > 다이어그램을 고치거나 코드를 옮기거나 — 마커를 지우는 것은 답이 아니다.
 
-지금 FDSP는 충돌 0건이라 안 보이지만, 경계가 어긋나는 순간 뜬다.
+지금 INDIA는 충돌 0건이라 안 보이지만, 경계가 어긋나는 순간 뜬다.
 
 ## 의도치 않은 함정 — 커밋에 내 작업이 아닌 것이 섞였다
 

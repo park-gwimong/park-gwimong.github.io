@@ -86,11 +86,11 @@ draft: false
 축이 다른 두 사실을 한 자리에 섞은 것이 뿌리였다. 파일 소유는 파일 머리에, 기능 구현은 구현 자리에 나눴다.
 
 ```python
-# [baton] SDSP-CMP-notamParser          ← 파일 머리 1줄: 이 파일의 구성 요소
+# [baton] KILO-CMP-notamParser          ← 파일 머리 1줄: 이 파일의 구성 요소
 """NOTAM 원문 파서."""
 
 def parse_coordinates(raw: str) -> Point:
-    # [baton] SDSP-FUN-GEO-001 NOTAM 좌표 파싱   ← 구현 자리: 기능 ID + 이름
+    # [baton] KILO-FUN-GEO-001 NOTAM 좌표 파싱   ← 구현 자리: 기능 ID + 이름
 ```
 
 `[baton]` 접두를 고정한 이유는 셋이다. `grep -rn "\[baton\]"`으로 전량 회수가 되고, 산문·문서·문자열 리터럴 속 ID 언급과 구별되고, 언어 주석 문법과 독립이다.
