@@ -1,72 +1,98 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import { type Post, formatDate, slugifyTag, categoryUrl, getPostUrl } from '../lib/posts';
 
 interface Props {
-  frontmatter: CollectionEntry<'posts'>['data'];
-  slug?: string;
+  frontmatter: Post['data'];
+  headings: MarkdownHeading[];
+  readingTime: number;
+  prev?: Post;
+  next?: Post;
 }
 
-const { frontmatter, slug } = Astro.props;
-const { title, subtitle, pubDate, category, tags, math } = frontmatter;
+const { frontmatter, headings, readingTime, prev, next } = Astro.props;
+const { title, subtitle, pubDate, updatedDate, category, tags, math } = frontmatter;
 
-function formatDate(date: Date): string {
-  return date.toISOString().split('T')[0];
-}
-
-function slugifyTag(tag: string): string {
-  return tag.toLowerCase()
-    .replace(/\//g, '-')
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9가-힣-]/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-}
+const toc = headings
+  .filter(h => h.depth === 2 || h.depth === 3)
+  .map(h => ({ ...h, text: h.text.replace(/^[\d.]+\s+/, '') }));
 ---
 
-<BaseLayout title={title} description={subtitle || title}>
-  <div class="page clearfix" data-post>
-    <div class="left">
-      <h1>{title}</h1>
-      {subtitle && <p>{subtitle}</p>}
-      <div class="label">
-        <div class="label-card">
-          <i class="fa fa-calendar"></i>{formatDate(pubDate)}
-        </div>
-        <div class="label-card">
-          <i class="fa fa-folder"></i>
-          <a href={`/category/${category.toLowerCase()}/`}>{category}</a>
-        </div>
-        {tags.length > 0 && (
-          <div class="label-card">
-            <i class="fa fa-tags"></i>
-            {tags.map((tag, i) => (
-              <>
-                <a href={`/tag/${slugifyTag(tag)}/`}>{tag}</a>
-                {i < tags.length - 1 && ', '}
-              </>
-            ))}
-          </div>
-        )}
-      </div>
-      <hr>
+<BaseLayout title={title} description={subtitle || title} showProgress>
+  <div class="container">
+    <div class="post-wrap">
       <article itemscope itemtype="http://schema.org/BlogPosting">
-        <slot />
-      </article>
-      <hr>
+        <header class="post-header">
+          <a class="category-chip" href={categoryUrl(category)}>{category}</a>
+          <h1 itemprop="headline">{title}</h1>
+          {subtitle && <p class="subtitle">{subtitle}</p>}
+          <div class="meta">
+            <time datetime={pubDate.toISOString()} itemprop="datePublished">{formatDate(pubDate)}</time>
+            {updatedDate && (
+              <span class="dot">수정 <time datetime={updatedDate.toISOString()} itemprop="dateModified">{formatDate(updatedDate)}</time></span>
+            )}
+            <span class="dot">{readingTime}분 분량</span>
+          </div>
+          {tags.length > 0 && (
+            <ul class="tag-list">
+              {tags.map(tag => <li><a class="tag" href={`/tag/${slugifyTag(tag)}/`}>#{tag}</a></li>)}
+            </ul>
+          )}
+        </header>
 
-      <h2 id="comments">Comments</h2>
-      <div id="disqus_thread"></div>
-    </div>
-    <div class="right">
-      <div class="wrap">
-        <div class="side content">
-          <div>Content</div>
-          <ul id="content-side" class="content-ul">
-            <li><a href="#comments">Comments</a></li>
-          </ul>
+        {toc.length > 1 && (
+          <details class="toc-inline">
+            <summary>목차</summary>
+            <nav class="toc" aria-label="목차">
+              <ul>
+                {toc.map(h => <li class={`depth-${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>)}
+              </ul>
+            </nav>
+          </details>
+        )}
+
+        <div class="prose" itemprop="articleBody">
+          <slot />
         </div>
-      </div>
+
+        <footer class="post-footer">
+          {(prev || next) && (
+            <nav class="post-nav" aria-label="이전·다음 글">
+              {prev && (
+                <a class="prev" href={getPostUrl(prev)}>
+                  <span class="label">← 이전 글</span>
+                  <span class="t">{prev.data.title}</span>
+                </a>
+              )}
+              {next && (
+                <a class="next" href={getPostUrl(next)}>
+                  <span class="label">다음 글 →</span>
+                  <span class="t">{next.data.title}</span>
+                </a>
+              )}
+            </nav>
+          )}
+
+          <section class="comments">
+            <h2 id="comments">Comments</h2>
+            <div id="disqus_thread"></div>
+          </section>
+        </footer>
+      </article>
+
+      <aside class="toc-aside">
+        {toc.length > 1 && (
+          <>
+            <p class="toc-title">On this page</p>
+            <nav class="toc" id="tocSide" aria-label="목차">
+              <ul>
+                {toc.map(h => <li class={`depth-${h.depth}`}><a href={`#${h.slug}`} data-target={h.slug}>{h.text}</a></li>)}
+              </ul>
+            </nav>
+          </>
+        )}
+      </aside>
     </div>
   </div>
 
@@ -81,65 +107,119 @@ function slugifyTag(tag: string): string {
   )}
 
   <script is:inline>
-    // Generate Table of Contents from article headings
-    (function() {
-      const article = document.querySelector('article');
-      const tocList = document.getElementById('content-side');
-      const headings = article.querySelectorAll('h2, h3');
+    (function () {
+      var prose = document.querySelector('.prose');
+      if (!prose) return;
 
-      if (headings.length > 0 && tocList) {
-        tocList.innerHTML = '';
+      // 제목 옆 앵커 링크
+      prose.querySelectorAll('h2[id], h3[id], h4[id]').forEach(function (h) {
+        var a = document.createElement('a');
+        a.className = 'heading-anchor';
+        a.href = '#' + h.id;
+        a.setAttribute('aria-label', '이 섹션 링크');
+        a.textContent = '#';
+        h.prepend(a);
+      });
 
-        headings.forEach((heading, index) => {
-          // Use existing ID or generate one
-          const headingId = heading.id || 'heading-' + index;
-          if (!heading.id) {
-            heading.id = headingId;
-          }
+      // 표: 가로 스크롤 래퍼
+      prose.querySelectorAll('table').forEach(function (t) {
+        var wrap = document.createElement('div');
+        wrap.className = 'table-wrap';
+        t.parentNode.insertBefore(wrap, t);
+        wrap.appendChild(t);
+      });
 
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = '#' + headingId;
-
-          // Clean up heading text (remove leading numbers like "1." or "5.1")
-          let text = heading.textContent.trim();
-          text = text.replace(/^[\d.]+\s*/, '');
-          a.textContent = text;
-
-          // Indent h3
-          if (heading.tagName === 'H3') {
-            li.style.paddingLeft = '1em';
-          }
-
-          li.appendChild(a);
-          tocList.appendChild(li);
+      // 코드 블록: 언어 표시 + 복사 버튼
+      var copyIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>';
+      prose.querySelectorAll('pre').forEach(function (pre) {
+        var lang = pre.getAttribute('data-language') || '';
+        if (lang === 'plaintext') lang = 'text';
+        var block = document.createElement('div');
+        block.className = 'code-block';
+        var head = document.createElement('div');
+        head.className = 'code-head';
+        var label = document.createElement('span');
+        label.textContent = lang;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'copy-btn';
+        btn.innerHTML = copyIcon + '<span>복사</span>';
+        btn.addEventListener('click', function () {
+          var text = pre.querySelector('code') ? pre.querySelector('code').innerText : pre.innerText;
+          navigator.clipboard.writeText(text.replace(/\n$/, '')).then(function () {
+            btn.classList.add('copied');
+            btn.lastChild.textContent = '복사됨';
+            setTimeout(function () {
+              btn.classList.remove('copied');
+              btn.lastChild.textContent = '복사';
+            }, 1500);
+          });
         });
+        head.appendChild(label);
+        head.appendChild(btn);
+        pre.parentNode.insertBefore(block, pre);
+        block.appendChild(head);
+        block.appendChild(pre);
+      });
 
-        // Add Comments link at the end
-        const commentsLi = document.createElement('li');
-        const commentsA = document.createElement('a');
-        commentsA.href = '#comments';
-        commentsA.textContent = 'Comments';
-        commentsLi.appendChild(commentsA);
-        tocList.appendChild(commentsLi);
+      // 외부 링크만 새 탭으로
+      prose.querySelectorAll('a[href^="http"]').forEach(function (a) {
+        if (a.hostname !== location.hostname) {
+          a.target = '_blank';
+          a.rel = 'noopener';
+        }
+      });
+
+      // 목차: 현재 읽는 섹션 강조
+      var links = document.querySelectorAll('#tocSide a[data-target]');
+      if (links.length) {
+        var targets = Array.prototype.map.call(links, function (a) {
+          return document.getElementById(a.getAttribute('data-target'));
+        }).filter(Boolean);
+        var current = null;
+        function update() {
+          var offset = 120;
+          var active = targets[0];
+          for (var i = 0; i < targets.length; i++) {
+            if (targets[i].getBoundingClientRect().top - offset <= 0) active = targets[i];
+            else break;
+          }
+          if (active === current) return;
+          current = active;
+          links.forEach(function (a) {
+            a.classList.toggle('active', a.getAttribute('data-target') === active.id);
+          });
+        }
+        var pending = false;
+        window.addEventListener('scroll', function () {
+          if (!pending) { pending = true; requestAnimationFrame(function () { pending = false; update(); }); }
+        }, { passive: true });
+        update();
+      }
+
+      // 모바일 목차: 항목을 누르면 닫는다
+      var inline = document.querySelector('.toc-inline');
+      if (inline) {
+        inline.addEventListener('click', function (e) {
+          if (e.target.tagName === 'A') inline.open = false;
+        });
       }
     })();
-
-    // External links open in new tab
-    document.querySelectorAll('article a:not([id])').forEach(link => {
-      link.setAttribute('target', '_blank');
-    });
 
     // Disqus
     var disqus_config = function () {
       this.page.url = window.location.href;
       this.page.identifier = window.location.pathname;
     };
-    (function() {
+    (function () {
       var d = document, s = d.createElement('script');
       s.src = 'https://park-gwimong-github-io.disqus.com/embed.js';
       s.setAttribute('data-timestamp', +new Date());
       (d.head || d.body).appendChild(s);
     })();
+    // 테마가 바뀌면 Disqus가 새 배경색을 다시 읽도록 리셋한다
+    document.addEventListener('themechange', function () {
+      if (window.DISQUS) window.DISQUS.reset({ reload: true, config: disqus_config });
+    });
   </script>
 </BaseLayout>

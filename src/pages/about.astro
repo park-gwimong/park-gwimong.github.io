@@ -117,10 +117,10 @@ const stack = [
 ---
 
 <BaseLayout title="About">
-  <div class="page clearfix">
-    <div class="left">
+  <div class="container">
+    <header class="page-head">
       <h1>About</h1>
-      <hr>
+    </header>
 
       <div class="about">
         <section class="intro">
@@ -220,14 +220,14 @@ const stack = [
           </p>
         </section>
       </div>
-    </div>
   </div>
 </BaseLayout>
 
 <style>
   .about {
-    max-width: 760px;
-    color: #333;
+    max-width: var(--prose);
+    line-height: 1.75;
+    color: var(--text);
   }
 
   .about section {
@@ -237,24 +237,24 @@ const stack = [
   .about h3 {
     font-size: 19px;
     font-weight: 600;
-    color: #223253;
+    color: var(--text);
     margin: 0 0 16px 0;
     padding-bottom: 8px;
-    border-bottom: 1px solid #e3e5ec;
+    border-bottom: 1px solid var(--border);
   }
 
   .about a {
-    color: #223253;
+    color: var(--text);
   }
 
   .about a:hover {
-    color: #4d6dad;
+    color: var(--accent);
   }
 
   .about code {
     font-size: 0.9em;
     padding: 1px 5px;
-    background: #eceef4;
+    background: var(--inline-code-bg);
     border-radius: 3px;
   }
 
@@ -264,12 +264,12 @@ const stack = [
     font-weight: 600;
     margin: 8px 0 10px 0;
     border: none;
-    color: #223253;
+    color: var(--text);
   }
 
   .intro p {
     margin: 0;
-    color: #555;
+    color: var(--text-muted);
     line-height: 1.75;
   }
 
@@ -283,12 +283,12 @@ const stack = [
     font-size: 16px;
     font-weight: 600;
     margin: 0 0 4px 0;
-    color: #333;
+    color: var(--text);
   }
 
   .interest p {
     margin: 0 0 8px 0;
-    color: #555;
+    color: var(--text-muted);
     line-height: 1.7;
   }
 
@@ -300,11 +300,11 @@ const stack = [
   }
 
   .post-links a {
-    border-bottom: 1px solid #c9cfdf;
+    border-bottom: 1px solid var(--border-strong);
   }
 
   .post-links a:hover {
-    border-bottom-color: #4d6dad;
+    border-bottom-color: var(--accent);
   }
 
   /* Projects */
@@ -319,39 +319,39 @@ const stack = [
     flex-direction: column;
     gap: 6px;
     padding: 14px 16px;
-    background: #fff;
-    border: 1px solid #e3e5ec;
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 6px;
     transition: border-color 0.2s ease;
   }
 
   .project:hover {
-    border-color: #4d6dad;
+    border-color: var(--accent);
   }
 
   .project-name {
-    font-family: Menlo, Consolas, 'Liberation Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 14px;
     font-weight: 600;
-    color: #223253;
+    color: var(--text);
   }
 
   .project-body {
     font-size: 14px;
     line-height: 1.6;
-    color: #555;
+    color: var(--text-muted);
   }
 
   .project-meta {
     margin-top: auto;
     font-size: 12px;
-    color: #888;
+    color: var(--text-subtle);
   }
 
   /* Record */
   .record-summary {
     margin: 0 0 14px 0;
-    color: #555;
+    color: var(--text-muted);
   }
 
   .yearly {
@@ -374,21 +374,21 @@ const stack = [
   .year-count {
     font-size: 11px;
     line-height: 1.4;
-    color: #888;
+    color: var(--text-subtle);
   }
 
   .year-bar {
     width: 100%;
     max-width: 28px;
-    background: #4d6dad;
+    background: var(--accent);
     border-radius: 2px 2px 0 0;
   }
 
   .year-label {
     font-size: 11px;
     line-height: 1.6;
-    color: #888;
-    border-top: 1px solid #d5d9e3;
+    color: var(--text-subtle);
+    border-top: 1px solid var(--border);
     width: 100%;
     text-align: center;
   }
@@ -399,17 +399,17 @@ const stack = [
     margin: 0;
   }
 
-  .page .left .recent li {
+  .about .recent li {
     display: flex;
     gap: 14px;
     line-height: 1.9;
-    color: #333;
+    color: var(--text);
   }
 
-  .page .left .recent li time {
+  .about .recent li time {
     flex-shrink: 0;
     width: auto;
-    color: #888;
+    color: var(--text-subtle);
     font-size: 14px;
     font-variant-numeric: tabular-nums;
   }
@@ -428,7 +428,7 @@ const stack = [
   }
 
   .stack dt {
-    color: #888;
+    color: var(--text-subtle);
     font-size: 14px;
     line-height: 1.7;
   }
@@ -444,8 +444,8 @@ const stack = [
     margin: 0;
   }
 
-  .page .left .colophon li {
-    color: #444;
+  .about .colophon li {
+    color: var(--text-body);
     line-height: 1.8;
   }
 
@@ -455,7 +455,7 @@ const stack = [
 
   .contact span {
     margin: 0 8px;
-    color: #aaa;
+    color: var(--text-subtle);
   }
 
   @media screen and (max-width: 770px) {
@@ -472,7 +472,7 @@ const stack = [
       margin-bottom: 10px;
     }
 
-    .page .left .recent li {
+    .about .recent li {
       flex-direction: column;
       gap: 0;
       margin-bottom: 8px;

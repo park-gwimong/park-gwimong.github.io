@@ -1,72 +1,51 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getPublishedPosts, getPostUrl, formatDate, categoryUrl, type Post } from '../lib/posts';
 
-const allPosts = await getCollection('posts');
-const sortedPosts = allPosts
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = await getPublishedPosts();
 
-// Group posts by year
-const postsByYear = sortedPosts.reduce((acc, post) => {
-  const year = new Date(post.data.pubDate).getFullYear();
-  if (!acc[year]) acc[year] = [];
-  acc[year].push(post);
-  return acc;
-}, {} as Record<number, typeof sortedPosts>);
-
-const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
-
-function formatDate(date: Date): string {
-  return date.toISOString().split('T')[0];
+const postsByYear = new Map<number, Post[]>();
+for (const post of posts) {
+  const year = post.data.pubDate.getFullYear();
+  if (!postsByYear.has(year)) postsByYear.set(year, []);
+  postsByYear.get(year)!.push(post);
 }
-
-function getPostUrl(post: typeof sortedPosts[0]): string {
-  const date = new Date(post.data.pubDate);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const slugParts = post.slug.split('/');
-  const fileSlug = slugParts[slugParts.length - 1];
-  return `/${year}/${month}/${day}/${fileSlug}/`;
-}
+const years = [...postsByYear.keys()].sort((a, b) => b - a);
 ---
 
 <BaseLayout title="Archives">
-  <div class="page clearfix">
-    <div class="left">
+  <div class="container">
+    <header class="page-head">
       <h1>Archives</h1>
-      <hr>
-      <ul>
+      <p>{years[years.length - 1]}년부터 쓴 글 {posts.length}편</p>
+    </header>
+    <div class="with-sidebar">
+      <div>
         {years.map(year => (
-          <>
-            <h2 id={String(year)}>{year}</h2>
-            {postsByYear[year].map(post => (
-              <li>
-                <time>{formatDate(post.data.pubDate)}</time>
-                <a class="title" href={getPostUrl(post)}>{post.data.title}</a>
-                <span class="categories">
-                  <i class="fa fa-folder"></i>
-                  <a href={`/category/${post.data.category.toLowerCase()}/`}>{post.data.category}</a>
-                </span>
-              </li>
-            ))}
-          </>
+          <section class="group">
+            <h2 class="group-title" id={String(year)}>{year} <span class="count">{postsByYear.get(year)!.length}</span></h2>
+            <ul class="compact-list">
+              {postsByYear.get(year)!.map(post => (
+                <li>
+                  <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+                  <a class="title" href={getPostUrl(post)}>{post.data.title}</a>
+                  <a class="aside category-chip" href={categoryUrl(post.data.category)}>{post.data.category}</a>
+                </li>
+              ))}
+            </ul>
+          </section>
         ))}
-      </ul>
-    </div>
-    <div class="right">
-      <div class="wrap">
-        <div class="side">
-          <div><i class="fa fa-archive"></i> Summary</div>
-          <ul class="content-ul">
-            <li>Total Posts: {sortedPosts.length}</li>
+      </div>
+      <aside class="sidebar">
+        <section class="side-section">
+          <h2>Years</h2>
+          <ul class="side-list">
             {years.map(year => (
-              <li><a href={`#${year}`}>{year} ({postsByYear[year].length})</a></li>
+              <li><a href={`#${year}`}><span>{year}</span><span class="count">{postsByYear.get(year)!.length}</span></a></li>
             ))}
           </ul>
-        </div>
-      </div>
+        </section>
+      </aside>
     </div>
   </div>
 </BaseLayout>

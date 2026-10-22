@@ -1,72 +1,53 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getPublishedPosts, getPostUrl, formatDate, categoryUrl, type Post } from '../../lib/posts';
 
-const allPosts = await getCollection('posts');
-const sortedPosts = allPosts
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = await getPublishedPosts();
 
-// Group posts by category
-const postsByCategory = sortedPosts.reduce((acc, post) => {
+const postsByCategory = new Map<string, Post[]>();
+for (const post of posts) {
   const cat = post.data.category;
-  if (!acc[cat]) acc[cat] = [];
-  acc[cat].push(post);
-  return acc;
-}, {} as Record<string, typeof sortedPosts>);
-
-const categories = Object.keys(postsByCategory).sort();
-
-function formatDate(date: Date): string {
-  return date.toISOString().split('T')[0];
+  if (!postsByCategory.has(cat)) postsByCategory.set(cat, []);
+  postsByCategory.get(cat)!.push(post);
 }
-
-function getPostUrl(post: typeof sortedPosts[0]): string {
-  const date = new Date(post.data.pubDate);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const slugParts = post.slug.split('/');
-  const fileSlug = slugParts[slugParts.length - 1];
-  return `/${year}/${month}/${day}/${fileSlug}/`;
-}
+const categories = [...postsByCategory.keys()].sort();
 ---
 
 <BaseLayout title="Categories">
-  <div class="page clearfix">
-    <div class="left">
+  <div class="container">
+    <header class="page-head">
       <h1>Categories</h1>
-      <hr>
-      <ul>
-        {categories.map(category => (
-          <>
-            <h2 id={category}>{category} ({postsByCategory[category].length})</h2>
-            {postsByCategory[category].map(post => (
-              <li>
-                <time>{formatDate(post.data.pubDate)}</time>
-                <a class="title" href={getPostUrl(post)}>{post.data.title}</a>
-              </li>
-            ))}
-          </>
+      <p>{categories.length}개 분류, {posts.length}편</p>
+    </header>
+    <div class="with-sidebar">
+      <div>
+        {categories.map(cat => (
+          <section class="group">
+            <h2 class="group-title" id={cat}>
+              <a href={categoryUrl(cat)} style="color: inherit">{cat}</a>
+              <span class="count">{postsByCategory.get(cat)!.length}</span>
+            </h2>
+            <ul class="compact-list">
+              {postsByCategory.get(cat)!.map(post => (
+                <li>
+                  <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+                  <a class="title" href={getPostUrl(post)}>{post.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </section>
         ))}
-      </ul>
-    </div>
-    <div class="right">
-      <div class="wrap">
-        <div class="side">
-          <div><i class="fa fa-th-list"></i> Categories</div>
-          <ul class="content-ul" data-cate>
+      </div>
+      <aside class="sidebar">
+        <section class="side-section">
+          <h2>Categories</h2>
+          <ul class="side-list">
             {categories.map(cat => (
-              <li>
-                <a href={`#${cat}`} class="categories-list-item">
-                  <span class="name">{cat}</span>
-                  <span class="badge">{postsByCategory[cat].length}</span>
-                </a>
-              </li>
+              <li><a href={`#${cat}`}><span>{cat}</span><span class="count">{postsByCategory.get(cat)!.length}</span></a></li>
             ))}
           </ul>
-        </div>
-      </div>
+        </section>
+      </aside>
     </div>
   </div>
 </BaseLayout>

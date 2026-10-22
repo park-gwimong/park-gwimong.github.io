@@ -1,0 +1,25 @@
+---
+import { type Post, getPostUrl, formatDate, slugifyTag, categoryUrl } from '../lib/posts';
+
+interface Props {
+  posts: Post[];
+}
+
+const { posts } = Astro.props;
+---
+
+<ul class="post-list">
+  {posts.map(post => (
+    <li class="post-item">
+      <h2><a href={getPostUrl(post)}>{post.data.title}</a></h2>
+      {post.data.subtitle && <p class="subtitle">{post.data.subtitle}</p>}
+      <div class="meta">
+        <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+        <a class="category-chip" href={categoryUrl(post.data.category)}>{post.data.category}</a>
+        {post.data.tags.slice(0, 4).map(tag => (
+          <a class="tag" href={`/tag/${slugifyTag(tag)}/`}>#{tag}</a>
+        ))}
+      </div>
+    </li>
+  ))}
+</ul>

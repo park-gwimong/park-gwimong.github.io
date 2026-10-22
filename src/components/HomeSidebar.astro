@@ -1,0 +1,41 @@
+---
+import { type Post, categoryUrl, slugifyTag } from '../lib/posts';
+
+interface Props {
+  posts: Post[];
+}
+
+const { posts } = Astro.props;
+
+const categoryCounts = new Map<string, number>();
+const tagCounts = new Map<string, { name: string; count: number }>();
+for (const post of posts) {
+  categoryCounts.set(post.data.category, (categoryCounts.get(post.data.category) ?? 0) + 1);
+  for (const tag of post.data.tags) {
+    const slug = slugifyTag(tag);
+    const entry = tagCounts.get(slug) ?? { name: tag, count: 0 };
+    entry.count += 1;
+    tagCounts.set(slug, entry);
+  }
+}
+
+const categories = [...categoryCounts.entries()].sort((a, b) => b[1] - a[1]);
+const topTags = [...tagCounts.entries()].sort((a, b) => b[1].count - a[1].count).slice(0, 16);
+---
+
+<aside class="sidebar">
+  <section class="side-section">
+    <h2>Categories</h2>
+    <ul class="side-list">
+      {categories.map(([name, count]) => (
+        <li><a href={categoryUrl(name)}><span>{name}</span><span class="count">{count}</span></a></li>
+      ))}
+    </ul>
+  </section>
+  <section class="side-section">
+    <h2>Popular tags</h2>
+    <div class="tag-cloud">
+      {topTags.map(([slug, { name }]) => <a class="tag" href={`/tag/${slug}/`}>#{name}</a>)}
+    </div>
+  </section>
+</aside>

@@ -1,110 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import PostList from '../components/PostList.astro';
+import Pagination from '../components/Pagination.astro';
+import HomeSidebar from '../components/HomeSidebar.astro';
+import { getPublishedPosts } from '../lib/posts';
+import { POSTS_PER_PAGE } from '../lib/pagination';
 
-function slugifyTag(tag: string): string {
-  return tag.toLowerCase()
-    .replace(/\//g, '-')
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9가-힣-]/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-}
-
-const allPosts = await getCollection('posts');
-const sortedPosts = allPosts
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-// Recent posts for sidebar
-const recentPosts = sortedPosts.slice(0, 10);
-
-// Pagination
-const postsPerPage = 8;
-const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
-const currentPage = 1;
-const paginatedPosts = sortedPosts.slice(0, postsPerPage);
-
-function formatDate(date: Date): string {
-  return date.toISOString().split('T')[0];
-}
-
-function getPostUrl(post: typeof sortedPosts[0]): string {
-  const date = new Date(post.data.pubDate);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const slugParts = post.slug.split('/');
-  const fileSlug = slugParts[slugParts.length - 1];
-  return `/${year}/${month}/${day}/${fileSlug}/`;
-}
+const posts = await getPublishedPosts();
+const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
 ---
 
 <BaseLayout>
-  <div class="page clearfix" data-index>
-    <div class="left">
-      <h1>Welcome to gwimong's Blog!</h1>
-      <small>안녕하세요. 귀몽이의 개인 블로그입니다.</small>
-      <hr>
-      <ul>
-        {paginatedPosts.map(post => (
-          <li class="post-card">
-            <h2>
-              <a class="post-link" href={getPostUrl(post)}>{post.data.title}</a>
-            </h2>
-            {post.data.subtitle && (
-              <p class="post-subtitle">{post.data.subtitle}</p>
-            )}
-            <div class="label">
-              <div class="label-card">
-                <i class="fa fa-calendar"></i>{formatDate(post.data.pubDate)}
-              </div>
-              <div class="label-card">
-                <i class="fa fa-folder"></i>
-                <a href={`/category/${post.data.category.toLowerCase()}/`}>{post.data.category}</a>
-              </div>
-              {post.data.tags.length > 0 && (
-                <div class="label-card tags">
-                  <i class="fa fa-tags"></i>
-                  {post.data.tags.slice(0, 5).map((tag, i) => (
-                    <a href={`/tag/${slugifyTag(tag)}/`} class="tag">{tag}</a>
-                  ))}
-                </div>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      <div class="pagination">
-        <span class="previous disable"><i class="fa fa-angle-double-left"></i></span>
-        <span class="previous disable"><i class="fa fa-angle-left"></i></span>
-        <span class="page_number">{currentPage}/{totalPages}</span>
-        {totalPages > 1 ? (
-          <>
-            <a href="/page/2/" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href={`/page/${totalPages}/`} class="next"><i class="fa fa-angle-double-right"></i></a>
-          </>
-        ) : (
-          <>
-            <span class="next disable"><i class="fa fa-angle-right"></i></span>
-            <span class="next disable"><i class="fa fa-angle-double-right"></i></span>
-          </>
-        )}
+  <div class="container">
+    <header class="page-head">
+      <h1>gwimong's blog</h1>
+      <p>무인기 관제 소프트웨어를 만들며 부딪힌 문제와 판단을 기록합니다.</p>
+    </header>
+    <div class="with-sidebar">
+      <div>
+        <PostList posts={posts.slice(0, POSTS_PER_PAGE)} />
+        <Pagination current={1} total={totalPages} />
       </div>
-    </div>
-
-    <div class="right">
-      <div class="wrap">
-        <div class="side">
-          <div><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Recent Posts</div>
-          <ul class="content-ul" data-recent>
-            {recentPosts.map(post => (
-              <li><a href={getPostUrl(post)}>{post.data.title}</a></li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <HomeSidebar posts={posts} />
     </div>
   </div>
 </BaseLayout>
