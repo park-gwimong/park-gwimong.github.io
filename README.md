@@ -7,7 +7,8 @@
 ## Tech Stack
 
 - [Astro](https://astro.build/) 4.x - Static Site Generator
-- [MathJax](https://www.mathjax.org/) - 수식 렌더링
+- [MathJax](https://www.mathjax.org/) - 수식 렌더링 (frontmatter `math: true`인 글만 로드)
+- [Pagefind](https://pagefind.app/) - 정적 검색 (빌드 후 색인 생성)
 - [Disqus](https://disqus.com/) - 댓글
 - GitHub Pages - Hosting
 - GitHub Actions - CI/CD
@@ -32,8 +33,14 @@ npm install
 # 개발 서버 실행 (http://localhost:5000)
 npm run dev
 
-# 프로덕션 빌드
+# 프로덕션 빌드 (내용 검사 → 빌드 → 검색 색인 생성)
 npm run build
+
+# 글에 내부 정보가 섞였는지만 검사
+npm run check:content
+
+# Astro 타입 검사
+npm run check
 
 # 빌드 결과 미리보기
 npm run preview
@@ -57,7 +64,20 @@ public/
 ```
 
 - **Permalink 구조**: `/:year/:month/:day/:slug/`
-- **RSS 피드**: `/rss.xml`
+- **RSS 피드**: `/rss.xml`, **사이트맵**: `/sitemap-index.xml`, **검색**: `/search/` (어느 페이지에서나 `/` 키)
+- **시리즈**: 카테고리 폴더 아래 한 단계 더 폴더를 두면 시리즈로 묶인다 (예: `devlog/baton/`). 표시 이름은 `src/lib/posts.ts`의 `SERIES_TITLES`에 등록한다.
+- **초안**: `draft: true`인 글은 프로덕션 빌드의 페이지·목록·검색·사이트맵·RSS에서 모두 빠지고 개발 서버(`npm run dev`)에서만 보인다.
+- 검색은 빌드할 때 색인을 만들어서 `npm run dev`에서는 동작하지 않는다. `npm run build && npm run preview`로 확인한다.
+
+## 내용 검사 (민감 정보 방지)
+
+`npm run check:content`는 글에 실제 프로젝트명·사내 도메인·개인 경로 등이 섞였는지 검사하고, 걸리면 빌드를 막는다. CI에서도 같은 검사를 돌리며 PR에서도 실행된다.
+
+- **기본 규칙**: 개인 경로, 사설 IP, 외부 Atlassian 주소(`devlog/` 아래), 토큰 형태 문자열
+- **금지어 목록**: 저장소가 공개라서 목록 자체는 저장소에 두지 않는다.
+  - 로컬: 저장소 루트의 `.sensitive-terms` (gitignore 대상, 한 줄에 하나, `#` 주석)
+  - CI: GitHub Secrets의 `SENSITIVE_TERMS` (줄바꿈 또는 쉼표로 구분). 없으면 기본 규칙만 검사한다.
+- 공개 CI 로그에 남지 않도록 걸린 **파일·줄 번호·규칙 번호만** 출력하고 일치한 내용은 출력하지 않는다.
 
 ## Writing a Post
 
