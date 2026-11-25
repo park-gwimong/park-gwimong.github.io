@@ -5,7 +5,7 @@ pubDate: 2026-10-22T10:00:00+09:00
 category: "softwareengineering"
 tags: ["Astro", "Pagefind", "GitHub Actions", "Sitemap", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-10-22에 진행한 블로그 정비 기록이다. 오전에 읽기 환경을 갈아엎고, 점검에서 나온 결함을 고치고, 검색과 시리즈 탐색을 붙인 뒤 `main`에 배포했다.
