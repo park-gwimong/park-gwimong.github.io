@@ -66,7 +66,7 @@ public/
 - **Permalink 구조**: `/:year/:month/:day/:slug/`
 - **RSS 피드**: `/rss.xml`, **사이트맵**: `/sitemap-index.xml`, **검색**: `/search/` (어느 페이지에서나 `/` 키)
 - **시리즈**: 카테고리 폴더 아래 한 단계 더 폴더를 두면 시리즈로 묶인다 (예: `devlog/baton/`). 표시 이름은 `src/lib/posts.ts`의 `SERIES_TITLES`에 등록한다.
-- **초안**: `draft: true`인 글은 프로덕션 빌드의 페이지·목록·검색·사이트맵·RSS에서 모두 빠지고 개발 서버(`npm run dev`)에서만 보인다.
+- **초안**: `draft: false`인 글은 프로덕션 빌드의 페이지·목록·검색·사이트맵·RSS에서 모두 빠지고 개발 서버(`npm run dev`)에서만 보인다.
 - 검색은 빌드할 때 색인을 만들어서 `npm run dev`에서는 동작하지 않는다. `npm run build && npm run preview`로 확인한다.
 
 ## 내용 검사 (민감 정보 방지)
@@ -91,7 +91,7 @@ pubDate: 2024-01-15
 category: softwareengineering  # posts 하위 디렉터리명과 일치 (소문자)
 tags: [tag1, tag2, tag3]
 math: true                     # LaTeX/MathJax 포함 시에만 true
-draft: true
+draft: false
 ---
 ```
 
