@@ -1,8 +1,9 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>쿼럼 애니메이션</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
 <style>
 /* Layout: a 9:16 "short" stage on the left, the same story as plain text on the right.
    Stacks to one column on phones. The stage is a fixed dark screen in both themes;
@@ -25,8 +26,10 @@
   --s-good: #41D893;
   --s-bad: #FF6F66;
 
-  --f-body: 'Noto Sans KR', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --f-mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  /* System fonts only: no web font request from inside the embed */
+  --f-body: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+            'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+  --f-mono: 'JetBrains Mono', D2Coding, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -93,11 +96,30 @@ h1 { font-size: clamp(30px, 6vw, 44px); line-height: 1.15; font-weight: 900; mar
 }
 
 /* Embed mode (?embed): player only, no header or notes, transparent ground */
-.embed body { padding: 0 0 8px; background: transparent; }
+.embed body { margin: 0; padding: 4px; background: transparent; overflow: hidden; }
 .embed .head, .embed .notes { display: none; }
 .embed .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
 </style>
-<script>if (/[?&]embed(=|&|$)/.test(location.search)) document.documentElement.classList.add('embed');</script>
+<script>
+/* Embed mode: mark the root, and follow the host page's theme toggle (same origin). */
+(function () {
+  var root = document.documentElement;
+  if (!/[?&]embed(=|&|$)/.test(location.search)) return;
+  root.classList.add('embed');
+  try {
+    var host = window.parent.document.documentElement;
+    if (host === root) return;
+    var sync = function () {
+      var th = host.getAttribute('data-theme');
+      if (th) root.setAttribute('data-theme', th);
+    };
+    sync();
+    new MutationObserver(sync).observe(host, { attributes: true, attributeFilter: ['data-theme'] });
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
 
 <div class="page">
   <header class="head">
@@ -397,16 +419,27 @@ h1 { font-size: clamp(30px, 6vw, 44px); line-height: 1.15; font-weight: 900; mar
 
   /* ---------- playback ---------- */
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var t = reduce ? 8.6 : 1.6, playing = !reduce, last = null;
+  /* Standalone: autoplay and loop. Embedded in a post: wait until the stage is on screen,
+     play once, hold on the summary frame, and pause whenever it scrolls away. */
+  var embed = document.documentElement.classList.contains('embed');
+  var START = 1.6, END = 28.2;
+  var t = reduce ? 8.6 : START, playing = !reduce && !embed, last = null;
+  var ended = false, userPaused = false;
   var playBtn = document.getElementById('play');
   var restartBtn = document.getElementById('restart');
-  function label() { playBtn.textContent = playing ? '일시정지' : '재생'; }
-  function seek(x) { t = x; render(t); }
-  function toggle() { playing = !playing; last = null; label(); }
+  function label() { playBtn.textContent = playing ? '일시정지' : ended ? '다시 보기' : '재생'; }
+  function setPlaying(v) { playing = v; last = null; label(); }
+  function seek(x) { t = x; ended = false; render(t); label(); }
+  function restart() { t = START; ended = false; userPaused = false; render(t); setPlaying(true); }
+  function toggle() {
+    if (ended) { restart(); return; }
+    userPaused = playing;
+    setPlaying(!playing);
+  }
   if (reduce) document.getElementById('hint').hidden = false;
   label();
   playBtn.addEventListener('click', toggle);
-  restartBtn.addEventListener('click', function () { t = 1.6; playing = true; last = null; label(); render(t); });
+  restartBtn.addEventListener('click', restart);
   svg.addEventListener('click', toggle);
   svg.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); } });
 
@@ -414,10 +447,40 @@ h1 { font-size: clamp(30px, 6vw, 44px); line-height: 1.15; font-weight: 900; mar
     if (last == null) last = ts;
     var dt = Math.min((ts - last) / 1000, 0.1);
     last = ts;
-    if (playing) { t = (t + dt) % T; render(t); }
+    if (playing) {
+      t += dt;
+      if (embed && t >= END) { t = END; ended = true; setPlaying(false); }
+      else if (t >= T) t %= T;
+      render(t);
+    }
     requestAnimationFrame(frame);
   }
   render(t);
   requestAnimationFrame(frame);
+
+  if (embed) {
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        var onScreen = entries[entries.length - 1].intersectionRatio >= 0.4;
+        if (!onScreen) { if (playing) setPlaying(false); }
+        else if (!reduce && !ended && !userPaused && !playing) setPlaying(true);
+      }, { threshold: [0, 0.4] }).observe(svg);
+    } else if (!reduce) {
+      setPlaying(true);
+    }
+
+    /* Size the host iframe to the content so nothing is clipped at any width. */
+    try {
+      var host = window.frameElement;
+      if (host) {
+        var fit = function () { host.style.height = Math.ceil(document.body.getBoundingClientRect().height) + 'px'; };
+        fit();
+        if ('ResizeObserver' in window) new ResizeObserver(fit).observe(document.body);
+        else window.addEventListener('resize', fit);
+      }
+    } catch (e) {}
+  }
 })();
 </script>
+</body>
+</html>

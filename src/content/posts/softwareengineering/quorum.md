@@ -5,7 +5,7 @@ pubDate: 2026-11-10T17:50:00+09:00
 category: "softwareengineering"
 tags: ["Quorum", "분산 시스템", "Raft", "Cassandra", "Kafka"]
 math: false
-draft: false
+draft: true
 ---
 
 데이터를 여러 노드에 복제하는 순간 "어느 복제본이 맞는가"라는 문제가 생긴다. 노드 하나가 죽거나 네트워크가 둘로 갈라졌을 때, 양쪽이 각자 자신이 최신이라고 믿고 쓰기를 받아들이면 데이터는 돌이킬 수 없이 갈라진다.
@@ -30,14 +30,15 @@ draft: false
 
 N이 5이고 쿼럼이 3이면 3 + 3 = 6으로 5를 넘으므로, 서로 다른 두 쿼럼은 최소 1개 노드를 공유한다. 이 공유 노드가 이전 결정을 기억하는 증인이다. 나중에 새 쿼럼이 구성되어도 그 안에 이미 확정된 결정을 아는 노드가 최소 하나는 들어 있다.
 
-아래 애니메이션은 노드 5대로 이 과정을 30초에 보여 준다. 화면을 누르면 멈추고, 위쪽 막대를 누르면 장면을 건너뛴다.
+아래 애니메이션은 노드 5대로 이 과정을 30초에 보여 준다. 화면에 들어오면 한 번 재생되고, 누르면 멈춘다. 위쪽 막대를 누르면 장면을 건너뛴다.
 
-<div style="max-width: 360px; margin: 1.5em auto;">
+<figure style="max-width: 360px; margin: 2em auto;">
   <iframe src="/resource/2026/20261110/quorum.html?embed"
           title="쿼럼 설명 애니메이션: 쓰기 커밋, 네트워크 분할, 과반수의 겹침"
-          style="width: 100%; aspect-ratio: 360 / 700; border: 0;"
+          style="display: block; width: 100%; aspect-ratio: 360 / 700; border: 0;"
           loading="lazy"></iframe>
-</div>
+  <figcaption>쓰기 커밋, 네트워크 분할, 과반수의 겹침을 30초로 요약했다. 애니메이션이 보이지 않으면 <a href="/resource/2026/20261110/quorum.html">장면별 설명이 있는 페이지</a>에서 볼 수 있다.</figcaption>
+</figure>
 
 이 성질이 **스플릿 브레인**(split brain)을 막는다. 네트워크가 3대와 2대로 갈라지면 3대 쪽만 쿼럼을 만들 수 있고, 2대 쪽은 쓰기를 받을 수 없다. 양쪽이 동시에 쿼럼을 만드는 일은 구조적으로 불가능하다.
 
