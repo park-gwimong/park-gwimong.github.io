@@ -5,7 +5,7 @@ pubDate: 2026-11-12T10:00:00+09:00
 category: "devlog"
 tags: ["BATON", "Concurrency", "AI Request", "Frontend Architecture", "TDD", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-11-11 하루의 기록이다. 아침에는 SSO 설정 오류로 서버가 뜨지 않았고, 그 뒤로는 하루 종일 "여러 Task에서 AI 지시를 동시에 보내기"를 다섯 단계로 나눠 넣었다. 저녁에는 단계마다 미뤄 둔 작은 문제를 묶어서 정리했다.
