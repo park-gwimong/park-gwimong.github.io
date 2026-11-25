@@ -5,7 +5,7 @@ pubDate: 2026-11-10T10:00:00+09:00
 category: "devlog"
 tags: ["BATON", "Performance", "Access Control", "Concurrency", "Draft", "Working Log"]
 math: false
-draft: true
+draft: false
 ---
 
 > 이 글은 2026-11-10 하루의 기록이다. 오전에 권한 강화 커밋을 올린 뒤 "데이터가 모두 비어 있다"는 증상을 쫓았고, 그 끝에서 느린 권한 검증을 찾았다. 오후에는 그 커밋이 남긴 버그와 테스트를 정리했고, 저녁에는 여러 Task를 동시에 진행하기 위한 구조를 다섯 단계로 나눠 넣었다.
