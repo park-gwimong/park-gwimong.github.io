@@ -49,6 +49,7 @@ export function readingMinutes(body: string): number {
 // 예) devlog/baton/artifact-transformer-1 → 시리즈 "baton"
 const SERIES_TITLES: Record<string, string> = {
   baton: 'BATON 작업 일지',
+  'ux-components': 'UX 컴포넌트 사전',
 };
 
 export function getSeriesKey(post: Post): string | undefined {
