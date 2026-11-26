@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>목록을 보여 주는 것 6가지 | UX 컴포넌트 사전</title>
+<link rel="stylesheet" href="sheet.css">
+<script src="sheet.js"></script>
+<style>
+/* 이 시트의 예시들. 기본 모양이 다 보인 상태이고, 처음 상태는 .js .tile:not(.is-open) 로 적는다. */
+
+/* 01 리스트 */
+.lst { position: absolute; inset: 0; padding: 0 6cqw; display: flex; flex-direction: column; justify-content: center; }
+.lst .row { display: flex; align-items: center; gap: 3.6cqw; padding: 3.2cqw 0; border-bottom: 1px solid var(--border); }
+.lst .row:last-child { border-bottom: 0; }
+.lst .ic { flex: none; width: 9cqw; height: 9cqw; border-radius: 2.4cqw; background: var(--skeleton); }
+.lst .tx { flex: 1; min-width: 0; }
+.lst .tx b { display: block; font-size: 4.4cqw; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lst .tx .ln { height: 2.4cqw; margin: 1.6cqw 0 0; }
+.lst .go { flex: none; font-size: 5.4cqw; line-height: 1; color: var(--text-subtle); }
+.is-open .lst .row:nth-child(2) { transition-delay: 0.07s; }
+.is-open .lst .row:nth-child(3) { transition-delay: 0.14s; }
+.is-open .lst .row:nth-child(4) { transition-delay: 0.21s; }
+.js .tile:not(.is-open) .lst .row { opacity: 0; transform: translateY(2.5cqw); }
+
+/* 02 테이블 */
+.tbl { position: absolute; inset: 0; padding: 0 5cqw; display: flex; flex-direction: column; justify-content: center; }
+.tbl .in { position: relative; }
+.tbl .hl { position: absolute; top: 0; bottom: 0; right: 0; width: 29cqw; border-radius: 2cqw; background: var(--accent-soft); }
+.tbl .tr { position: relative; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr) minmax(0, 1.1fr); align-items: center; height: 11.5cqw; padding: 0 2.4cqw; border-bottom: 1px solid var(--border); font-size: 4.2cqw; white-space: nowrap; }
+.tbl .tr:last-child { border-bottom: 0; }
+.tbl .tr.th { height: 9.5cqw; font-size: 3.8cqw; font-weight: 700; color: var(--text-muted); border-bottom-color: var(--border-strong); }
+.tbl .tr span:nth-child(2) { color: var(--text-muted); }
+.tbl .tr span:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.tbl .tr.th span:last-child { color: var(--accent); }
+/* 줄이 먼저 나오고, 견주는 열이 뒤따라 칠해진다 */
+.is-open .tbl .hl { transition-delay: 0.55s; }
+.is-open .tbl .tr:nth-child(3) { transition-delay: 0.06s; }
+.is-open .tbl .tr:nth-child(4) { transition-delay: 0.12s; }
+.is-open .tbl .tr:nth-child(5) { transition-delay: 0.18s; }
+.is-open .tbl .tr:nth-child(6) { transition-delay: 0.24s; }
+.js .tile:not(.is-open) .tbl .tr:not(.th) { opacity: 0; }
+.js .tile:not(.is-open) .tbl .hl { opacity: 0; }
+
+/* 03 카드 그리드 */
+.cards { position: absolute; inset: 0; padding: 6cqw; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 3.4cqw; }
+.cards .c { display: flex; flex-direction: column; overflow: hidden; border-radius: 2.4cqw; border: 1px solid var(--border); background: var(--surface); }
+.cards .im { flex: 1; background: var(--skeleton); }
+.cards .cap { padding: 2.2cqw 2.4cqw 1cqw; }
+.cards .cap .ln { height: 2.2cqw; margin-bottom: 1.6cqw; }
+.is-open .cards .c:nth-child(2) { transition-delay: 0.06s; }
+.is-open .cards .c:nth-child(3) { transition-delay: 0.12s; }
+.is-open .cards .c:nth-child(4) { transition-delay: 0.18s; }
+.is-open .cards .c:nth-child(5) { transition-delay: 0.24s; }
+.is-open .cards .c:nth-child(6) { transition-delay: 0.3s; }
+.js .tile:not(.is-open) .cards .c { opacity: 0; transform: scale(0.88); }
+
+/* 04 칸반 */
+.kan { position: absolute; inset: 0; padding: 5cqw 4cqw; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3cqw; }
+.kan .lane { padding: 2.4cqw; border-radius: 2.6cqw; border: 1px solid var(--border); background: var(--surface); }
+.kan .lane > b { display: block; margin-bottom: 2.2cqw; font-size: 3.8cqw; font-weight: 700; color: var(--text-muted); white-space: nowrap; }
+.kan .card { height: 11cqw; margin-bottom: 2.4cqw; padding: 2.4cqw; border-radius: 1.8cqw; border: 1px solid var(--border); background: var(--bg-subtle); }
+.kan .card .ln { height: 2.2cqw; margin-bottom: 1.8cqw; }
+.kan .card.mv { position: relative; z-index: 1; border-color: var(--accent); background: var(--surface); box-shadow: var(--float-shadow); }
+/* 카드 한 장이 '할 일' 셋째 자리에서 '진행 중' 둘째 자리로 옮겨 간다 (가로: 열 너비 + 간격, 세로: 카드 한 칸) */
+.is-open .kan .card.mv { transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.2, 1) 0.35s; }
+.js .tile:not(.is-open) .kan .card.mv { transform: translate(-31.67cqw, 13.4cqw); }
+
+/* 05 타임라인 */
+.tl { position: absolute; inset: 0; padding: 6cqw 6cqw 0 9cqw; }
+.tl .rail { position: absolute; left: 11.5cqw; top: 9cqw; width: 0.8cqw; height: 46.5cqw; background: var(--border-strong); transform-origin: 50% 0; }
+.tl .ev { position: relative; display: flex; align-items: flex-start; gap: 4cqw; height: 15.5cqw; }
+.tl .pt { flex: none; width: 5.8cqw; height: 5.8cqw; border-radius: 50%; border: 1.2cqw solid var(--border-strong); background: var(--surface); }
+.tl .ev.now .pt { border-color: var(--accent); }
+.tl .ev i { display: block; font-style: normal; font-size: 3.6cqw; line-height: 1.2; color: var(--text-subtle); font-variant-numeric: tabular-nums; }
+.tl .ev b { display: block; font-size: 4.4cqw; font-weight: 600; white-space: nowrap; }
+.tl .ev.now b { color: var(--accent); }
+/* 선이 위에서 아래로 자라고, 사건이 시간 순서대로 찍힌다 */
+.is-open .tl .rail { transition: transform 0.8s ease; }
+.is-open .tl .ev:nth-child(2) { transition-delay: 0.05s; }
+.is-open .tl .ev:nth-child(3) { transition-delay: 0.28s; }
+.is-open .tl .ev:nth-child(4) { transition-delay: 0.51s; }
+.is-open .tl .ev:nth-child(5) { transition-delay: 0.74s; }
+.js .tile:not(.is-open) .tl .rail { transform: scaleY(0); }
+.js .tile:not(.is-open) .tl .ev { opacity: 0; transform: translateX(-2cqw); }
+
+/* 06 트리 */
+.tree { position: absolute; inset: 0; padding: 7.5cqw 7cqw; }
+.tree .nd { display: flex; align-items: center; gap: 2.2cqw; height: 10cqw; padding-left: calc(var(--d, 0) * 7cqw); font-size: 4.4cqw; white-space: nowrap; }
+.tree .tw { flex: none; display: grid; place-items: center; width: 4cqw; height: 4cqw; }
+.tree .tw::before { content: ''; border-left: 1.4cqw solid transparent; border-right: 1.4cqw solid transparent; border-top: 1.9cqw solid var(--text-subtle); }
+.tree .tw.shut { transform: rotate(-90deg); }
+.tree .tw.none::before { display: none; }
+.tree .fo { flex: none; width: 5.6cqw; height: 4.4cqw; border-radius: 1cqw; background: var(--border-strong); }
+.tree .fi { flex: none; width: 4.4cqw; height: 5.4cqw; margin: 0 0.6cqw; border-radius: 0.8cqw; border: 1px solid var(--border-strong); background: var(--surface); }
+.tree .nd.kid { color: var(--text-muted); }
+/* '디자인' 폴더가 펼쳐지면서 아래 형제들이 밀려 내려간다 */
+.is-open .tree .tw.tg, .is-open .tree .nd.below { transition-delay: 0.25s; }
+.is-open .tree .nd.kid { transition-delay: 0.35s; }
+.is-open .tree .nd.kid + .nd.kid { transition-delay: 0.43s; }
+.js .tile:not(.is-open) .tree .tw.tg { transform: rotate(-90deg); }
+.js .tile:not(.is-open) .tree .nd.kid { opacity: 0; transform: translateY(-4cqw); }
+.js .tile:not(.is-open) .tree .nd.below { transform: translateY(-20cqw); }
+</style>
+</head>
+<body>
+<div class="sheet-page">
+  <header class="head">
+    <p class="eyebrow">UX 컴포넌트 사전 · 11</p>
+    <h1>목록을 보여 주는 것 6가지</h1>
+    <p class="lede">여러 항목을 한 화면에 늘어놓는 방법은 항목의 구조에 따라 갈립니다. 속성끼리 견주는지, 항목이 평면인지 상태별인지 시간순인지 계층인지를 나란히 놓고 봅니다.</p>
+  </header>
+
+  <div class="toolbar">
+    <p>칸을 누르면 그 예시가 다시 재생됩니다.</p>
+    <button type="button" id="replay-all">전체 다시 재생</button>
+  </div>
+
+  <ul class="grid">
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="리스트 예시 다시 재생">
+        <div class="lst" aria-hidden="true">
+          <div class="row"><span class="ic"></span><span class="tx"><b>주간 회의록</b><span class="ln" style="--w: 78%"></span></span><span class="go">›</span></div>
+          <div class="row"><span class="ic"></span><span class="tx"><b>디자인 시안 2차</b><span class="ln" style="--w: 56%"></span></span><span class="go">›</span></div>
+          <div class="row"><span class="ic"></span><span class="tx"><b>배포 점검표</b><span class="ln" style="--w: 88%"></span></span><span class="go">›</span></div>
+          <div class="row"><span class="ic"></span><span class="tx"><b>휴가 일정</b><span class="ln" style="--w: 44%"></span></span><span class="go">›</span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">01</span>리스트</p>
+        <p class="en">List</p>
+        <p class="when">제목 하나로 구분되는 항목을 위에서 아래로 훑어 하나를 고르게 한다.</p>
+        <p class="chips"><span class="chip">훑어보기</span><span class="chip">구조: 평면</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="테이블 예시 다시 재생">
+        <div class="tbl" aria-hidden="true">
+          <div class="in">
+            <span class="hl"></span>
+            <div class="tr th"><span>상품</span><span>상태</span><span>금액 ▾</span></div>
+            <div class="tr"><span>모니터</span><span>완료</span><span>320,000</span></div>
+            <div class="tr"><span>키보드</span><span>배송 중</span><span>89,000</span></div>
+            <div class="tr"><span>마우스</span><span>완료</span><span>45,000</span></div>
+            <div class="tr"><span>케이블</span><span>취소</span><span>9,000</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">02</span>테이블</p>
+        <p class="en">Table</p>
+        <p class="when">같은 속성을 여러 항목에 걸쳐 견주거나 정렬해서 봐야 할 때 쓴다.</p>
+        <p class="chips"><span class="chip block">속성 비교</span><span class="chip">구조: 평면 · 행과 열</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="카드 그리드 예시 다시 재생">
+        <div class="cards" aria-hidden="true">
+          <div class="c"><span class="im"></span><span class="cap"><span class="ln" style="--w: 80%"></span><span class="ln" style="--w: 48%"></span></span></div>
+          <div class="c"><span class="im"></span><span class="cap"><span class="ln" style="--w: 64%"></span><span class="ln" style="--w: 40%"></span></span></div>
+          <div class="c"><span class="im"></span><span class="cap"><span class="ln" style="--w: 88%"></span><span class="ln" style="--w: 52%"></span></span></div>
+          <div class="c"><span class="im"></span><span class="cap"><span class="ln" style="--w: 70%"></span><span class="ln" style="--w: 44%"></span></span></div>
+          <div class="c"><span class="im"></span><span class="cap"><span class="ln" style="--w: 84%"></span><span class="ln" style="--w: 36%"></span></span></div>
+          <div class="c"><span class="im"></span><span class="cap"><span class="ln" style="--w: 60%"></span><span class="ln" style="--w: 50%"></span></span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">03</span>카드 그리드</p>
+        <p class="en">Card grid</p>
+        <p class="when">이미지처럼 생김새가 고르는 기준이 되는 항목을 넓게 펼쳐 보인다.</p>
+        <p class="chips"><span class="chip">훑어보기</span><span class="chip">구조: 평면 · 시각 위주</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="칸반 예시 다시 재생">
+        <div class="kan" aria-hidden="true">
+          <div class="lane">
+            <b>할 일</b>
+            <div class="card"><span class="ln" style="--w: 86%"></span><span class="ln" style="--w: 50%"></span></div>
+            <div class="card"><span class="ln" style="--w: 70%"></span><span class="ln" style="--w: 40%"></span></div>
+          </div>
+          <div class="lane">
+            <b>진행 중</b>
+            <div class="card"><span class="ln" style="--w: 78%"></span><span class="ln" style="--w: 56%"></span></div>
+            <div class="card mv"><span class="ln" style="--w: 90%"></span><span class="ln" style="--w: 46%"></span></div>
+          </div>
+          <div class="lane">
+            <b>완료</b>
+            <div class="card"><span class="ln" style="--w: 66%"></span><span class="ln" style="--w: 52%"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">04</span>칸반</p>
+        <p class="en">Kanban board</p>
+        <p class="when">항목이 단계를 차례로 거쳐 가고, 단계마다 얼마나 쌓였는지 봐야 할 때 쓴다.</p>
+        <p class="chips"><span class="chip">훑어보기</span><span class="chip">구조: 상태별</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="타임라인 예시 다시 재생">
+        <div class="tl" aria-hidden="true">
+          <span class="rail"></span>
+          <div class="ev"><span class="pt"></span><span><i>09:10</i><b>주문 접수</b></span></div>
+          <div class="ev"><span class="pt"></span><span><i>11:30</i><b>상품 준비</b></span></div>
+          <div class="ev"><span class="pt"></span><span><i>14:05</i><b>배송 출발</b></span></div>
+          <div class="ev now"><span class="pt"></span><span><i>16:40</i><b>배송 완료</b></span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">05</span>타임라인</p>
+        <p class="en">Timeline</p>
+        <p class="when">무슨 일이 어떤 순서로 일어났는지가 내용의 핵심일 때 쓴다.</p>
+        <p class="chips"><span class="chip">순서대로 읽기</span><span class="chip">구조: 시간순</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="트리 예시 다시 재생">
+        <div class="tree" aria-hidden="true">
+          <div class="nd"><span class="tw"></span><span class="fo"></span>프로젝트</div>
+          <div class="nd" style="--d: 1"><span class="tw tg"></span><span class="fo"></span>디자인</div>
+          <div class="nd kid" style="--d: 2"><span class="tw none"></span><span class="fi"></span>로고.svg</div>
+          <div class="nd kid" style="--d: 2"><span class="tw none"></span><span class="fi"></span>시안.fig</div>
+          <div class="nd below" style="--d: 1"><span class="tw shut"></span><span class="fo"></span>개발</div>
+          <div class="nd below" style="--d: 1"><span class="tw shut"></span><span class="fo"></span>문서</div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">06</span>트리</p>
+        <p class="en">Tree view</p>
+        <p class="when">항목이 다른 항목을 품는 관계일 때, 필요한 가지만 펼쳐서 찾게 한다.</p>
+        <p class="chips"><span class="chip">펼쳐서 찾기</span><span class="chip">구조: 계층</span></p>
+      </div>
+    </li>
+  </ul>
+
+  <p class="foot">비교표와 고르는 기준은 <a href="/2026/11/26/ux-components-11/">블로그 글</a>에 있습니다.</p>
+</div>
+</body>
+</html>
