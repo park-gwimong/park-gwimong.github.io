@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>알려 주는 것 6가지 | UX 컴포넌트 사전</title>
+<link rel="stylesheet" href="sheet.css">
+<script src="sheet.js"></script>
+<style>
+/* 이 시트의 예시들. 기본 모양이 보이는 상태이고, 숨은 상태는 .js .tile:not(.is-open) 로 적는다.
+   저절로 사라지는 것(토스트, 스낵바)만 @keyframes 로 나타났다 사라지기를 되풀이한다. */
+
+/* 01 토스트: 오른쪽 위에 잠깐 떴다가 사라진다 */
+.toast { right: 5cqw; top: 16cqw; border-radius: 2.6cqw; border: 1px solid var(--border); padding: 2.6cqw 3.8cqw 3cqw 3cqw; display: flex; align-items: center; gap: 2.4cqw; font-size: 4.3cqw; font-weight: 600; overflow: hidden; white-space: nowrap; }
+.toast svg { width: 5.6cqw; height: 5.6cqw; flex: none; }
+.toast svg circle { fill: var(--accent); }
+.toast svg path { fill: none; stroke: var(--surface); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.toast .life { position: absolute; left: 0; right: 0; bottom: 0; height: 0.9cqw; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0.6); }
+.js .tile:not(.is-open) .toast { opacity: 0; transform: translateX(8cqw); }
+.is-open .toast { animation: toast-life 5s ease infinite; }
+.is-open .toast .life { animation: toast-timer 5s linear infinite; }
+@keyframes toast-life {
+  0% { opacity: 0; transform: translateX(8cqw); }
+  8%, 70% { opacity: 1; transform: none; }
+  80%, 100% { opacity: 0; transform: translateY(-3cqw); }
+}
+@keyframes toast-timer {
+  0%, 8% { transform: scaleX(1); }
+  70%, 100% { transform: scaleX(0); }
+}
+
+/* 02 스낵바: 아래쪽 막대, 조작 하나가 붙는다 */
+.snack { position: absolute; left: 5cqw; right: 5cqw; bottom: 5cqw; background: var(--tip-bg); color: var(--tip-fg); border-radius: 2.4cqw; padding: 2.8cqw 4cqw; display: flex; justify-content: space-between; align-items: center; font-size: 4.3cqw; box-shadow: var(--float-shadow); white-space: nowrap; }
+.snack b { font-weight: 700; text-decoration: underline; text-underline-offset: 0.8cqw; }
+.js .tile:not(.is-open) .snack { opacity: 0; transform: translateY(16cqw); }
+.is-open .snack { animation: snack-life 7s ease infinite; }
+@keyframes snack-life {
+  0% { opacity: 0; transform: translateY(16cqw); }
+  6%, 78% { opacity: 1; transform: none; }
+  86%, 100% { opacity: 0; transform: translateY(16cqw); }
+}
+
+/* 03 배너: 상단 바 아래에 끼어들어 내용을 밀어 내리고 머문다 */
+.t-banner .bar { position: relative; z-index: 1; }
+.bn { margin: -5cqw -6cqw 5cqw; height: 11cqw; padding: 0 6cqw; display: flex; align-items: center; justify-content: space-between; background-color: var(--surface); background-image: linear-gradient(var(--accent-soft), var(--accent-soft)); border-bottom: 1px solid var(--border); color: var(--accent); font-size: 4.2cqw; font-weight: 600; white-space: nowrap; }
+.bn .x { font-size: 5.4cqw; line-height: 1; font-weight: 400; }
+.js .tile:not(.is-open) .bn { opacity: 0; transform: translateY(-100%); }
+.js .tile:not(.is-open) .bn-body { transform: translateY(-11cqw); }
+
+/* 04 인라인 알림: 문제가 난 입력 바로 아래에 머문다 */
+.fld { height: 9.5cqw; margin-bottom: 3cqw; padding: 0 3cqw; display: flex; align-items: center; border: 1px solid var(--danger); border-radius: 2cqw; background: var(--surface); font-size: 4.2cqw; color: var(--text-muted); transition: border-color 0.26s ease; }
+.ia { height: 10cqw; margin-bottom: 3.5cqw; padding: 0 3cqw; display: flex; align-items: center; gap: 2.2cqw; border: 1px solid var(--danger); border-radius: 2cqw; background: var(--surface); font-size: 4.1cqw; font-weight: 600; white-space: nowrap; }
+.ia svg { width: 5.4cqw; height: 5.4cqw; flex: none; fill: none; stroke: var(--danger); stroke-width: 2.2; stroke-linecap: round; }
+.ia-next { display: flex; justify-content: flex-end; }
+.js .tile:not(.is-open) .fld { border-color: var(--border-strong); }
+.js .tile:not(.is-open) .ia { opacity: 0; transform: translateY(-3cqw); }
+.js .tile:not(.is-open) .ia-next { transform: translateY(-13.5cqw); }
+.is-open .ia { transition-delay: 0.12s; }
+
+/* 05 배지: 아이콘 귀퉁이의 숫자나 점 */
+.icons { display: flex; justify-content: center; gap: 8cqw; margin-top: 6cqw; }
+.ib { position: relative; width: 16cqw; height: 16cqw; border-radius: 4cqw; border: 1px solid var(--border-strong); background: var(--surface); display: grid; place-items: center; }
+.ib svg { width: 8cqw; height: 8cqw; fill: none; stroke: var(--text-muted); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.bdg { position: absolute; top: -2.6cqw; right: -2.6cqw; min-width: 6.6cqw; height: 6.6cqw; padding: 0 1.7cqw; border-radius: 3.3cqw; background: var(--danger); color: var(--surface); font-size: 3.8cqw; font-weight: 700; line-height: 6.6cqw; text-align: center; }
+.bdg.dot { min-width: 0; width: 4.4cqw; height: 4.4cqw; padding: 0; top: -1.4cqw; right: -1.4cqw; }
+.js .tile:not(.is-open) .bdg { transform: scale(0); }
+.is-open .ib:nth-child(2) .bdg { transition-delay: 0.25s; }
+.is-open .ib:nth-child(3) .bdg { transition-delay: 0.5s; }
+
+/* 06 알림 센터: 종 아이콘을 누르면 쌓인 알림이 목록으로 열린다 */
+.bell { position: relative; margin-left: auto; width: 6.4cqw; height: 6.4cqw; }
+.bell svg { display: block; width: 100%; height: 100%; fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.bell i { position: absolute; top: -0.4cqw; right: -0.2cqw; width: 2.6cqw; height: 2.6cqw; border-radius: 50%; background: var(--danger); }
+.nc { right: 4cqw; top: 13.5cqw; width: 66%; border-radius: 2.6cqw; border: 1px solid var(--border); padding: 3.6cqw 4cqw 2.4cqw; transform-origin: 90% 0; }
+.nc .ttl { font-size: 4.6cqw; margin-bottom: 1.6cqw; }
+.nc .row { display: flex; align-items: center; gap: 2.4cqw; padding: 1.7cqw 0; font-size: 4cqw; white-space: nowrap; border-top: 1px solid var(--border); }
+.nc .row i { width: 2.2cqw; height: 2.2cqw; border-radius: 50%; flex: none; background: var(--accent); }
+.nc .row.read { color: var(--text-muted); }
+.nc .row.read i { background: transparent; }
+.js .tile:not(.is-open) .nc { opacity: 0; transform: scale(0.9); }
+
+@media (prefers-reduced-motion: reduce) {
+  .is-open .toast, .is-open .toast .life, .is-open .snack { animation: none; }
+}
+</style>
+</head>
+<body>
+<div class="sheet-page">
+  <header class="head">
+    <p class="eyebrow">UX 컴포넌트 사전 · 02</p>
+    <h1>알려 주는 것 6가지</h1>
+    <p class="lede">무언가를 알리는 컴포넌트는 저절로 사라지는 것과 남아 있는 것으로 갈립니다. 얼마나 끼어드는지, 사용자가 무엇을 해야 하는지를 나란히 놓고 봅니다.</p>
+  </header>
+
+  <div class="toolbar">
+    <p>칸을 누르면 그 예시가 다시 재생됩니다.</p>
+    <button type="button" id="replay-all">전체 다시 재생</button>
+  </div>
+
+  <ul class="grid">
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="토스트 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <span class="ln" style="--w: 70%"></span><span class="ln"></span><span class="ln" style="--w: 86%"></span><span class="ln" style="--w: 52%"></span><span class="ln" style="--w: 78%"></span>
+        </div>
+        <div class="float toast" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.4 3.4L17 9"/></svg>
+          저장했습니다
+          <span class="life"></span>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">01</span>토스트</p>
+        <p class="en">Toast</p>
+        <p class="when">방금 한 일이 잘 끝났다는 것처럼 놓쳐도 괜찮은 결과를 짧게 알린다.</p>
+        <p class="chips"><span class="chip">저절로 사라짐</span><span class="chip">조작 없음</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="스낵바 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <span class="ln" style="--w: 70%"></span><span class="ln"></span><span class="ln" style="--w: 86%"></span><span class="ln" style="--w: 52%"></span>
+        </div>
+        <div class="snack" aria-hidden="true">메일을 삭제했습니다<b>실행 취소</b></div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">02</span>스낵바</p>
+        <p class="en">Snackbar</p>
+        <p class="when">결과를 알리면서 실행 취소 같은 조작 하나를 잠깐 함께 내민다.</p>
+        <p class="chips"><span class="chip">저절로 사라짐</span><span class="chip">조작: 하나, 선택</span></p>
+      </div>
+    </li>
+
+    <li class="tile t-banner">
+      <div class="stage" role="button" tabindex="0" aria-label="배너 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <div class="bn">오늘 23시부터 점검합니다<span class="x">×</span></div>
+          <div class="bn-body">
+            <span class="ln" style="--w: 70%"></span><span class="ln"></span><span class="ln" style="--w: 86%"></span><span class="ln" style="--w: 52%"></span><span class="ln" style="--w: 78%"></span>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">03</span>배너</p>
+        <p class="en">Banner</p>
+        <p class="when">점검이나 연결 끊김처럼 화면 전체에 걸친 상태를 맨 위에 계속 걸어 둔다.</p>
+        <p class="chips"><span class="chip block">남아 있음</span><span class="chip">닫기: 버튼 · 해결</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="인라인 알림 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <span class="ln" style="--w: 26%"></span>
+          <div class="fld">5310 •••• 1234</div>
+          <div class="ia"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 7.5v5.5M12 16.4v.2"/></svg>카드가 만료됐습니다</div>
+          <div class="ia-next"><span class="b primary">결제</span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">04</span>인라인 알림</p>
+        <p class="en">Inline alert</p>
+        <p class="when">문제가 생긴 입력이나 영역 바로 옆에 원인과 고칠 방법을 적어 둔다.</p>
+        <p class="chips"><span class="chip block">남아 있음</span><span class="chip">사라짐: 고치면</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="배지 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <span class="ln" style="--w: 58%"></span>
+          <div class="icons">
+            <span class="ib"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg><b class="bdg">12</b></span>
+            <span class="ib"><svg viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg><b class="bdg">3</b></span>
+            <span class="ib"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9.5L4 20z"/></svg><b class="bdg dot"></b></span>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">05</span>배지</p>
+        <p class="en">Badge</p>
+        <p class="when">아직 확인하지 않은 것이 있다는 사실과 그 개수만 아이콘 귀퉁이에 표시한다.</p>
+        <p class="chips"><span class="chip block">남아 있음</span><span class="chip">사라짐: 확인하면</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="알림 센터 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span><span class="bell"><svg viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg><i></i></span></div>
+          <span class="ln" style="--w: 70%"></span><span class="ln"></span><span class="ln" style="--w: 86%"></span><span class="ln" style="--w: 52%"></span>
+        </div>
+        <div class="float nc" aria-hidden="true">
+          <span class="ttl">알림</span>
+          <div class="row"><i></i>댓글이 달렸습니다</div>
+          <div class="row"><i></i>배포가 끝났습니다</div>
+          <div class="row read"><i></i>초대를 받았습니다</div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">06</span>알림 센터</p>
+        <p class="en">Notification center</p>
+        <p class="when">지나간 알림을 한곳에 모아 두고 사용자가 원할 때 열어 다시 보게 한다.</p>
+        <p class="chips"><span class="chip block">남아 있음</span><span class="chip">열기: 사용자가</span></p>
+      </div>
+    </li>
+  </ul>
+
+  <p class="foot">비교표와 고르는 기준은 <a href="/2026/11/26/ux-components-2/">블로그 글</a>에 있습니다.</p>
+</div>
+</body>
+</html>
