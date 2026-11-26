@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>고르게 하는 것 7가지 | UX 컴포넌트 사전</title>
+<link rel="stylesheet" href="sheet.css">
+<script src="sheet.js"></script>
+<style>
+/* 이 시트의 예시들. 기본 모양이 고른 뒤의 상태이고, 고르기 전 상태는 .js .tile:not(.is-open) 로 적는다.
+   색이 바뀌는 요소는 transition 에 색 속성을 따로 더했다. */
+
+/* 공통: 조작 요소를 크게 보여 주는 판 */
+.pane { position: absolute; inset: 0; padding: 6cqw 8cqw; display: flex; flex-direction: column; justify-content: center; }
+.pane.top { justify-content: flex-start; }
+.cap { display: block; font-size: 4cqw; font-weight: 600; color: var(--text-muted); margin-bottom: 3cqw; }
+.opt { display: flex; align-items: center; gap: 3cqw; height: 6.5cqw; margin-bottom: 3.2cqw; font-size: 5cqw; line-height: 6.5cqw; white-space: nowrap; }
+
+/* 01 체크박스 */
+.box { position: relative; flex: none; width: 6.5cqw; height: 6.5cqw; border-radius: 1.6cqw; border: 1px solid var(--border-strong); background: var(--surface); }
+.box b { position: absolute; inset: -1px; border-radius: inherit; background: var(--accent); display: grid; place-items: center; }
+.box svg { width: 70%; height: 70%; fill: none; stroke: var(--surface); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+.cb-foot { display: flex; justify-content: flex-end; margin-top: 1cqw; }
+.js .tile:not(.is-open) .box b { opacity: 0; transform: scale(0.5); }
+.is-open .opt:nth-of-type(1) .box b { transition-delay: 0.15s; }
+.is-open .opt:nth-of-type(3) .box b { transition-delay: 0.55s; }
+
+/* 02 라디오: 고른 표시가 하나뿐이라 다른 것을 고르면 옮겨 간다 */
+.rlist { position: relative; }
+.ring { flex: none; width: 6.5cqw; height: 6.5cqw; border-radius: 50%; border: 1px solid var(--border-strong); background: var(--surface); }
+.pick { position: absolute; left: 0; top: 9.7cqw; width: 6.5cqw; height: 6.5cqw; border-radius: 50%; background: var(--accent); display: grid; place-items: center; }
+.pick b { width: 2.6cqw; height: 2.6cqw; border-radius: 50%; background: var(--surface); }
+.js .tile:not(.is-open) .pick { transform: translateY(-9.7cqw); }
+.is-open .pick { transition-delay: 0.3s; }
+
+/* 03 스위치 */
+.srow { display: flex; align-items: center; justify-content: space-between; height: 7cqw; margin-bottom: 4cqw; font-size: 5cqw; white-space: nowrap; }
+.sw { position: relative; flex: none; width: 12cqw; height: 7cqw; border-radius: 3.5cqw; border: 1px solid var(--border-strong); background-color: transparent; transition: background-color 0.26s ease, border-color 0.26s ease; }
+.sw i { position: absolute; left: 0.8cqw; top: 50%; width: 4.8cqw; height: 4.8cqw; margin-top: -2.4cqw; border-radius: 50%; background-color: var(--text-subtle); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.26s ease; }
+.sw.on { background-color: var(--accent); border-color: var(--accent); }
+.sw.on i { background-color: var(--surface); transform: translateX(5cqw); }
+.js .tile:not(.is-open) .sw.go { background-color: transparent; border-color: var(--border-strong); }
+.js .tile:not(.is-open) .sw.go i { background-color: var(--text-subtle); transform: none; }
+.is-open .sw.go, .is-open .sw.go i { transition-delay: 0.3s; }
+
+/* 04 세그먼트 컨트롤: 고르는 즉시 아래 내용이 바뀐다 */
+.seg { position: relative; display: flex; padding: 0.8cqw; border-radius: 2.6cqw; background: var(--border); }
+.seg .ind { position: absolute; top: 0.8cqw; bottom: 0.8cqw; left: 0.8cqw; width: calc((100% - 1.6cqw) / 3); border-radius: 2cqw; background: var(--surface); border: 1px solid var(--border-strong); transform: translateX(100%); }
+.seg em { position: relative; flex: 1; text-align: center; font-style: normal; font-size: 4.6cqw; font-weight: 600; padding: 1.5cqw 0; color: var(--text-muted); transition: color 0.26s ease; }
+.seg em.on { color: var(--text); }
+.bars { display: flex; align-items: flex-end; gap: 2.4cqw; height: 24cqw; margin-top: 6cqw; padding: 0 2cqw; border-bottom: 1px solid var(--border-strong); }
+.bars i { flex: 1; height: var(--h); border-radius: 1cqw 1cqw 0 0; background: var(--accent); transform-origin: 50% 100%; }
+.js .tile:not(.is-open) .seg .ind { transform: none; }
+.js .tile:not(.is-open) .seg em.on { color: var(--text-muted); }
+.js .tile:not(.is-open) .seg em.was { color: var(--text); }
+.js .tile:not(.is-open) .bars i { transform: scaleY(var(--s)); }
+.is-open .seg .ind, .is-open .seg em { transition-delay: 0.3s; }
+.is-open .bars i { transition-delay: 0.45s; }
+
+/* 05 칩: 여러 개를 켜고 끄는 필터 */
+.fcs { display: flex; flex-wrap: wrap; gap: 2.4cqw; }
+.fc { font-size: 4.4cqw; line-height: 1.3; padding: 1.5cqw 3.6cqw; border-radius: 99cqw; border: 1px solid var(--border-strong); background-color: var(--surface); color: var(--text-muted); white-space: nowrap; transition: background-color 0.26s ease, border-color 0.26s ease, color 0.26s ease; }
+.fc.on { background-color: var(--accent); border-color: var(--accent); color: var(--surface); font-weight: 600; }
+.fcs + .sub { margin-top: 4.5cqw; }
+.js .tile:not(.is-open) .fc.on { background-color: var(--surface); border-color: var(--border-strong); color: var(--text-muted); }
+.is-open .fc.d1 { transition-delay: 0.15s; }
+.is-open .fc.d2 { transition-delay: 0.45s; }
+.is-open .fc.d3 { transition-delay: 0.75s; }
+
+/* 06 셀렉트 · 07 콤보박스: 눌러서 여는 상자와 그 아래 목록 */
+.trig { display: flex; align-items: center; justify-content: space-between; gap: 2cqw; height: 9.5cqw; padding: 0 3cqw; border: 1px solid var(--border-strong); border-radius: 2cqw; background: var(--surface); font-size: 4.4cqw; white-space: nowrap; }
+.trig.focus { border-color: var(--accent); justify-content: flex-start; }
+.trig .arr { color: var(--text-subtle); font-size: 4cqw; }
+.trig svg { width: 5cqw; height: 5cqw; flex: none; fill: none; stroke: var(--text-subtle); stroke-width: 2.2; stroke-linecap: round; }
+.list { margin-top: 1.5cqw; padding: 1.5cqw; border: 1px solid var(--border); border-radius: 2.4cqw; background: var(--surface); box-shadow: var(--float-shadow); transform-origin: 50% 0; }
+.lopt { display: flex; align-items: center; justify-content: space-between; padding: 1.4cqw 2.6cqw; border-radius: 1.6cqw; font-size: 4.4cqw; white-space: nowrap; }
+.lopt.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.lopt mark { background: none; color: var(--accent); font-weight: 700; }
+.lopt.hi { background: var(--bg-subtle); }
+.caret { display: inline-block; width: 0.5cqw; height: 5.4cqw; margin-left: -1.5cqw; background: var(--accent); }
+.js .tile:not(.is-open) .list { opacity: 0; transform: translateY(-2cqw) scale(0.96); }
+.js .tile:not(.is-open) .typed { opacity: 0; }
+.is-open .list { transition-delay: 0.2s; }
+.is-open .typed { transition-delay: 0.25s; }
+.is-open .list.late { transition-delay: 0.6s; }
+.is-open .caret { animation: caret-blink 1s steps(1, end) infinite; }
+@keyframes caret-blink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .is-open .caret { animation: none; }
+}
+</style>
+</head>
+<body>
+<div class="sheet-page">
+  <header class="head">
+    <p class="eyebrow">UX 컴포넌트 사전 · 03</p>
+    <h1>고르게 하는 것 7가지</h1>
+    <p class="lede">선택을 받는 컴포넌트는 하나만 고르는지 여러 개를 고르는지에서 먼저 갈립니다. 고른 것이 언제 적용되는지, 선택지가 몇 개인지를 나란히 놓고 봅니다.</p>
+  </header>
+
+  <div class="toolbar">
+    <p>칸을 누르면 그 예시가 다시 재생됩니다.</p>
+    <button type="button" id="replay-all">전체 다시 재생</button>
+  </div>
+
+  <ul class="grid">
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="체크박스 예시 다시 재생">
+        <div class="pane" aria-hidden="true">
+          <span class="cap">받을 알림</span>
+          <div class="opt"><span class="box"><b><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b></span>이메일</div>
+          <div class="opt"><span class="box"></span>문자</div>
+          <div class="opt"><span class="box"><b><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b></span>앱 푸시</div>
+          <div class="cb-foot"><span class="b primary">저장</span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">01</span>체크박스</p>
+        <p class="en">Checkbox</p>
+        <p class="when">서로 상관없는 항목을 원하는 만큼 고르게 하고, 폼을 제출할 때 한꺼번에 반영한다.</p>
+        <p class="chips"><span class="chip block">여러 개</span><span class="chip">적용: 제출할 때</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="라디오 예시 다시 재생">
+        <div class="pane" aria-hidden="true">
+          <span class="cap">배송 방법</span>
+          <div class="rlist">
+            <div class="opt"><span class="ring"></span>일반 배송</div>
+            <div class="opt"><span class="ring"></span>빠른 배송</div>
+            <div class="opt"><span class="ring"></span>매장 수령</div>
+            <span class="pick"><b></b></span>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">02</span>라디오</p>
+        <p class="en">Radio button</p>
+        <p class="when">몇 안 되는 선택지를 모두 펼쳐 보여 주고 그중 하나만 고르게 한다.</p>
+        <p class="chips"><span class="chip">하나</span><span class="chip">적용: 제출할 때</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="스위치 예시 다시 재생">
+        <div class="pane" aria-hidden="true">
+          <div class="srow">알림 소리<span class="sw on"><i></i></span></div>
+          <div class="srow">다크 모드<span class="sw on go"><i></i></span></div>
+          <div class="srow" style="margin-bottom: 0">자동 재생<span class="sw"><i></i></span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">03</span>스위치</p>
+        <p class="en">Switch · Toggle</p>
+        <p class="when">설정 하나를 켜고 끄며, 누르는 순간 바로 적용된다.</p>
+        <p class="chips"><span class="chip">켬 · 끔</span><span class="chip">적용: 즉시</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="세그먼트 컨트롤 예시 다시 재생">
+        <div class="pane" aria-hidden="true">
+          <div class="seg"><span class="ind"></span><em class="was">일</em><em class="on">주</em><em>월</em></div>
+          <div class="bars">
+            <i style="--h: 46%; --s: 1.7"></i><i style="--h: 72%; --s: 0.5"></i><i style="--h: 58%; --s: 1.4"></i><i style="--h: 90%; --s: 0.4"></i><i style="--h: 64%; --s: 1.2"></i><i style="--h: 38%; --s: 2"></i><i style="--h: 80%; --s: 0.7"></i>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">04</span>세그먼트 컨트롤</p>
+        <p class="en">Segmented control</p>
+        <p class="when">같은 내용을 보는 방식 몇 가지 가운데 하나로 바로 바꾼다.</p>
+        <p class="chips"><span class="chip">하나</span><span class="chip">적용: 즉시</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="칩 예시 다시 재생">
+        <div class="pane" aria-hidden="true">
+          <span class="cap">필터</span>
+          <div class="fcs">
+            <span class="fc">전체</span><span class="fc on d1">무료</span><span class="fc">주말</span><span class="fc on d2">온라인</span><span class="fc">초급</span><span class="fc">평일</span><span class="fc on d3">저녁</span>
+          </div>
+          <span class="sub">모임 8개</span>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">05</span>칩</p>
+        <p class="en">Chip · Filter chip</p>
+        <p class="when">목록 위에 조건을 늘어놓고 여러 개를 켜고 끄면서 결과를 바로 거른다.</p>
+        <p class="chips"><span class="chip block">여러 개</span><span class="chip">적용: 즉시</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="셀렉트 예시 다시 재생">
+        <div class="pane top" aria-hidden="true">
+          <span class="cap">정렬</span>
+          <div class="trig">최신순<span class="arr">▾</span></div>
+          <div class="list">
+            <div class="lopt on">최신순<span>✓</span></div>
+            <div class="lopt">인기순</div>
+            <div class="lopt">가격 낮은순</div>
+            <div class="lopt">가격 높은순</div>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">06</span>셀렉트</p>
+        <p class="en">Select · Dropdown</p>
+        <p class="when">선택지가 많아 다 펼쳐 둘 자리가 없을 때 접어 두었다가 눌러서 하나를 고르게 한다.</p>
+        <p class="chips"><span class="chip">하나</span><span class="chip">선택지: 많음</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="콤보박스 예시 다시 재생">
+        <div class="pane top" aria-hidden="true">
+          <span class="cap">도시</span>
+          <div class="trig focus"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/></svg><span class="typed">서</span><span class="caret"></span></div>
+          <div class="list late">
+            <div class="lopt hi"><span><mark>서</mark>울</span></div>
+            <div class="lopt"><span><mark>서</mark>귀포</span></div>
+            <div class="lopt"><span><mark>서</mark>산</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">07</span>콤보박스</p>
+        <p class="en">Combobox · Autocomplete</p>
+        <p class="when">선택지가 훑어보기 어려울 만큼 많을 때 글자를 입력해 걸러 낸 뒤 고르게 한다.</p>
+        <p class="chips"><span class="chip">하나</span><span class="chip">입력해서 거름</span></p>
+      </div>
+    </li>
+  </ul>
+
+  <p class="foot">비교표와 고르는 기준은 <a href="/2026/11/26/ux-components-3/">블로그 글</a>에 있습니다.</p>
+</div>
+</body>
+</html>
