@@ -5,7 +5,7 @@ pubDate: 2026-11-10T17:50:00+09:00
 category: "softwareengineering"
 tags: ["Quorum", "분산 시스템", "Raft", "Cassandra", "Kafka"]
 math: false
-draft: true
+draft: false
 ---
 
 데이터를 여러 노드에 복제하는 순간 "어느 복제본이 맞는가"라는 문제가 생긴다. 노드 하나가 죽거나 네트워크가 둘로 갈라졌을 때, 양쪽이 각자 자신이 최신이라고 믿고 쓰기를 받아들이면 데이터는 돌이킬 수 없이 갈라진다.
