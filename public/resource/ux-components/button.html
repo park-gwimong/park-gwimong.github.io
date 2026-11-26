@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>버튼의 종류와 위계 7가지 | UX 컴포넌트 사전</title>
+<link rel="stylesheet" href="sheet.css">
+<script src="sheet.js"></script>
+<style>
+/* 이 시트의 예시들. 기본 모양이 버튼이 다 나온 상태이고, 나오기 전 상태는 .js .tile:not(.is-open) 로 적는다.
+   칸마다 주인공 버튼(.hero)만 또렷하고, 곁의 버튼(.dimmed)은 흐리다. */
+:root { --on-accent: #ffffff; }
+:root[data-theme="dark"] { --on-accent: #0f1218; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --on-accent: #0f1218; } }
+
+/* 함께 쓰는 조각: 버튼 모양 네 가지와 버튼 줄 */
+.btn { display: inline-flex; align-items: center; justify-content: center; height: 11cqw; padding: 0 5cqw; border-radius: 2.6cqw; border: 1px solid transparent; font-size: 4.6cqw; font-weight: 600; white-space: nowrap; }
+.btn.fill { background: var(--accent); color: var(--on-accent); }
+.btn.line { background: var(--surface); border-color: var(--border-strong); color: var(--text); }
+.btn.txt { height: 9cqw; padding: 0 2.6cqw; color: var(--accent); }
+.btn.dng { background: var(--danger); color: var(--on-accent); }
+.dimmed { opacity: 0.38; }
+.row { display: flex; align-items: center; gap: 2.4cqw; }
+.row.end { justify-content: flex-end; }
+.is-open .hero { transition-delay: 0.3s; }
+.js .tile:not(.is-open) .hero { opacity: 0; transform: scale(0.85); }
+
+/* 01 주 버튼 */
+.sk-f { height: 8cqw; margin-bottom: 3.4cqw; border: 1px solid var(--border-strong); border-radius: 2cqw; background: var(--surface); }
+.row.form-end { margin-top: 2cqw; }
+
+/* 02 보조 버튼 */
+.pic { height: 18cqw; margin-bottom: 3.4cqw; border-radius: 2.4cqw; background: var(--skeleton); }
+.row.pair { margin-top: 1.6cqw; }
+.row.pair .btn { flex: 1; padding: 0; }
+
+/* 03 텍스트 버튼 */
+.note { margin-top: 1cqw; padding: 4.5cqw 4.5cqw 3cqw; border: 1px solid var(--border); border-radius: 3cqw; background: var(--surface); }
+.note .ttl { margin-bottom: 1.2cqw; }
+.note .row { margin-top: 2.4cqw; gap: 1cqw; }
+.note + .ln { margin-top: 4.4cqw; }
+.is-open .hero.second { transition-delay: 0.42s; }
+
+/* 04 아이콘 버튼 */
+.tools { display: inline-flex; gap: 2cqw; margin-top: 2cqw; padding: 1.6cqw; border: 1px solid var(--border); border-radius: 9cqw; background: var(--surface); }
+.ib { position: relative; width: 12cqw; height: 12cqw; border-radius: 50%; display: grid; place-items: center; }
+.ib svg { width: 6.4cqw; height: 6.4cqw; fill: none; stroke: var(--text-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ib svg .dotf { fill: var(--text-muted); stroke: none; }
+.ib .halo { position: absolute; inset: 0; border-radius: 50%; background: var(--accent-soft); }
+.ib.on svg { position: relative; stroke: var(--accent); }
+.ib .nm { position: absolute; left: 50%; top: 15cqw; transform: translateX(-50%); padding: 1.5cqw 3.2cqw; border-radius: 2cqw; background: var(--tip-bg); color: var(--tip-fg); font-size: 4cqw; font-weight: 600; white-space: nowrap; }
+.is-open .ib .halo { transition-delay: 0.3s; }
+.is-open .ib .nm { transition-delay: 0.65s; }
+.js .tile:not(.is-open) .ib .halo { opacity: 0; transform: scale(0.6); }
+.js .tile:not(.is-open) .ib .nm { opacity: 0; transform: translateX(-50%) translateY(-1.5cqw); }
+
+/* 05 플로팅 액션 버튼 */
+.item { display: flex; align-items: center; gap: 3cqw; margin-bottom: 3cqw; }
+.item i { flex: none; width: 8cqw; height: 8cqw; border-radius: 1.6cqw; background: var(--skeleton); }
+.item .ln { margin: 0; }
+.fab { position: absolute; right: 6cqw; bottom: 6cqw; width: 15cqw; height: 15cqw; border-radius: 50%; background: var(--accent); box-shadow: var(--float-shadow); display: grid; place-items: center; }
+.fab svg { width: 7cqw; height: 7cqw; fill: none; stroke: var(--on-accent); stroke-width: 2.4; stroke-linecap: round; }
+.js .tile:not(.is-open) .fab { opacity: 0; transform: scale(0.4); }
+
+/* 06 위험 버튼 */
+.zone { margin-top: 1cqw; padding: 4cqw; border: 1px solid var(--border); border-radius: 3cqw; background: var(--surface); }
+.zone .ttl { margin-bottom: 0.8cqw; font-size: 4.6cqw; }
+.zone .sub { font-size: 3.8cqw; }
+.zone .btn { height: 10cqw; margin-top: 3cqw; }
+
+/* 07 링크 */
+.para { margin: 0 0 4cqw; font-size: 4.4cqw; line-height: 1.6; white-space: nowrap; color: var(--text); }
+.para span { display: block; }
+.para .lk { position: relative; display: inline; color: var(--accent); font-weight: 600; }
+.para .lk i { position: absolute; left: 0; right: 0; bottom: -0.6cqw; height: 0.5cqw; background: var(--accent); transform-origin: 0 50%; }
+.url { position: absolute; left: 0; bottom: 0; padding: 1.2cqw 3cqw; border: 1px solid var(--border); border-left: 0; border-bottom: 0; border-radius: 0 1.8cqw 0 0; background: var(--surface); color: var(--text-muted); font-size: 3.5cqw; white-space: nowrap; }
+.is-open .para .lk i { transition-delay: 0.3s; }
+.is-open .url { transition-delay: 0.6s; }
+.js .tile:not(.is-open) .para .lk i { transform: scaleX(0); }
+.js .tile:not(.is-open) .url { opacity: 0; transform: translateY(100%); }
+</style>
+</head>
+<body>
+<div class="sheet-page">
+  <header class="head">
+    <p class="eyebrow">UX 컴포넌트 사전 · 10</p>
+    <h1>버튼의 종류와 위계 7가지</h1>
+    <p class="lede">버튼의 모양은 그 화면에서 무엇이 먼저인지를 알리는 신호입니다. 한 화면 안에서의 우선순위와, 동작인지 이동인지를 나란히 놓고 봅니다.</p>
+  </header>
+
+  <div class="toolbar">
+    <p>칸을 누르면 그 예시가 다시 재생됩니다.</p>
+    <button type="button" id="replay-all">전체 다시 재생</button>
+  </div>
+
+  <ul class="grid">
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="주 버튼 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <span class="ln" style="--w: 26%"></span>
+          <div class="sk-f"></div>
+          <span class="ln" style="--w: 38%"></span>
+          <div class="sk-f"></div>
+          <div class="row end form-end"><span class="btn line dimmed">취소</span><span class="btn fill hero">저장</span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">01</span>주 버튼</p>
+        <p class="en">Primary button</p>
+        <p class="when">그 화면에서 가장 중요한 동작 하나에 쓴다.</p>
+        <p class="chips"><span class="chip block">위계: 높음</span><span class="chip">동작 · 화면에 하나</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="보조 버튼 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <div class="pic"></div>
+          <span class="ln" style="--w: 60%"></span>
+          <span class="ln" style="--w: 36%"></span>
+          <div class="row pair"><span class="btn line hero">장바구니</span><span class="btn fill dimmed">바로 구매</span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">02</span>보조 버튼</p>
+        <p class="en">Secondary button</p>
+        <p class="when">주 버튼 옆에서 취소나 대안처럼 그보다 덜 중요한 동작에 쓴다.</p>
+        <p class="chips"><span class="chip">위계: 중간</span><span class="chip">동작 · 주 버튼 옆</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="텍스트 버튼 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <div class="note">
+            <span class="ttl">알림을 켤까요?</span>
+            <span class="sub">새 댓글을 바로 알려 드려요</span>
+            <div class="row end"><span class="btn txt hero">나중에</span><span class="btn txt hero second">켜기</span></div>
+          </div>
+          <span class="ln" style="--w: 70%"></span>
+          <span class="ln" style="--w: 48%"></span>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">03</span>텍스트 버튼</p>
+        <p class="en">Text button</p>
+        <p class="when">눈에 덜 띄어도 되는 동작에 쓰고, 한 화면에 여러 개 있어도 된다.</p>
+        <p class="chips"><span class="chip">위계: 낮음</span><span class="chip">동작 · 여러 개 가능</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="아이콘 버튼 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <span class="ln" style="--w: 70%"></span>
+          <span class="ln" style="--w: 48%"></span>
+          <div class="tools">
+            <span class="ib"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>
+            <span class="ib"><svg viewBox="0 0 24 24"><path d="M7 4h10v16l-5-4-5 4z"/></svg></span>
+            <span class="ib on"><span class="halo"></span><svg viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4M5 13v6h14v-6"/></svg><span class="nm">공유</span></span>
+            <span class="ib"><svg viewBox="0 0 24 24"><circle class="dotf" cx="5" cy="12" r="1.6"/><circle class="dotf" cx="12" cy="12" r="1.6"/><circle class="dotf" cx="19" cy="12" r="1.6"/></svg></span>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">04</span>아이콘 버튼</p>
+        <p class="en">Icon button</p>
+        <p class="when">자리가 좁고 뜻이 널리 알려진 동작을 아이콘만으로 보여 준다.</p>
+        <p class="chips"><span class="chip">위계: 낮음</span><span class="chip">동작 · 이름 필요</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="플로팅 액션 버튼 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <div class="item"><i></i><span class="ln" style="--w: 62%"></span></div>
+          <div class="item"><i></i><span class="ln" style="--w: 78%"></span></div>
+          <div class="item"><i></i><span class="ln" style="--w: 50%"></span></div>
+          <div class="item"><i></i><span class="ln" style="--w: 68%"></span></div>
+          <div class="item"><i></i><span class="ln" style="--w: 56%"></span></div>
+        </div>
+        <span class="fab hero" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">05</span>플로팅 액션 버튼</p>
+        <p class="en">Floating action button · FAB</p>
+        <p class="when">화면의 대표 동작 하나를 내용 위에 띄워 스크롤해도 같은 자리에 있게 한다.</p>
+        <p class="chips"><span class="chip block">위계: 가장 높음</span><span class="chip">동작 · 떠 있음</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="위험 버튼 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <span class="ln" style="--w: 50%"></span>
+          <span class="ln" style="--w: 80%"></span>
+          <div class="zone">
+            <span class="ttl">계정 삭제</span>
+            <span class="sub">모든 데이터가 지워집니다</span>
+            <span class="btn dng hero">계정 삭제</span>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">06</span>위험 버튼</p>
+        <p class="en">Destructive button</p>
+        <p class="when">삭제나 탈퇴처럼 되돌리기 어려운 동작임을 누르기 전에 색과 글자로 알린다.</p>
+        <p class="chips"><span class="chip block">위계: 따로 구분</span><span class="chip">동작 · 되돌리기 어려움</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="링크 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <p class="para"><span>결제일은 매달 1일입니다.</span><span>자세한 내용은 <b class="lk">요금 안내<i></i></b>에서</span><span>확인할 수 있습니다.</span></p>
+          <span class="ln" style="--w: 82%"></span>
+          <span class="ln" style="--w: 46%"></span>
+        </div>
+        <span class="url" aria-hidden="true">example.com/pricing</span>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">07</span>링크</p>
+        <p class="en">Link</p>
+        <p class="when">무언가를 실행하는 것이 아니라 다른 페이지나 위치로 옮겨 갈 때 쓴다.</p>
+        <p class="chips"><span class="chip">위계: 본문 수준</span><span class="chip">이동 · 주소가 바뀜</span></p>
+      </div>
+    </li>
+  </ul>
+
+  <p class="foot">비교표와 고르는 기준은 <a href="/2026/11/26/ux-components-10/">블로그 글</a>에 있습니다.</p>
+</div>
+</body>
+</html>
