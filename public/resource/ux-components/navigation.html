@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이동하게 하는 것 6가지 | UX 컴포넌트 사전</title>
+<link rel="stylesheet" href="sheet.css">
+<script src="sheet.js"></script>
+<style>
+/* 이 시트의 예시들. 기본 모양이 재생이 끝난 상태이고, 재생 전 상태는 .js .tile:not(.is-open) 로 적는다. */
+
+/* 강조색 위에 올리는 글자색 */
+:root { --on-accent: #ffffff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --on-accent: #0f1218; } }
+:root[data-theme="dark"] { --on-accent: #0f1218; }
+
+/* 여러 칸이 같이 쓰는 목록 한 줄: 동그라미 하나와 줄 둘 */
+.rw { display: flex; align-items: center; gap: 3cqw; height: 12cqw; border-bottom: 1px solid var(--border); }
+.rw > i { flex: none; width: 7cqw; height: 7cqw; border-radius: 50%; background: var(--skeleton); }
+.rw > span { flex: 1; }
+.rw .ln { margin-bottom: 2cqw; }
+.rw .ln:last-child { margin-bottom: 0; }
+
+/* 01 상단 바: 내용은 밀려 올라가고 바는 제자리에 남는다 */
+.scroller { position: absolute; left: 6cqw; right: 6cqw; top: 14cqw; transform: translateY(-20cqw); }
+.appbar { position: absolute; left: 0; right: 0; top: 0; height: 14cqw; padding: 0 5cqw; display: flex; align-items: center; gap: 3.4cqw; background: var(--surface); border-bottom: 1px solid var(--border); }
+.appbar svg { flex: none; width: 5.8cqw; height: 5.8cqw; fill: none; stroke: var(--text-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.appbar .tt { flex: 1; font-size: 4.8cqw; font-weight: 700; white-space: nowrap; }
+.appbar .shade { position: absolute; left: 0; right: 0; top: 100%; height: 2.6cqw; background: linear-gradient(to bottom, var(--scrim), transparent); opacity: 0.3; }
+.is-open .scroller { transition: transform 1.2s cubic-bezier(0.3, 0, 0.2, 1) 0.3s; }
+.is-open .appbar .shade { transition-delay: 0.5s; }
+.js .tile:not(.is-open) .scroller { transform: translateY(0); }
+.js .tile:not(.is-open) .appbar .shade { opacity: 0; }
+
+/* 02 사이드바: 옆에 늘 펼쳐져 있고, 고른 항목이 표시된다 */
+.side { position: absolute; left: 0; top: 0; bottom: 0; width: 38%; padding: 4cqw 2.4cqw; background: var(--surface); border-right: 1px solid var(--border); }
+.side .hl { position: absolute; left: 2.4cqw; right: 2.4cqw; top: 15cqw; height: 8.5cqw; border-radius: 2cqw; background: var(--accent-soft); transform: translateY(17cqw); }
+.side .brand { display: flex; align-items: center; gap: 2.4cqw; height: 8cqw; margin-bottom: 3cqw; padding: 0 2.4cqw; }
+.side .brand i { flex: none; width: 6cqw; height: 6cqw; border-radius: 1.6cqw; background: var(--accent); }
+.side .brand .ln { margin: 0; }
+.side .ni { position: relative; display: flex; align-items: center; gap: 2.4cqw; height: 8.5cqw; padding: 0 2.4cqw; font-size: 4.2cqw; font-weight: 600; color: var(--text-muted); white-space: nowrap; transition: color 0.26s ease; }
+.side .ni i { flex: none; width: 4.4cqw; height: 4.4cqw; border-radius: 1.2cqw; background: var(--skeleton); }
+.side .ni.child { padding-left: 9.2cqw; font-size: 4cqw; font-weight: 500; }
+.side .ni.n2 { color: var(--accent); font-weight: 600; }
+.main { position: absolute; left: 38%; right: 0; top: 0; bottom: 0; }
+.main .mv { position: absolute; inset: 0; padding: 6cqw 5cqw 0 6cqw; }
+.main .box { height: 13cqw; margin-bottom: 3cqw; border: 1px solid var(--border); border-radius: 2.4cqw; background: var(--surface); }
+.main .mv.ma { opacity: 0; }
+.is-open .side .hl, .is-open .side .ni, .is-open .main .mv { transition-delay: 0.3s; }
+.js .tile:not(.is-open) .side .hl { transform: translateY(0); }
+.js .tile:not(.is-open) .side .ni.n1 { color: var(--accent); }
+.js .tile:not(.is-open) .side .ni.n2 { color: var(--text-muted); }
+.js .tile:not(.is-open) .main .mv.ma { opacity: 1; }
+.js .tile:not(.is-open) .main .mv.mb { opacity: 0; }
+
+/* 03 하단 탭 바: 아래에 고정된 목적지 넷, 고른 탭이 표시된다 */
+.vw { position: absolute; left: 6cqw; right: 6cqw; top: 17cqw; }
+.vw .sfield { height: 9cqw; margin-bottom: 4.4cqw; border: 1px solid var(--border-strong); border-radius: 5cqw; background: var(--surface); }
+.vw.va { opacity: 0; }
+.tabbar { position: absolute; left: 0; right: 0; bottom: 0; height: 16cqw; display: flex; background: var(--surface); border-top: 1px solid var(--border); }
+.tabbar .pill { position: absolute; left: calc(12.5% - 6cqw); top: 1.9cqw; width: 12cqw; height: 7cqw; border-radius: 4cqw; background: var(--accent-soft); transform: translateX(25cqw); }
+.tabbar .tb { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.8cqw; font-size: 3.4cqw; font-weight: 600; color: var(--text-subtle); white-space: nowrap; transition: color 0.26s ease; }
+.tabbar .tb svg { width: 5.6cqw; height: 5.6cqw; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tabbar .tb2 { color: var(--accent); }
+.is-open .tabbar .pill, .is-open .tabbar .tb, .is-open .vw { transition-delay: 0.3s; }
+.js .tile:not(.is-open) .tabbar .pill { transform: translateX(0); }
+.js .tile:not(.is-open) .tabbar .tb1 { color: var(--accent); }
+.js .tile:not(.is-open) .tabbar .tb2 { color: var(--text-subtle); }
+.js .tile:not(.is-open) .vw.va { opacity: 1; }
+.js .tile:not(.is-open) .vw.vb { opacity: 0; }
+
+/* 04 브레드크럼: 윗단계부터 지금 위치까지가 차례로 이어진다 */
+.crumbs { display: flex; align-items: center; gap: 1.8cqw; margin-bottom: 5cqw; font-size: 4.2cqw; font-weight: 500; white-space: nowrap; }
+.crumbs .cr { color: var(--accent); }
+.crumbs .cr.cur { color: var(--text); font-weight: 700; }
+.crumbs .sep { width: 1.8cqw; height: 1.8cqw; border-top: 0.45cqw solid var(--text-subtle); border-right: 0.45cqw solid var(--text-subtle); transform: rotate(45deg); }
+.crumb-page .ttl { font-size: 5.6cqw; margin-bottom: 4cqw; }
+.is-open .crumbs > :nth-child(2) { transition-delay: 0.14s; }
+.is-open .crumbs > :nth-child(3) { transition-delay: 0.28s; }
+.is-open .crumbs > :nth-child(4) { transition-delay: 0.42s; }
+.is-open .crumbs > :nth-child(5) { transition-delay: 0.56s; }
+.is-open .crumbs > :nth-child(6) { transition-delay: 0.7s; }
+.is-open .crumbs > :nth-child(7) { transition-delay: 0.84s; }
+.is-open .crumb-page .ttl { transition-delay: 0.84s; }
+.js .tile:not(.is-open) .crumbs .cr { opacity: 0; transform: translateX(-2cqw); }
+.js .tile:not(.is-open) .crumbs .sep { opacity: 0; }
+.js .tile:not(.is-open) .crumb-page .ttl { opacity: 0; }
+
+/* 05 페이지네이션: 쪽 번호가 1에서 2로 옮겨 가고 목록이 바뀐다 */
+.plist { position: absolute; left: 6cqw; right: 6cqw; top: 15cqw; }
+.plist.la { opacity: 0; }
+.pager { position: absolute; left: 0; right: 0; bottom: 5cqw; display: flex; justify-content: center; gap: 1.6cqw; }
+.pager .pg { width: 9cqw; height: 9cqw; display: grid; place-items: center; font-size: 4.2cqw; font-weight: 600; line-height: 1; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); border-radius: 2cqw; transition: background-color 0.26s ease, border-color 0.26s ease, color 0.26s ease; }
+.pager .pg.gap { background: transparent; border-color: transparent; }
+.pager .pg.p2 { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.is-open .pager .pg, .is-open .plist { transition-delay: 0.3s; }
+.js .tile:not(.is-open) .pager .pg.p1 { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.js .tile:not(.is-open) .pager .pg.p2 { background: var(--surface); border-color: var(--border); color: var(--text-muted); }
+.js .tile:not(.is-open) .plist.la { opacity: 1; }
+.js .tile:not(.is-open) .plist.lb { opacity: 0; }
+
+/* 06 무한 스크롤: 아래에 닿으면 불러오는 표시가 나오고 다음 줄들이 이어 붙는다 */
+.feed { position: absolute; left: 6cqw; right: 6cqw; top: 15cqw; transform: translateY(-20cqw); }
+.feed .more { position: relative; }
+.feed .loading { position: absolute; left: 0; right: 0; top: 0; height: 12cqw; display: flex; align-items: center; justify-content: center; gap: 2.4cqw; font-size: 3.8cqw; color: var(--text-subtle); }
+.feed .spin { width: 4.6cqw; height: 4.6cqw; border-radius: 50%; border: 0.7cqw solid var(--border-strong); border-top-color: var(--accent); }
+.feed .new { opacity: 0; }
+@keyframes inf-feed {
+  0%, 8% { transform: translateY(0); opacity: 1; }
+  26%, 52% { transform: translateY(-20cqw); opacity: 1; }
+  70%, 90% { transform: translateY(-36cqw); opacity: 1; }
+  95% { transform: translateY(-36cqw); opacity: 0; }
+  96% { transform: translateY(0); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes inf-load { 0%, 44% { opacity: 1; } 50%, 95% { opacity: 0; } 96%, 100% { opacity: 1; } }
+@keyframes inf-new { 0%, 44% { opacity: 0; } 52%, 95% { opacity: 1; } 96%, 100% { opacity: 0; } }
+@keyframes inf-spin { to { transform: rotate(360deg); } }
+.is-open .feed { animation: inf-feed 9s ease-in-out infinite; }
+.is-open .feed .loading { animation: inf-load 9s linear infinite; }
+.is-open .feed .new { animation: inf-new 9s linear infinite; }
+.is-open .feed .spin { animation: inf-spin 0.9s linear infinite; }
+.js .tile:not(.is-open) .feed { transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .is-open .feed, .is-open .feed .loading, .is-open .feed .new, .is-open .feed .spin { animation: none; }
+}
+</style>
+</head>
+<body>
+<div class="sheet-page">
+  <header class="head">
+    <p class="eyebrow">UX 컴포넌트 사전 · 06</p>
+    <h1>이동하게 하는 것 6가지</h1>
+    <p class="lede">다른 화면이나 다음 내용으로 옮겨 가게 하는 컴포넌트입니다. 계층이 얼마나 깊은지, 화면이 얼마나 넓은지, 지금 어디에 있는지 알려 주는지를 나란히 놓고 봅니다.</p>
+  </header>
+
+  <div class="toolbar">
+    <p>칸을 누르면 그 예시가 다시 재생됩니다.</p>
+    <button type="button" id="replay-all">전체 다시 재생</button>
+  </div>
+
+  <ul class="grid">
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="상단 바 예시 다시 재생">
+        <div class="scroller" aria-hidden="true">
+          <div class="rw"><i></i><span><span class="ln" style="--w: 46%"></span><span class="ln" style="--w: 88%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 58%"></span><span class="ln" style="--w: 74%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 40%"></span><span class="ln" style="--w: 92%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 52%"></span><span class="ln" style="--w: 66%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 62%"></span><span class="ln" style="--w: 84%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 44%"></span><span class="ln" style="--w: 70%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 56%"></span><span class="ln" style="--w: 90%"></span></span></div>
+        </div>
+        <div class="appbar" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+          <span class="tt">받은 편지함</span>
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+          <i class="shade"></i>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">01</span>상단 바</p>
+        <p class="en">Top bar · App bar</p>
+        <p class="when">지금 화면의 제목과 그 화면에서 쓰는 주요 동작을 맨 위에 고정해 둔다.</p>
+        <p class="chips"><span class="chip block">위치: 화면 제목</span><span class="chip">모든 화면 크기</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="사이드바 예시 다시 재생">
+        <div class="main" aria-hidden="true">
+          <div class="mv ma">
+            <span class="ttl">홈</span>
+            <span class="ln" style="--w: 90%"></span><span class="ln" style="--w: 72%"></span><span class="ln" style="--w: 84%"></span><span class="ln" style="--w: 50%"></span>
+          </div>
+          <div class="mv mb">
+            <span class="ttl">진행 중</span>
+            <div class="box"></div><div class="box"></div><div class="box"></div>
+          </div>
+        </div>
+        <div class="side" aria-hidden="true">
+          <i class="hl"></i>
+          <span class="brand"><i></i><span class="ln" style="--w: 56%"></span></span>
+          <span class="ni n1"><i></i>홈</span>
+          <span class="ni"><i></i>프로젝트</span>
+          <span class="ni child n2">진행 중</span>
+          <span class="ni child">완료</span>
+          <span class="ni"><i></i>설정</span>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">02</span>사이드바</p>
+        <p class="en">Sidebar · Side navigation</p>
+        <p class="when">넓은 화면에서 메뉴가 많거나 여러 단계일 때 옆에 세로로 펼쳐 둔다.</p>
+        <p class="chips"><span class="chip block">위치: 선택 항목</span><span class="chip">넓은 화면 · 여러 단계</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="하단 탭 바 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+        </div>
+        <div class="vw va" aria-hidden="true">
+          <span class="ln" style="--w: 70%"></span><span class="ln"></span><span class="ln" style="--w: 86%"></span><span class="ln" style="--w: 52%"></span><span class="ln" style="--w: 76%"></span>
+        </div>
+        <div class="vw vb" aria-hidden="true">
+          <div class="sfield"></div>
+          <span class="ln" style="--w: 44%"></span><span class="ln" style="--w: 62%"></span><span class="ln" style="--w: 36%"></span>
+        </div>
+        <div class="tabbar" aria-hidden="true">
+          <i class="pill"></i>
+          <span class="tb tb1"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"/></svg>홈</span>
+          <span class="tb tb2"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>검색</span>
+          <span class="tb"><svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 21h4"/></svg>알림</span>
+          <span class="tb"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>내 정보</span>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">03</span>하단 탭 바</p>
+        <p class="en">Bottom tab bar · Bottom navigation</p>
+        <p class="when">모바일에서 자주 오가는 최상위 화면 3~5개를 엄지가 닿는 아래쪽에 둔다.</p>
+        <p class="chips"><span class="chip block">위치: 선택 탭</span><span class="chip">좁은 화면 · 3~5개</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="브레드크럼 예시 다시 재생">
+        <div class="page crumb-page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <div class="crumbs"><span class="cr">홈</span><i class="sep"></i><span class="cr">제품</span><i class="sep"></i><span class="cr">노트북</span><i class="sep"></i><span class="cr cur">15인치</span></div>
+          <span class="ttl">15인치 노트북</span>
+          <span class="ln" style="--w: 88%"></span><span class="ln" style="--w: 70%"></span><span class="ln" style="--w: 80%"></span><span class="ln" style="--w: 46%"></span>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">04</span>브레드크럼</p>
+        <p class="en">Breadcrumb</p>
+        <p class="when">깊은 계층에서 지금 위치까지의 경로를 보여 주고 윗단계로 바로 돌아가게 한다.</p>
+        <p class="chips"><span class="chip block">위치: 전체 경로</span><span class="chip">깊은 계층</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="페이지네이션 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+        </div>
+        <div class="plist la" aria-hidden="true">
+          <div class="rw"><i></i><span><span class="ln" style="--w: 46%"></span><span class="ln" style="--w: 88%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 58%"></span><span class="ln" style="--w: 74%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 40%"></span><span class="ln" style="--w: 92%"></span></span></div>
+        </div>
+        <div class="plist lb" aria-hidden="true">
+          <div class="rw"><i></i><span><span class="ln" style="--w: 64%"></span><span class="ln" style="--w: 70%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 38%"></span><span class="ln" style="--w: 90%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 54%"></span><span class="ln" style="--w: 60%"></span></span></div>
+        </div>
+        <div class="pager" aria-hidden="true">
+          <span class="pg">‹</span><span class="pg p1">1</span><span class="pg p2">2</span><span class="pg">3</span><span class="pg gap">…</span><span class="pg">9</span><span class="pg">›</span>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">05</span>페이지네이션</p>
+        <p class="en">Pagination</p>
+        <p class="when">긴 목록을 쪽으로 나누어 전체 중 어디쯤인지 알리고 원하는 쪽으로 건너뛰게 한다.</p>
+        <p class="chips"><span class="chip block">위치: 쪽 번호</span><span class="chip">끝이 있는 목록</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="무한 스크롤 예시 다시 재생">
+        <div class="feed" aria-hidden="true">
+          <div class="rw"><i></i><span><span class="ln" style="--w: 46%"></span><span class="ln" style="--w: 88%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 58%"></span><span class="ln" style="--w: 74%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 40%"></span><span class="ln" style="--w: 92%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 52%"></span><span class="ln" style="--w: 66%"></span></span></div>
+          <div class="rw"><i></i><span><span class="ln" style="--w: 62%"></span><span class="ln" style="--w: 84%"></span></span></div>
+          <div class="more">
+            <div class="loading"><i class="spin"></i>불러오는 중</div>
+            <div class="rw new"><i></i><span><span class="ln" style="--w: 44%"></span><span class="ln" style="--w: 70%"></span></span></div>
+            <div class="rw new"><i></i><span><span class="ln" style="--w: 56%"></span><span class="ln" style="--w: 90%"></span></span></div>
+            <div class="rw new"><i></i><span><span class="ln" style="--w: 48%"></span><span class="ln" style="--w: 78%"></span></span></div>
+          </div>
+        </div>
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">06</span>무한 스크롤</p>
+        <p class="en">Infinite scroll</p>
+        <p class="when">끝을 정해 두지 않고 훑어보는 피드에서 아래에 닿으면 다음 내용을 이어 붙인다.</p>
+        <p class="chips"><span class="chip">위치 표시 없음</span><span class="chip">끝이 없는 피드</span></p>
+      </div>
+    </li>
+  </ul>
+
+  <p class="foot">비교표와 고르는 기준은 <a href="/2026/11/26/ux-components-6/">블로그 글</a>에 있습니다.</p>
+</div>
+</body>
+</html>
