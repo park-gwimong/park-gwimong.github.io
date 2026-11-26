@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>도와주는 것 6가지 | UX 컴포넌트 사전</title>
+<link rel="stylesheet" href="sheet.css">
+<script src="sheet.js"></script>
+<style>
+/* 이 시트의 예시들. 기본 모양이 다 보인 상태이고, 처음 상태는 .js .tile:not(.is-open) 로 적는다. */
+
+/* 여러 칸이 같이 쓰는 조각: 포인터, 입력 칸 */
+.cursor { position: absolute; z-index: 3; width: 8.5cqw; height: 8.5cqw; }
+.cursor path { fill: var(--text); stroke: var(--surface); stroke-width: 1.5; }
+.form { position: absolute; left: 9cqw; right: 9cqw; }
+.form .lb { display: block; margin-bottom: 2.2cqw; font-size: 4.2cqw; font-weight: 600; line-height: 1.3; }
+.form .inp { position: relative; display: flex; align-items: center; height: 13cqw; padding: 0 3.6cqw; border-radius: 2.4cqw; border: 1px solid var(--border-strong); background: var(--surface); font-size: 4.4cqw; white-space: nowrap; }
+.form .inp.on { border-color: var(--accent); box-shadow: 0 0 0 0.8cqw var(--accent-soft); }
+.form .caret { width: 0.5cqw; height: 6cqw; margin-left: 0.8cqw; background: var(--accent); }
+.form .ph { color: var(--text-subtle); }
+
+/* 01 툴팁 */
+.edbar { display: flex; gap: 2.5cqw; margin: 6cqw 0 5cqw; }
+.edbar .eb { display: grid; place-items: center; width: 12cqw; height: 12cqw; border-radius: 2.6cqw; border: 1px solid var(--border-strong); background: var(--surface); font-size: 5.4cqw; font-weight: 700; color: var(--text-muted); }
+.edbar .eb.hv { border-color: var(--accent); color: var(--accent); }
+.edbar .eb em { font-family: Georgia, 'Times New Roman', serif; }
+.edbar .eb u { text-underline-offset: 0.6cqw; }
+.tip { position: absolute; left: 26.5cqw; top: 22.5cqw; transform: translateX(-50%); padding: 1.7cqw 3.4cqw; border-radius: 2cqw; background: var(--tip-bg); color: var(--tip-fg); font-size: 4.2cqw; font-weight: 600; white-space: nowrap; }
+.tip::before { content: ''; position: absolute; left: 50%; top: -1.2cqw; width: 2.8cqw; height: 2.8cqw; margin-left: -1.4cqw; background: var(--tip-bg); transform: rotate(45deg); }
+.t-tip .cursor { left: 27cqw; top: 12cqw; }
+/* 포인터가 먼저 올라가고, 잠깐 뒤에 툴팁이 나온다 */
+.is-open .tip { transition-delay: 0.5s; }
+.js .tile:not(.is-open) .tip { opacity: 0; transform: translateX(-50%) translateY(-1.5cqw); }
+.js .tile:not(.is-open) .t-tip .cursor { transform: translate(22cqw, 20cqw); }
+
+/* 02 도움말 텍스트 */
+.t-helper .form { top: 11cqw; }
+.t-helper .pw { display: flex; gap: 1.6cqw; }
+.t-helper .pw i { width: 2.6cqw; height: 2.6cqw; border-radius: 50%; background: var(--text); }
+.t-helper .hint { display: block; margin: 2.4cqw 0 5cqw; font-size: 3.8cqw; line-height: 1.3; color: var(--text-muted); white-space: nowrap; }
+.t-helper .lb.ghost { width: 22cqw; height: 3cqw; margin: 1cqw 0 3.2cqw; border-radius: 2cqw; background: var(--skeleton); }
+/* 글자가 한 자씩 찍히는 동안에도 아래 설명은 그대로 있다 */
+.is-open .t-helper .pw i:nth-child(1) { transition-delay: 0.2s; }
+.is-open .t-helper .pw i:nth-child(2) { transition-delay: 0.36s; }
+.is-open .t-helper .pw i:nth-child(3) { transition-delay: 0.52s; }
+.is-open .t-helper .pw i:nth-child(4) { transition-delay: 0.68s; }
+.is-open .t-helper .pw i:nth-child(5) { transition-delay: 0.84s; }
+.js .tile:not(.is-open) .t-helper .pw i { opacity: 0; }
+
+/* 03 플레이스홀더 */
+.t-ph .form { top: 13cqw; }
+.t-ph .inp + .lb { margin-top: 5cqw; }
+.t-ph .ph.gone { position: absolute; left: 3.6cqw; opacity: 0; }
+.t-ph .typed { display: flex; align-items: center; }
+/* 첫 칸은 입력을 시작하자 예시 글자가 사라진다. 둘째 칸은 아직 비어 있어 예시가 남아 있다 */
+.is-open .t-ph .ph.gone { transition-delay: 0.6s; }
+.is-open .t-ph .typed b { transition-delay: 0.75s; }
+.js .tile:not(.is-open) .t-ph .ph.gone { opacity: 1; }
+.js .tile:not(.is-open) .t-ph .typed b { opacity: 0; }
+.t-ph .typed b { font-weight: 400; }
+
+/* 04 코치 마크 */
+.fab { position: absolute; right: 7cqw; bottom: 7cqw; display: grid; place-items: center; width: 13cqw; height: 13cqw; border-radius: 50%; background: var(--accent); color: var(--surface); font-size: 8cqw; font-weight: 500; line-height: 1; }
+.spot { position: absolute; right: 3cqw; bottom: 3cqw; width: 21cqw; height: 21cqw; border-radius: 50%; box-shadow: 0 0 0 150cqw var(--scrim); }
+.coach { position: absolute; right: 7cqw; bottom: 29cqw; width: 60cqw; padding: 4cqw; border-radius: 3cqw; background: var(--surface); box-shadow: var(--float-shadow); }
+.coach::after { content: ''; position: absolute; right: 5cqw; bottom: -1.5cqw; width: 3.4cqw; height: 3.4cqw; background: var(--surface); transform: rotate(45deg); }
+.coach .msg { display: block; margin-bottom: 3cqw; font-size: 4.2cqw; font-weight: 600; line-height: 1.35; word-break: keep-all; }
+/* 한 곳만 남기고 어두워진 다음에 설명이 붙는다 */
+.is-open .spot { transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.is-open .coach { transition-delay: 0.4s; }
+.js .tile:not(.is-open) .spot { opacity: 0; transform: scale(2.4); }
+.js .tile:not(.is-open) .coach { opacity: 0; transform: translateY(2cqw); }
+
+/* 05 투어 */
+.tabs { display: flex; gap: 5cqw; margin-bottom: 5cqw; }
+.tabs span { flex: 1; height: 10cqw; display: grid; place-items: center; border-radius: 2.2cqw; border: 1px solid var(--border-strong); background: var(--surface); font-size: 4cqw; font-weight: 600; color: var(--text-muted); }
+.ring { position: absolute; left: 35cqw; top: 4cqw; width: 30cqw; height: 14cqw; border-radius: 3.4cqw; border: 0.8cqw solid var(--accent); }
+.tour { position: absolute; left: 37cqw; top: 21.5cqw; width: 57cqw; padding: 4cqw; border-radius: 3cqw; border: 1px solid var(--border); background: var(--surface); box-shadow: var(--float-shadow); }
+.tour::before { content: ''; position: absolute; left: 11cqw; top: -1.9cqw; width: 3.2cqw; height: 3.2cqw; background: var(--surface); border-left: 1px solid var(--border); border-top: 1px solid var(--border); transform: rotate(45deg); }
+.tour .ttl { margin-bottom: 2.6cqw; white-space: nowrap; }
+.tour .ft { display: flex; align-items: center; justify-content: space-between; margin-top: 1cqw; }
+.tour .dots { position: relative; display: flex; gap: 1.8cqw; }
+.tour .dots i { width: 2.4cqw; height: 2.4cqw; border-radius: 50%; background: var(--border-strong); }
+.tour .dots i.cur { position: absolute; left: 4.2cqw; top: 0; background: var(--accent); }
+/* 첫 단계에서 나타났다가, 잠깐 뒤 다음 단계의 자리로 옮겨 간다 */
+.is-open .ring, .is-open .tour { transition: opacity 0.26s ease, transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) 0.95s; }
+.is-open .tour .dots i.cur { transition-delay: 0.95s; }
+.js .tile:not(.is-open) .ring, .js .tile:not(.is-open) .tour { opacity: 0; transform: translateX(-31cqw); }
+.js .tile:not(.is-open) .tour .dots i.cur { transform: translateX(-4.2cqw); }
+
+/* 06 인포 아이콘 */
+.fee { position: absolute; left: 6cqw; right: 6cqw; top: 12cqw; padding: 4.5cqw; border-radius: 3cqw; border: 1px solid var(--border); background: var(--surface); }
+.fee .frow { display: flex; align-items: center; gap: 2cqw; margin-bottom: 7cqw; font-size: 4.4cqw; white-space: nowrap; }
+.fee .amt { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
+.fee .info { position: relative; flex: none; width: 6.4cqw; height: 6.4cqw; }
+.fee .info .i { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: var(--accent); color: var(--surface); font-size: 4.2cqw; font-weight: 700; line-height: 1; font-family: Georgia, 'Times New Roman', serif; }
+.fee .rip { position: absolute; inset: -1.8cqw; border-radius: 50%; border: 0.6cqw solid var(--accent); opacity: 0; }
+.fee .tg { position: absolute; z-index: 2; left: -14cqw; top: 10cqw; width: 56cqw; padding: 3cqw 3.6cqw; border-radius: 2.6cqw; border: 1px solid var(--border-strong); background: var(--surface); box-shadow: var(--float-shadow); font-size: 4cqw; line-height: 1.4; color: var(--text); white-space: normal; word-break: keep-all; }
+.fee .tg::before { content: ''; position: absolute; left: 15.6cqw; top: -1.9cqw; width: 3.2cqw; height: 3.2cqw; background: var(--surface); border-left: 1px solid var(--border-strong); border-top: 1px solid var(--border-strong); transform: rotate(45deg); }
+.fee .cursor { left: 3cqw; top: 3cqw; }
+/* 포인터가 와서 누르고, 누른 뒤에 설명이 열려 그대로 남는다 */
+@keyframes rip { from { opacity: 0.9; transform: scale(0.6); } to { opacity: 0; transform: scale(1.7); } }
+.is-open .fee .rip { animation: rip 0.5s ease-out 0.45s forwards; }
+.is-open .fee .tg { transition-delay: 0.65s; }
+.js .tile:not(.is-open) .fee .tg { opacity: 0; transform: translateY(-1.5cqw); }
+.js .tile:not(.is-open) .fee .cursor { transform: translate(16cqw, 14cqw); }
+@media (prefers-reduced-motion: reduce) {
+  .is-open .fee .rip { animation: none; }
+}
+</style>
+</head>
+<body>
+<div class="sheet-page">
+  <header class="head">
+    <p class="eyebrow">UX 컴포넌트 사전 · 12</p>
+    <h1>도와주는 것 6가지</h1>
+    <p class="lede">사용법을 알려 주는 요소는 언제 보이느냐로 갈립니다. 늘 보이는지 찾을 때만 보이는지, 조작하기 전인지 하는 중인지 처음 한 번인지를 나란히 놓고 봅니다.</p>
+  </header>
+
+  <div class="toolbar">
+    <p>칸을 누르면 그 예시가 다시 재생됩니다.</p>
+    <button type="button" id="replay-all">전체 다시 재생</button>
+  </div>
+
+  <ul class="grid">
+    <li class="tile">
+      <div class="stage t-tip" role="button" tabindex="0" aria-label="툴팁 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="edbar"><span class="eb">B</span><span class="eb hv"><em>I</em></span><span class="eb"><u>U</u></span></div>
+          <span class="ln" style="--w: 92%"></span><span class="ln" style="--w: 74%"></span><span class="ln" style="--w: 84%"></span><span class="ln" style="--w: 58%"></span><span class="ln" style="--w: 80%"></span><span class="ln" style="--w: 40%"></span>
+        </div>
+        <div class="tip" aria-hidden="true">기울임꼴</div>
+        <svg class="cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2l15 9-7 1.6L8.5 20z"/></svg>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">01</span>툴팁</p>
+        <p class="en">Tooltip</p>
+        <p class="when">아이콘 버튼처럼 글자가 없는 조작 요소의 이름을 포인터나 포커스가 닿았을 때 알려 준다.</p>
+        <p class="chips"><span class="chip">호버 · 포커스 때</span><span class="chip">시점: 조작 직전</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage t-helper" role="button" tabindex="0" aria-label="도움말 텍스트 예시 다시 재생">
+        <div class="form" aria-hidden="true">
+          <span class="lb">비밀번호</span>
+          <div class="inp on"><span class="pw"><i></i><i></i><i></i><i></i><i></i></span><span class="caret"></span></div>
+          <span class="hint">영문과 숫자를 섞어 8자 이상</span>
+          <span class="lb ghost"></span>
+          <div class="inp"></div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">02</span>도움말 텍스트</p>
+        <p class="en">Helper text</p>
+        <p class="when">모르면 입력을 틀리게 되는 조건이나 형식을 입력 칸 바로 아래에 늘 적어 둔다.</p>
+        <p class="chips"><span class="chip block">항상 보임</span><span class="chip">시점: 입력 전 · 입력 중</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage t-ph" role="button" tabindex="0" aria-label="플레이스홀더 예시 다시 재생">
+        <div class="form" aria-hidden="true">
+          <span class="lb">이름</span>
+          <div class="inp on"><span class="ph gone">홍길동</span><span class="typed"><b>김지</b><span class="caret"></span></span></div>
+          <span class="lb">이메일</span>
+          <div class="inp"><span class="ph">name@example.com</span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">03</span>플레이스홀더</p>
+        <p class="en">Placeholder</p>
+        <p class="when">빈 입력 칸 안에 입력 예시를 흐리게 보여 주되, 레이블을 대신하게 하지는 않는다.</p>
+        <p class="chips"><span class="chip">입력하면 사라짐</span><span class="chip">시점: 입력 전</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="코치 마크 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div class="bar"><span class="dot"></span><span class="ln" style="--w: 34%"></span></div>
+          <span class="ln" style="--w: 70%"></span><span class="ln"></span><span class="ln" style="--w: 86%"></span><span class="ln" style="--w: 52%"></span><span class="ln" style="--w: 64%"></span>
+          <span class="fab">+</span>
+        </div>
+        <div class="spot" aria-hidden="true"></div>
+        <div class="coach" aria-hidden="true">
+          <span class="msg">새 글은 여기서 씁니다</span>
+          <div class="btns"><span class="b primary">확인</span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">04</span>코치 마크</p>
+        <p class="en">Coach mark</p>
+        <p class="when">처음 보는 사람이 놓치기 쉬운 기능 하나를 그 자리에서 짚어 한 번 알려 준다.</p>
+        <p class="chips"><span class="chip">자동으로 한 번</span><span class="chip">시점: 첫 사용</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="투어 예시 다시 재생">
+        <div class="page" aria-hidden="true">
+          <div style="height: 6cqw"></div>
+          <div class="tabs"><span>홈</span><span>검색</span><span>알림</span></div>
+          <span class="ln" style="--w: 82%"></span><span class="ln"></span><span class="ln" style="--w: 60%"></span><span class="ln" style="--w: 90%"></span><span class="ln" style="--w: 46%"></span>
+        </div>
+        <div class="ring" aria-hidden="true"></div>
+        <div class="tour" aria-hidden="true">
+          <span class="ttl">기능 둘러보기</span>
+          <span class="ln" style="--w: 84%"></span>
+          <div class="ft"><span class="dots"><i></i><i></i><i></i><i></i><i class="cur"></i></span><span class="b primary">다음</span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">05</span>투어</p>
+        <p class="en">Product tour</p>
+        <p class="when">처음 쓰는 사람에게 화면의 여러 곳을 정해진 순서대로 짚어 가며 안내한다.</p>
+        <p class="chips"><span class="chip">자동 · 여러 단계</span><span class="chip">시점: 첫 사용</span></p>
+      </div>
+    </li>
+
+    <li class="tile">
+      <div class="stage" role="button" tabindex="0" aria-label="인포 아이콘 예시 다시 재생">
+        <div class="fee" aria-hidden="true">
+          <div class="frow">
+            <span>예상 수수료</span>
+            <span class="info">
+              <span class="i">i</span>
+              <span class="rip"></span>
+              <span class="tg">결제 금액의 3%이고 최소 500원입니다</span>
+              <svg class="cursor" viewBox="0 0 24 24"><path d="M4 2l15 9-7 1.6L8.5 20z"/></svg>
+            </span>
+            <span class="amt">1,500원</span>
+          </div>
+          <span class="ln" style="--w: 90%"></span><span class="ln" style="--w: 66%"></span><span class="ln" style="--w: 78%"></span><span class="ln" style="--w: 50%; margin-bottom: 0"></span>
+        </div>
+      </div>
+      <div class="meta">
+        <p class="name"><span class="no">06</span>인포 아이콘</p>
+        <p class="en">Info icon · Toggletip</p>
+        <p class="when">대부분은 몰라도 되지만 일부가 궁금해할 설명을 아이콘 뒤에 두고 누르면 보여 준다.</p>
+        <p class="chips"><span class="chip">누를 때</span><span class="chip">시점: 궁금할 때</span></p>
+      </div>
+    </li>
+  </ul>
+
+  <p class="foot">비교표와 고르는 기준은 <a href="/2026/11/26/ux-components-12/">블로그 글</a>에 있습니다.</p>
+</div>
+</body>
+</html>
