@@ -1,0 +1,127 @@
+/* UX 컴포넌트 사전: 모든 시트가 함께 쓰는 틀.
+   시트 한 장 = 주제 하나, 칸(.tile) 하나 = 컴포넌트 하나.
+   칸 위쪽 .stage 는 작은 화면이고, 그 안의 치수는 전부 cqw 단위라 칸 너비에 맞춰 같이 줄어든다.
+   색은 블로그(src/styles/global.css)의 토큰과 같은 값을 쓴다. */
+:root {
+  --bg: #ffffff;
+  --bg-subtle: #f6f7f9;
+  --surface: #ffffff;
+  --border: #e4e7eb;
+  --border-strong: #cfd4da;
+  --text: #1d2128;
+  --text-muted: #5b6470;
+  --text-subtle: #848d99;
+  --accent: #2563eb;
+  --accent-soft: #eef3fe;
+  --danger: #e03131;
+  --scrim: rgba(16, 24, 40, 0.45);
+  --skeleton: #e4e7eb;
+  --tip-bg: #1d2128;
+  --tip-fg: #ffffff;
+  --float-shadow: 0 6px 20px rgba(16, 24, 40, 0.16);
+
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1218; --bg-subtle: #161b23; --surface: #1c222c; --border: #262d38; --border-strong: #353e4b;
+    --text: #e8ecf1; --text-muted: #9aa4b1; --text-subtle: #6f7a87;
+    --accent: #6aa1ff; --accent-soft: rgba(106, 161, 255, 0.12); --danger: #ff6b6b;
+    --scrim: rgba(0, 0, 0, 0.55); --skeleton: #2a323e; --tip-bg: #e8ecf1; --tip-fg: #0f1218;
+    --float-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1218; --bg-subtle: #161b23; --surface: #1c222c; --border: #262d38; --border-strong: #353e4b;
+  --text: #e8ecf1; --text-muted: #9aa4b1; --text-subtle: #6f7a87;
+  --accent: #6aa1ff; --accent-soft: rgba(106, 161, 255, 0.12); --danger: #ff6b6b;
+  --scrim: rgba(0, 0, 0, 0.55); --skeleton: #2a323e; --tip-bg: #e8ecf1; --tip-fg: #0f1218;
+  --float-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+:root[data-theme="light"] { color-scheme: light; }
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 32px 16px 48px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.sheet-page { max-width: 760px; margin: 0 auto; }
+
+.head { margin-bottom: 24px; }
+.eyebrow { margin: 0 0 6px; font-size: 13px; font-weight: 600; color: var(--accent); }
+.head h1 { margin: 0 0 8px; font-size: clamp(26px, 5vw, 36px); line-height: 1.2; font-weight: 800; text-wrap: balance; }
+.lede { margin: 0; color: var(--text-muted); max-width: 52ch; }
+.foot { margin: 24px 0 0; font-size: 14px; color: var(--text-muted); }
+.foot a { color: var(--accent); }
+
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.toolbar p { margin: 0; font-size: 13px; color: var(--text-subtle); }
+.toolbar button {
+  font: inherit; font-size: 13px; font-weight: 500; color: var(--text); background: var(--surface);
+  border: 1px solid var(--border-strong); border-radius: 8px; padding: 6px 12px; cursor: pointer; white-space: nowrap;
+}
+.toolbar button:hover { border-color: var(--accent); }
+.toolbar button:focus-visible, .stage:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- grid and tiles ---------- */
+.grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 540px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } }
+
+.tile { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 10px; display: flex; flex-direction: column; }
+.meta { padding: 10px 2px 2px; }
+.meta p { margin: 0; }
+.name { font-size: 15px; font-weight: 700; line-height: 1.3; }
+.name .no { color: var(--accent); font-weight: 700; margin-right: 4px; font-variant-numeric: tabular-nums; }
+.en { font-size: 12px; color: var(--text-subtle); }
+.when { margin-top: 6px !important; font-size: 13px; line-height: 1.5; color: var(--text-muted); }
+.chips { margin-top: 8px !important; display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { font-size: 11px; line-height: 1; padding: 4px 7px; border-radius: 999px; background: var(--bg-subtle); color: var(--text-muted); border: 1px solid var(--border); white-space: nowrap; }
+.chip.block { background: var(--accent-soft); color: var(--accent); border-color: transparent; font-weight: 600; }
+
+/* ---------- stage: a small screen ---------- */
+.stage {
+  position: relative; overflow: hidden; container-type: inline-size;
+  aspect-ratio: 4 / 3; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg-subtle); cursor: pointer; user-select: none; -webkit-user-select: none;
+  color: var(--text);
+}
+/* cqw on the stage itself would resolve against the viewport, so the type size goes on its children */
+.stage > * { font-size: 4.6cqw; line-height: 1.3; }
+.stage * { transition: opacity 0.26s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+/* the page underneath: a top bar and a few placeholder lines */
+.page { position: absolute; inset: 0; padding: 0 6cqw; }
+.page .bar { height: 12cqw; margin: 0 -6cqw 5cqw; padding: 0 6cqw; display: flex; align-items: center; gap: 3cqw; background: var(--surface); border-bottom: 1px solid var(--border); }
+.page .dot { width: 5cqw; height: 5cqw; border-radius: 50%; background: var(--skeleton); }
+.ln { display: block; height: 3cqw; border-radius: 2cqw; background: var(--skeleton); margin-bottom: 3.4cqw; width: var(--w, 100%); }
+.page .bar .ln { margin: 0; }
+
+/* shared pieces used inside overlays */
+.scrim { position: absolute; inset: 0; background: var(--scrim); }
+.float { position: absolute; background: var(--surface); box-shadow: var(--float-shadow); }
+.ttl { display: block; font-weight: 700; font-size: 5cqw; margin-bottom: 3cqw; }
+.sub { display: block; font-size: 4cqw; color: var(--text-muted); }
+.btns { display: flex; justify-content: flex-end; gap: 2.4cqw; }
+.b { font-size: 4cqw; font-weight: 600; padding: 1.8cqw 4cqw; border-radius: 2cqw; border: 1px solid var(--border-strong); color: var(--text-muted); background: var(--surface); }
+.b.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.b.danger { background: var(--danger); border-color: var(--danger); color: #fff; }
+:root[data-theme="dark"] .b.primary, :root[data-theme="dark"] .b.danger { color: #0f1218; }
+
+/* closed state of the scrim; each sheet defines the closed state of its own overlays the same way */
+.js .tile:not(.is-open) .scrim { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stage * { transition: none !important; }
+}
+
+/* ---------- embed mode (?embed): grid only, transparent ground ---------- */
+.embed body { padding: 2px; background: transparent; overflow: hidden; }
+.embed .head, .embed .foot { display: none; }
